@@ -1,0 +1,29 @@
+# -------------------------------------------------------------
+# 1. OPTIMASI SEO: PAKSA HTTPS & NON-WWW (CANONICAL REDIRECT 301)
+# -------------------------------------------------------------
+# A. Jika user mengakses menggunakan www, arahkan ke non-www (https://geelywinner.id)
+RewriteCond %{HTTP_HOST} ^www\.geelywinner\.id$ [NC]
+RewriteRule ^(.*)$ https://geelywinner.id/$1 [L,R=301]
+
+# B. Jika user mengakses HTTP biasa (belum SSL), paksa ke HTTPS
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://geelywinner.id/$1 [L,R=301]
+
+# -------------------------------------------------------------
+# 2. PENANGANAN DIREKTORI LARAVEL (ROUTING KE PUBLIC)
+# -------------------------------------------------------------
+# Paksa Apache untuk menganggap index.php di folder public sebagai file utama (Cegah 403 Forbidden)
+DirectoryIndex public/index.php
+
+# Arahkan halaman utama (root) ke public/index.php
+RewriteRule ^$ public/index.php [L]
+
+# Arahkan semua request lain ke folder public/ jika belum ada di sana
+RewriteCond %{REQUEST_URI} !^/public/
+RewriteRule ^(.*)$ public/$1 [L]
+
+# -------------------------------------------------------------
+# 3. PENANGANAN AUTHORIZATION HEADER
+# -------------------------------------------------------------
+RewriteCond %{HTTP:Authorization} .
+RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
