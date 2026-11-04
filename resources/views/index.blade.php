@@ -1122,17 +1122,30 @@
 
                 <div data-slider class="flex overflow-x-auto overflow-y-hidden hide-scrollbar snap-x snap-mandatory gap-4 md:gap-6 pt-4 pb-12 px-4 md:px-0 -mx-4 md:mx-0 scroll-smooth">
                     @php
-                        $customers = [
-                            'assets/images/customer/IMG_4242.PNG',
-                            'assets/images/customer/IMG_4243.PNG',
-                        ];
+                        // Ambil foto delivery dari database yang diunggah Admin, fallback ke foto default jika kosong
+                        $dbDeliveries = \App\Models\CustomerDelivery::where('is_active', true)->orderBy('sort_order', 'asc')->latest()->get();
+                        
+                        $customers = [];
+                        if ($dbDeliveries->isNotEmpty()) {
+                            foreach($dbDeliveries as $item) {
+                                $customers[] = [
+                                    'url' => $item->image_url,
+                                    'title' => $item->title ?: 'Delivery Moment Pelanggan Geely',
+                                ];
+                            }
+                        } else {
+                            $customers = [
+                                ['url' => asset('assets/images/customer/IMG_4242.PNG'), 'title' => 'Delivery Moment 1'],
+                                ['url' => asset('assets/images/customer/IMG_4243.PNG'), 'title' => 'Delivery Moment 2'],
+                            ];
+                        }
                     @endphp
 
-                    @foreach($customers as $index => $img)
+                    @foreach($customers as $index => $item)
                     @php $delayClass = $index % 3 == 0 ? 'delay-100' : ($index % 3 == 1 ? 'delay-200' : 'delay-300'); @endphp
-                    <div class="flex-shrink-0 w-[75vw] sm:w-[45vw] md:w-[30vw] lg:w-[22vw] snap-center glass-panel rounded-[1.5rem] p-2.5 group cursor-pointer reveal-up {{ $delayClass }} transition-all duration-500 shadow-md hover:shadow-2xl hover:border-sky-400 border border-sky-200" onclick="openLightbox('{{ asset($img) }}', 'Delivery Moment {{ $index + 1 }}')">
+                    <div class="flex-shrink-0 w-[75vw] sm:w-[45vw] md:w-[30vw] lg:w-[22vw] snap-center glass-panel rounded-[1.5rem] p-2.5 group cursor-pointer reveal-up {{ $delayClass }} transition-all duration-500 shadow-md hover:shadow-2xl hover:border-sky-400 border border-sky-200" onclick="openLightbox('{{ $item['url'] }}', '{{ addslashes($item['title']) }}')">
                         <div class="relative w-full aspect-[4/5] rounded-[1rem] overflow-hidden bg-slate-100">
-                            <img src="{{ asset($img) }}" alt="Customer Serah Terima Mobil Baru Geely Wonder Alam Sutera {{ $index + 1 }}" draggable="false" loading="lazy" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105 pointer-events-none select-none">
+                            <img src="{{ $item['url'] }}" alt="{{ $item['title'] }}" draggable="false" loading="lazy" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105 pointer-events-none select-none">
                             <div class="absolute inset-0 bg-sky-500/15 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
                         </div>
                     </div>

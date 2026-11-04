@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CustomerDelivery;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
 
@@ -9,10 +10,16 @@ class PageController extends Controller
 {
     /**
      * Menampilkan Halaman Utama (Home / Discover)
+     * Mengambil foto serah terima kendaraan aktif yang diunggah admin.
      */
     public function index(): View
     {
-        return view('index');
+        $deliveries = CustomerDelivery::where('is_active', true)
+            ->orderBy('sort_order', 'asc')
+            ->latest()
+            ->get();
+
+        return view('index', compact('deliveries'));
     }
 
     /**
@@ -20,7 +27,12 @@ class PageController extends Controller
      */
     public function discover(): View
     {
-        return view('index');
+        $deliveries = CustomerDelivery::where('is_active', true)
+            ->orderBy('sort_order', 'asc')
+            ->latest()
+            ->get();
+
+        return view('index', compact('deliveries'));
     }
 
     /**

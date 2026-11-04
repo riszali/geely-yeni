@@ -1,7 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminArticleController;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminCustomerDeliveryController;
 use App\Http\Controllers\AdminLeadController;
+use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\PageController;
 use App\Http\Controllers\SitemapController;
@@ -12,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 | Geely Indonesia - Web Routes (Full Version)
 |--------------------------------------------------------------------------
 | Seluruh rute publik, eksplorasi detail kendaraan (EX2, EX5, Starray, Coolray),
-| API leads, autentikasi admin CRM, dan sitemap XML lengkap.
+| API leads, autentikasi admin CRM, galeri delivery order, artikel SEO, dan sitemap XML.
 */
 
 // =============================================================
@@ -64,8 +67,9 @@ Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::get('/credit-simulation', [PageController::class, 'creditSimulation'])->name('credit-simulation');
 
 // Berita & Artikel Publik (SEO Boost)
-Route::get('/news', [\App\Http\Controllers\ArticleController::class, 'index'])->name('news.index');
-Route::get('/news/{slug}', [\App\Http\Controllers\ArticleController::class, 'show'])->name('news.show');
+Route::get('/news', [ArticleController::class, 'index'])->name('news.index');
+Route::get('/news/{slug}', [ArticleController::class, 'show'])->name('news.show');
+
 
 // =============================================================
 // 4. API PENERIMA LEADS & SIMULASI
@@ -108,7 +112,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/leads/export/csv', [AdminLeadController::class, 'exportCsv'])->name('leads.export.csv');
 
         // Manajemen Artikel & SEO CMS
-        Route::resource('articles', \App\Http\Controllers\AdminArticleController::class);
+        Route::resource('articles', AdminArticleController::class);
+
+        // Manajemen Foto Delivery Order (Customer Delivery Moments)
+        Route::resource('deliveries', AdminCustomerDeliveryController::class);
     });
 });
 
