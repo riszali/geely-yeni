@@ -43,7 +43,7 @@
 
         /* Light Blue Glassmorphism Tokens */
         .glass-panel {
-            background: rgba(255, 255, 255, 0.78);
+            background: rgba(255, 255, 255, 0.82);
             backdrop-filter: blur(28px);
             -webkit-backdrop-filter: blur(28px);
             border: 1px solid rgba(186, 230, 253, 0.65);
@@ -61,7 +61,7 @@
 
         /* Floating Nav Chip */
         .glass-chip-nav {
-            background: rgba(255, 255, 255, 0.82);
+            background: rgba(255, 255, 255, 0.85);
             backdrop-filter: blur(20px) saturate(180%);
             -webkit-backdrop-filter: blur(20px) saturate(180%);
             border: 1px solid rgba(186, 230, 253, 0.85);
@@ -304,13 +304,10 @@
             <div class="absolute inset-x-0 bottom-0 h-80 bg-gradient-to-t from-[#e0f2fe] via-[#f0f9ff]/80 to-transparent pointer-events-none"></div>
         </div>
 
-        <!-- Top Floating Status Badge -->
+        <!-- Top Floating Status Badge (Titik berkedip dihilangkan, menjadi solid dot bersih) -->
         <div class="relative z-20 reveal-up">
             <div class="inline-flex items-center gap-3 px-4 py-1.5 md:px-5 md:py-2 rounded-full glass-chip-nav border border-sky-300/60 shadow-sm">
-                <span class="relative flex h-2.5 w-2.5">
-                    <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-500 opacity-75"></span>
-                    <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-sky-600"></span>
-                </span>
+                <span class="inline-flex rounded-full h-2 w-2 bg-sky-600"></span>
                 <span class="text-[9px] md:text-[10px] font-bold tracking-[0.35em] uppercase text-sky-800 drop-shadow-sm">Geely Wonder • YENNI</span>
                 <div class="w-[1px] h-3 bg-sky-300"></div>
                 <span class="text-[8px] md:text-[9px] font-semibold tracking-[0.2em] uppercase text-slate-600 hidden sm:inline">+628170879315</span>
@@ -504,7 +501,7 @@
                     </div>
                 </div>
 
-                <div class="text-center mt-3 flex md:hidden justify-center items-center gap-2 text-sky-600 text-[9px] font-bold uppercase tracking-widest animate-pulse">
+                <div class="text-center mt-3 flex md:hidden justify-center items-center gap-2 text-sky-600 text-[9px] font-bold uppercase tracking-widest">
                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                     Swipe to explore more models
                 </div>
@@ -521,7 +518,7 @@
                 <div class="grid grid-cols-1 lg:grid-cols-2 items-center">
                     <div class="p-8 md:p-12 lg:p-24 relative z-10">
                         <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-sky-300/60 bg-sky-500/10 mb-6 md:mb-8">
-                            <div class="w-2 h-2 rounded-full bg-sky-600 animate-pulse"></div>
+                            <div class="w-2 h-2 rounded-full bg-sky-600"></div>
                             <span class="text-sky-700 text-[8px] md:text-[9px] font-bold tracking-[0.3em] uppercase">Promo & Pembiayaan Geely BSD</span>
                         </div>
                         
@@ -590,76 +587,126 @@
         </div>
     </section>
 
-    <!-- TECH SPECS & READY TO EXPLORE SECTION -->
-    <section class="section-stars py-16 md:py-24 lg:py-40 relative w-full overflow-hidden bg-gradient-to-b from-[#e0f2fe] via-[#d0ebff] to-[#e0f2fe]">
-        <div class="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-white to-transparent opacity-60 pointer-events-none z-10"></div>
+    <!-- TECH SPECS & READY TO CONQUER SECTION (SESUAI FOTO KEDUA) -->
+    <section class="py-16 md:py-24 lg:py-36 relative w-full overflow-hidden bg-gradient-to-b from-[#e0f2fe] via-[#ecf6fd] to-[#e0f2fe]">
+        <div class="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-white/70 to-transparent pointer-events-none z-10"></div>
+        <div class="absolute -top-24 -left-24 w-96 h-96 bg-sky-300/30 rounded-full blur-[120px] pointer-events-none z-0"></div>
+        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-300/25 rounded-full blur-[120px] pointer-events-none z-0"></div>
 
-        <div class="relative z-20 w-full max-w-[1400px] mx-auto px-6">
-            <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <div class="relative z-20 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
                 
-                <div class="order-2 lg:order-1 lg:col-span-5 glass-panel p-8 md:p-10 lg:p-12 rounded-[24px] md:rounded-[40px] flex flex-col justify-center group hover:border-sky-400 transition-all duration-500 reveal-left border border-sky-200">
-                    <div class="absolute top-0 left-0 w-64 h-64 bg-sky-400/20 rounded-full blur-[80px] pointer-events-none transition-colors duration-700 group-hover:bg-sky-400/30"></div>
-                    
-                    <div class="relative z-10">
-                        <span class="text-sky-600 text-[10px] md:text-xs tracking-[0.4em] font-bold uppercase mb-4 block drop-shadow-sm">All-New EX5</span>
-                        <h2 class="font-geely text-4xl md:text-5xl lg:text-6xl uppercase tracking-tighter mb-6 md:mb-8 leading-[0.9] text-slate-900">
-                            Ready To <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 to-blue-600">Explore</span>
-                        </h2>
-                        
-                        <p class="text-slate-600 text-sm md:text-base leading-relaxed font-normal mb-8 md:mb-10 max-w-[90vw] md:max-w-none">
-                            Rasakan kebebasan berkendara tanpa batas dengan arsitektur baterai mutakhir dan efisiensi aerodinamis kelas dunia. Geely EX5 dirancang secara presisi memadukan performa elektrik superior dengan tata ruang kabin yang lapang.
-                        </p>
-                        
-                        <a href="/test-drive" class="inline-flex items-center gap-3 text-sky-700 text-[10px] font-bold tracking-[0.2em] uppercase hover:text-blue-800 transition-colors w-max pb-2 border-b-2 border-sky-400 hover:border-blue-700">
-                            Book Test Drive <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="order-1 lg:order-2 lg:col-span-7 flex flex-col reveal-right relative z-10">
-                    <div class="glass-panel p-2.5 rounded-[24px] md:rounded-[40px] group hover:border-sky-300 transition-all duration-500 shadow-xl flex flex-col z-10 relative border border-sky-200">
-                        <div class="relative w-full aspect-video rounded-[18px] md:rounded-[32px] overflow-hidden bg-slate-900">
-                            <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover object-center transform transition-transform duration-[4s] ease-out opacity-90 group-hover:opacity-100 z-0">
+                <!-- SISI KIRI: Cockpit Video/Media & 3 Kartu Spesifikasi (Sesuai Foto Kedua) -->
+                <div class="order-1 lg:col-span-7 flex flex-col justify-between gap-5 md:gap-6 reveal-left">
+                    <!-- Kartu Atas: Cockpit Command Preview Media -->
+                    <div class="glass-panel p-2.5 sm:p-3 rounded-[24px] sm:rounded-[32px] md:rounded-[36px] border border-sky-200/90 shadow-[0_20px_45px_-10px_rgba(14,165,233,0.15)] overflow-hidden group">
+                        <div class="relative w-full aspect-[16/9] sm:aspect-[16/9.2] rounded-[18px] sm:rounded-[26px] md:rounded-[30px] overflow-hidden bg-slate-950">
+                            <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover object-center transform transition-transform duration-[4s] ease-out opacity-95 group-hover:scale-105 z-0">
                                 <source src="https://assets.zyrosite.com/Yle46KEPN6IkVONg/video_atmosphere-WPk8K2f2d7da9R4C.mp4" type="video/mp4">
                             </video>
                             
-                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-black/10 to-transparent opacity-90 pointer-events-none z-10"></div>
+                            <!-- Soft Gradient Vignette -->
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent pointer-events-none z-10"></div>
                             
-                            <div class="absolute bottom-12 lg:bottom-10 left-6 md:left-10 z-20 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-500 ease-out pointer-events-none">
-                                <p class="font-geely text-2xl md:text-3xl lg:text-4xl uppercase tracking-tight mb-1 drop-shadow-lg text-white">Immersive Atmosphere</p>
-                                <p class="text-sky-200 text-[9px] md:text-[10px] tracking-[0.2em] uppercase font-bold drop-shadow-md">Premium Cabin Experience</p>
+                            <!-- Caption Cockpit Command -->
+                            <div class="absolute bottom-5 sm:bottom-7 md:bottom-8 left-5 sm:left-7 md:left-9 z-20 pointer-events-none">
+                                <h3 class="font-geely text-2xl sm:text-3xl md:text-4xl text-white uppercase tracking-tight font-bold drop-shadow-md mb-1 leading-tight">
+                                    Cockpit Command
+                                </h3>
+                                <p class="text-sky-300 text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.25em] uppercase font-bold drop-shadow-sm">
+                                    Premium Cabin Experience • Geely BSD
+                                </p>
                             </div>
                         </div>
                     </div>
 
-                    <div class="grid grid-cols-3 gap-2 sm:gap-3 md:gap-4 lg:gap-6 -mt-6 sm:-mt-10 md:-mt-8 lg:mt-6 relative z-20 px-1 sm:px-4 md:px-0 lg:px-0">
-                        <div class="absolute inset-0 bg-gradient-to-r from-sky-300/30 via-blue-300/30 to-indigo-300/30 blur-[40px] rounded-full pointer-events-none z-0"></div>
-
-                        <div class="glass-panel relative z-10 p-3 sm:p-5 md:p-6 lg:p-8 rounded-[16px] sm:rounded-[24px] md:rounded-[32px] hover:border-sky-400 transition-all duration-500 shadow-md flex flex-col justify-center items-center text-center border border-sky-200">
-                            <p class="text-slate-500 text-[6px] sm:text-[9px] tracking-[0.1em] sm:tracking-[0.2em] font-bold uppercase mb-1 sm:mb-2 whitespace-nowrap">Up to</p>
-                            <h3 class="font-geely flex items-baseline justify-center text-xl sm:text-3xl md:text-4xl lg:text-5xl text-slate-900 mb-1 sm:mb-2">
-                                <span class="leading-none text-sky-600">495</span><span class="text-[8px] sm:text-sm lg:text-lg text-slate-500 ml-0.5 sm:ml-1 leading-none">km*</span>
-                            </h3>
-                            <div class="h-[2px] w-6 sm:w-10 bg-sky-200 mb-1 sm:mb-2"></div>
-                            <p class="text-slate-500 text-[5px] sm:text-[8px] md:text-[9px] tracking-widest uppercase font-bold">NEDC Range</p>
+                    <!-- Kartu Bawah: 3 Kolom Metrik Tanpa Garis Pemisah (Sesuai Foto Kedua) -->
+                    <div class="grid grid-cols-3 gap-3 sm:gap-4 md:gap-5">
+                        <!-- Stat 1: Range -->
+                        <div class="glass-panel p-4 sm:p-5 md:p-6 rounded-[20px] sm:rounded-[26px] md:rounded-[30px] border border-sky-200/80 shadow-[0_12px_30px_rgba(14,165,233,0.08)] flex flex-col justify-center items-center text-center transition-all duration-300 hover:border-sky-400 hover:-translate-y-1">
+                            <span class="text-slate-400 text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.2em] font-bold uppercase mb-1.5 sm:mb-2 whitespace-nowrap">
+                                Up To
+                            </span>
+                            <div class="flex items-baseline justify-center mb-1.5 sm:mb-2">
+                                <span class="font-geely text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#0284c7] leading-none">
+                                    495
+                                </span>
+                                <span class="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-500 ml-1 leading-none">
+                                    km*
+                                </span>
+                            </div>
+                            <span class="text-slate-400 text-[7px] sm:text-[8px] md:text-[9px] tracking-wider font-bold uppercase">
+                                NEDC Range
+                            </span>
                         </div>
+
+                        <!-- Stat 2: Charging -->
+                        <div class="glass-panel p-4 sm:p-5 md:p-6 rounded-[20px] sm:rounded-[26px] md:rounded-[30px] border border-sky-200/80 shadow-[0_12px_30px_rgba(14,165,233,0.08)] flex flex-col justify-center items-center text-center transition-all duration-300 hover:border-sky-400 hover:-translate-y-1">
+                            <span class="text-slate-400 text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.2em] font-bold uppercase mb-1.5 sm:mb-2 whitespace-nowrap">
+                                Fast Charge
+                            </span>
+                            <div class="flex items-baseline justify-center mb-1.5 sm:mb-2">
+                                <span class="font-geely text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#0284c7] leading-none">
+                                    20
+                                </span>
+                                <span class="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-500 ml-1 leading-none">
+                                    mins**
+                                </span>
+                            </div>
+                            <span class="text-slate-400 text-[7px] sm:text-[8px] md:text-[9px] tracking-wider font-bold uppercase">
+                                30% - 80%
+                            </span>
+                        </div>
+
+                        <!-- Stat 3: Acceleration -->
+                        <div class="glass-panel p-4 sm:p-5 md:p-6 rounded-[20px] sm:rounded-[26px] md:rounded-[30px] border border-sky-200/80 shadow-[0_12px_30px_rgba(14,165,233,0.08)] flex flex-col justify-center items-center text-center transition-all duration-300 hover:border-sky-400 hover:-translate-y-1">
+                            <span class="text-slate-400 text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.2em] font-bold uppercase mb-1.5 sm:mb-2 whitespace-nowrap">
+                                Acceleration
+                            </span>
+                            <div class="flex items-baseline justify-center mb-1.5 sm:mb-2">
+                                <span class="font-geely text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#2563eb] leading-none">
+                                    6.9
+                                </span>
+                                <span class="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-500 ml-1 leading-none">
+                                    sec
+                                </span>
+                            </div>
+                            <span class="text-slate-400 text-[7px] sm:text-[8px] md:text-[9px] tracking-wider font-bold uppercase">
+                                0-100 KM/H
+                            </span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- SISI KANAN: Kartu Ready to Conquer (Sesuai Foto Kedua) -->
+                <div class="order-2 lg:col-span-5 flex flex-col justify-center reveal-right">
+                    <div class="glass-panel p-8 sm:p-10 md:p-12 lg:p-14 rounded-[24px] sm:rounded-[32px] md:rounded-[40px] border border-sky-200/90 shadow-[0_25px_55px_-12px_rgba(14,165,233,0.18)] relative overflow-hidden group hover:border-sky-400 transition-all duration-500 h-full flex flex-col justify-center">
+                        <div class="absolute top-0 right-0 w-80 h-80 bg-sky-300/25 rounded-full blur-[80px] pointer-events-none transition-colors duration-700 group-hover:bg-sky-400/30"></div>
                         
-                        <div class="glass-panel relative z-10 p-3 sm:p-5 md:p-6 lg:p-8 rounded-[16px] sm:rounded-[24px] md:rounded-[32px] hover:border-blue-400 transition-all duration-500 shadow-md flex flex-col justify-center items-center text-center border border-sky-200">
-                            <p class="text-slate-500 text-[6px] sm:text-[9px] tracking-[0.1em] sm:tracking-[0.2em] font-bold uppercase mb-1 sm:mb-2 whitespace-nowrap">Fast Charging</p>
-                            <h3 class="font-geely flex items-baseline justify-center text-xl sm:text-3xl md:text-4xl lg:text-5xl text-slate-900 mb-1 sm:mb-2">
-                                <span class="leading-none text-blue-600">20</span><span class="text-[8px] sm:text-sm lg:text-lg text-slate-500 ml-0.5 sm:ml-1 leading-none">mins**</span>
-                            </h3>
-                            <div class="h-[2px] w-6 sm:w-10 bg-sky-200 mb-1 sm:mb-2"></div>
-                            <p class="text-slate-500 text-[5px] sm:text-[8px] md:text-[9px] tracking-widest uppercase font-bold">30% - 80%</p>
-                        </div>
-
-                        <div class="glass-panel relative z-10 p-3 sm:p-5 md:p-6 lg:p-8 rounded-[16px] sm:rounded-[24px] md:rounded-[32px] hover:border-indigo-400 transition-all duration-500 shadow-md flex flex-col justify-center items-center text-center border border-sky-200">
-                            <p class="text-slate-500 text-[6px] sm:text-[9px] tracking-[0.1em] sm:tracking-[0.2em] font-bold uppercase mb-1 sm:mb-2 whitespace-nowrap">Acceleration</p>
-                            <h3 class="font-geely flex items-baseline justify-center text-xl sm:text-3xl md:text-4xl lg:text-5xl text-slate-900 mb-1 sm:mb-2">
-                                <span class="leading-none text-indigo-600">6.9</span><span class="text-[8px] sm:text-[11px] lg:text-sm text-slate-500 ml-0.5 sm:ml-1 tracking-normal lowercase leading-none">sec</span>
-                            </h3>
-                            <div class="h-[2px] w-6 sm:w-10 bg-sky-200 mb-1 sm:mb-2"></div>
-                            <p class="text-slate-500 text-[5px] sm:text-[8px] md:text-[9px] tracking-widest uppercase font-bold">0-100 km/h</p>
+                        <div class="relative z-10">
+                            <span class="text-sky-600 text-[10px] sm:text-xs tracking-[0.3em] font-bold uppercase mb-4 block drop-shadow-sm">
+                                All-New Geely EX5
+                            </span>
+                            
+                            <h2 class="font-geely text-4xl sm:text-5xl lg:text-6xl uppercase tracking-tighter mb-6 md:mb-8 leading-[0.92] text-slate-900">
+                                Ready To <br> 
+                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-blue-700 to-indigo-700">
+                                    Conquer
+                                </span>
+                            </h2>
+                            
+                            <p class="text-slate-600 text-sm sm:text-base leading-relaxed font-normal mb-8 md:mb-12">
+                                Rasakan akselerasi responsif dan kestabilan sasis superior berkat teknologi baterai mutakhir Geely. Kunjungi dealer resmi Geely BSD untuk konsultasi dan merasakan langsung sensasi berkendara.
+                            </p>
+                            
+                            <div class="pt-1">
+                                <a href="/test-drive" class="inline-flex items-center gap-3 text-sky-700 text-[11px] sm:text-xs font-bold tracking-[0.2em] uppercase hover:text-blue-800 transition-all pb-1.5 border-b-2 border-sky-400 hover:border-blue-700 w-max group/btn">
+                                    <span>Book Test Drive Geely</span>
+                                    <svg class="w-4 h-4 transform group-hover/btn:translate-x-1.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path>
+                                    </svg>
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -918,7 +965,7 @@
                 </div>
             </div>
 
-            <div class="text-center mt-3 flex md:hidden justify-center items-center gap-2 text-sky-600 text-[9px] font-bold uppercase tracking-widest animate-pulse">
+            <div class="text-center mt-3 flex md:hidden justify-center items-center gap-2 text-sky-600 text-[9px] font-bold uppercase tracking-widest">
                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 Swipe to explore
             </div>
@@ -971,7 +1018,7 @@
                 </div>
             </div>
 
-            <div class="text-center mt-2 flex justify-center items-center gap-2 text-sky-600 text-[9px] font-bold uppercase tracking-widest animate-pulse">
+            <div class="text-center mt-2 flex justify-center items-center gap-2 text-sky-600 text-[9px] font-bold uppercase tracking-widest">
                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 Swipe or drag to view
             </div>
