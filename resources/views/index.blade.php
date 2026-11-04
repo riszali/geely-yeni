@@ -284,14 +284,10 @@
                 height: 600px !important;
             }
         }
-
-        .cta-modal-pulse {
-            box-shadow: 0 0 50px -10px rgba(56, 189, 248, 0.4), 0 25px 60px -12px rgba(2, 132, 199, 0.25);
-        }
     </style>
 
-    <!-- CINEMATIC LIGHT BLUE AUTOMOTIVE HERO HEADER -->
-    <header class="relative min-h-[100svh] w-full flex flex-col justify-between items-center overflow-hidden bg-gradient-to-b from-[#e0f2fe] via-[#f0f9ff] to-[#e0f2fe] bg-noise pt-28 pb-12 md:pt-36 md:pb-16">
+    <!-- CINEMATIC LIGHT BLUE AUTOMOTIVE HERO HEADER (STICKY PINNED SECTION 1) -->
+    <header id="hero-header" class="sticky top-0 z-0 min-h-[100svh] w-full flex flex-col justify-between items-center overflow-hidden bg-gradient-to-b from-[#e0f2fe] via-[#f0f9ff] to-[#e0f2fe] bg-noise pt-28 pb-12 md:pt-36 md:pb-16 transition-[transform,opacity,filter] duration-300 will-change-transform origin-center">
         <!-- Background Cinematic Video with Light Crystalline Overlay -->
         <div class="absolute inset-0 z-0 overflow-hidden">
             <video autoplay muted loop playsinline class="w-full h-full object-cover scale-105 filter brightness-[1.05] contrast-[1.02] opacity-75">
@@ -304,11 +300,13 @@
             <div class="absolute inset-x-0 bottom-0 h-80 bg-gradient-to-t from-[#e0f2fe] via-[#f0f9ff]/80 to-transparent pointer-events-none"></div>
         </div>
 
+        <!-- Dimming Overlay saat Section 2 Menimpa Section 1 -->
+        <div id="hero-dim-overlay" class="absolute inset-0 bg-slate-950/40 opacity-0 pointer-events-none z-10 transition-opacity duration-300"></div>
+
         <!-- Top Floating Status Badge -->
         <div class="relative z-20 reveal-up">
             <div class="inline-flex items-center gap-3 px-4 py-1.5 md:px-5 md:py-2 rounded-full glass-chip-nav border border-sky-300/60 shadow-sm">
-                <span class="inline-flex rounded-full h-2 w-2 bg-sky-600"></span>
-                <span class="text-[9px] md:text-[10px] font-bold tracking-[0.35em] uppercase text-sky-800 drop-shadow-sm">Geely Wonder • YENNI</span>
+                <span class="text-[9px] md:text-[10px] font-bold tracking-[0.35em] uppercase text-sky-800 drop-shadow-sm">Geely Wonder YENNI</span>
                 <div class="w-[1px] h-3 bg-sky-300"></div>
                 <span class="text-[8px] md:text-[9px] font-semibold tracking-[0.2em] uppercase text-slate-600 hidden sm:inline">+628170879315</span>
             </div>
@@ -346,40 +344,112 @@
             <div class="glass-island-dock rounded-2xl md:rounded-full p-2 md:p-2.5">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
                     <a href="/models/ex5" class="glass-island-cell rounded-xl md:rounded-full py-2.5 px-4 flex flex-col items-center justify-center text-center group cursor-pointer shadow-sm">
-                        <div class="flex items-center gap-1.5">
-                            <span class="w-1.5 h-1.5 rounded-full bg-sky-500"></span>
-                            <span class="text-slate-900 font-mono text-[11px] font-bold tracking-wider group-hover:text-sky-600 transition-colors">GEELY EX5</span>
-                        </div>
+                        <span class="text-slate-900 font-mono text-[11px] font-bold tracking-wider group-hover:text-sky-600 transition-colors">GEELY EX5</span>
                         <span class="text-slate-600 text-[9px] uppercase tracking-wider font-medium mt-0.5">600km Smart Range</span>
                     </a>
                     
                     <a href="/models/ex2" class="glass-island-cell rounded-xl md:rounded-full py-2.5 px-4 flex flex-col items-center justify-center text-center group cursor-pointer shadow-sm">
-                        <div class="flex items-center gap-1.5">
-                            <span class="w-1.5 h-1.5 rounded-full bg-blue-500"></span>
-                            <span class="text-slate-900 font-mono text-[11px] font-bold tracking-wider group-hover:text-sky-600 transition-colors">GEELY EX2</span>
-                        </div>
+                        <span class="text-slate-900 font-mono text-[11px] font-bold tracking-wider group-hover:text-sky-600 transition-colors">GEELY EX2</span>
                         <span class="text-slate-600 text-[9px] uppercase tracking-wider font-medium mt-0.5">Urban Agility EV</span>
                     </a>
 
                     <a href="/models/starray-em-i" class="glass-island-cell rounded-xl md:rounded-full py-2.5 px-4 flex flex-col items-center justify-center text-center group cursor-pointer shadow-sm">
-                        <div class="flex items-center gap-1.5">
-                            <span class="w-1.5 h-1.5 rounded-full bg-indigo-500"></span>
-                            <span class="text-slate-900 font-mono text-[11px] font-bold tracking-wider group-hover:text-sky-600 transition-colors">STARRAY EM-i</span>
-                        </div>
+                        <span class="text-slate-900 font-mono text-[11px] font-bold tracking-wider group-hover:text-sky-600 transition-colors">STARRAY EM-i</span>
                         <span class="text-slate-600 text-[9px] uppercase tracking-wider font-medium mt-0.5">Super Hybrid Drive</span>
                     </a>
 
                     <a href="/models/coolray" class="glass-island-cell rounded-xl md:rounded-full py-2.5 px-4 flex flex-col items-center justify-center text-center group cursor-pointer shadow-sm">
-                        <div class="flex items-center gap-1.5">
-                            <span class="w-1.5 h-1.5 rounded-full bg-teal-500"></span>
-                            <span class="text-slate-900 font-mono text-[11px] font-bold tracking-wider group-hover:text-sky-600 transition-colors">COOLRAY</span>
-                        </div>
+                        <span class="text-slate-900 font-mono text-[11px] font-bold tracking-wider group-hover:text-sky-600 transition-colors">COOLRAY</span>
                         <span class="text-slate-600 text-[9px] uppercase tracking-wider font-medium mt-0.5">172 HP Turbo DCT</span>
                     </a>
                 </div>
             </div>
         </div>
     </header>
+
+    <!-- SECTION 2: OFFICIAL SALES CONSULTANT PROFILE (STICKY OVERLAY MENIMPA SECTION 1) -->
+    <section id="sales-profile" class="relative z-20 py-16 md:py-24 bg-gradient-to-b from-[#e0f2fe] via-[#edf7fe] to-[#e0f2fe] rounded-t-[2.5rem] sm:rounded-t-[3.5rem] md:rounded-t-[4.5rem] border-t-2 border-sky-300/90 shadow-[0_-35px_80px_rgba(2,132,199,0.28)] overflow-hidden">
+        <div class="absolute top-1/2 left-6 w-72 h-72 bg-sky-300/25 rounded-full blur-[120px] pointer-events-none"></div>
+        <div class="absolute bottom-6 right-6 w-80 h-80 bg-cyan-200/30 rounded-full blur-[130px] pointer-events-none"></div>
+
+        <div class="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 relative z-10">
+            <div class="glass-panel mobile-bento-glass-light rounded-[24px] sm:rounded-[32px] md:rounded-[40px] overflow-hidden p-6 sm:p-8 md:p-12 lg:p-16 border border-sky-200/90 shadow-[0_25px_60px_-15px_rgba(2,132,199,0.15)] reveal-up">
+                <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-14 items-center">
+                    
+                    <!-- Sales Photo Card -->
+                    <div class="lg:col-span-5 flex justify-center">
+                        <div class="relative w-full max-w-[340px] sm:max-w-[380px] aspect-[4/5] rounded-[24px] sm:rounded-[30px] overflow-hidden border-2 border-sky-200 shadow-2xl group glare-effect bg-gradient-to-br from-white to-sky-100">
+                            <img src="{{ asset('assets/images/profile.jpeg') }}" 
+                                 alt="Yenni - Sales Counter Geely Wonder Alam Sutera" 
+                                 class="w-full h-full object-cover object-top transform group-hover:scale-105 transition-transform duration-700">
+                        </div>
+                    </div>
+
+                    <!-- Sales Information & Direct Contact CTA -->
+                    <div class="lg:col-span-7 flex flex-col justify-center">
+                        <div class="inline-flex items-center px-4 py-1.5 rounded-full border border-sky-300/80 bg-sky-500/10 mb-4 sm:mb-6 w-max">
+                            <span class="text-sky-700 text-[9px] md:text-[10px] font-bold tracking-[0.3em] uppercase">Geely Wonder Alam Sutera</span>
+                        </div>
+
+                        <h2 class="font-geely text-3xl sm:text-4xl md:text-5xl lg:text-6xl text-slate-900 uppercase tracking-tighter leading-[1.05] mb-2">
+                            YENNI
+                        </h2>
+                        <p class="text-sky-600 font-bold text-xs sm:text-sm tracking-[0.25em] uppercase mb-5 sm:mb-6">
+                            Sales Counter & EV Consultant
+                        </p>
+
+                        <p class="text-slate-600 text-sm md:text-base leading-relaxed font-normal mb-6 sm:mb-8 max-w-2xl">
+                            Siap mendampingi Anda dalam memilih mobil listrik dan hybrid Geely impian. Dapatkan kemudahan booking test drive, konsultasi simulasi kredit bunga ringan, estimasi trade-in, hingga promo eksklusif untuk wilayah Alam Sutera, Tangerang, BSD, dan Jabodetabek dengan pelayanan ramah dan transparan.
+                        </p>
+
+                        <!-- Value Badges -->
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 mb-8">
+                            <div class="p-3 sm:p-4 rounded-2xl bg-white/75 border border-sky-200/80 shadow-sm">
+                                <span class="text-sky-600 text-xs sm:text-sm font-bold block mb-0.5">Fast Response</span>
+                                <span class="text-slate-500 text-[10px] sm:text-xs">Konsultasi Siap 24/7</span>
+                            </div>
+                            <div class="p-3 sm:p-4 rounded-2xl bg-white/75 border border-sky-200/80 shadow-sm">
+                                <span class="text-sky-600 text-xs sm:text-sm font-bold block mb-0.5">Promo Terbaik</span>
+                                <span class="text-slate-500 text-[10px] sm:text-xs">Diskon & Bunga Spesial</span>
+                            </div>
+                            <div class="p-3 sm:p-4 rounded-2xl bg-white/75 border border-sky-200/80 shadow-sm col-span-2 sm:col-span-1">
+                                <span class="text-sky-600 text-xs sm:text-sm font-bold block mb-0.5">Home Test Drive</span>
+                                <span class="text-slate-500 text-[10px] sm:text-xs">Unit Diantar ke Rumah</span>
+                            </div>
+                        </div>
+
+                        <!-- Direct Actions -->
+                        <div class="flex flex-col sm:flex-row items-center gap-3.5 sm:gap-4">
+                            <a href="https://wa.me/628170879315?text=Halo%20Yenni,%20saya%20tertarik%20dengan%20mobil%20Geely%20dan%20ingin%20konsultasi%20promo" 
+                               target="_blank" 
+                               rel="noopener noreferrer" 
+                               class="btn-shimmer glass-btn-primary flex items-center justify-center gap-3 text-white px-8 py-3.5 sm:py-4 rounded-full font-bold text-[10px] sm:text-[11px] tracking-[0.2em] uppercase w-full sm:w-auto shadow-lg hover:shadow-cyan-400/50">
+                                <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                                <span>Hubungi WhatsApp</span>
+                            </a>
+
+                            <a href="https://www.instagram.com/yennigeelywonder/" 
+                               target="_blank" 
+                               rel="noopener noreferrer" 
+                               class="glass-btn-secondary flex items-center justify-center gap-2.5 text-slate-800 hover:text-pink-600 px-6 py-3.5 sm:py-4 rounded-full font-bold text-[10px] sm:text-[11px] tracking-[0.2em] uppercase w-full sm:w-auto border border-sky-200 group/ig">
+                                <svg class="w-4 h-4 text-pink-600 group-hover/ig:scale-110 transition-transform" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
+                                </svg>
+                                <span>Instagram</span>
+                            </a>
+
+                            <a href="tel:+628170879315" 
+                               class="glass-btn-secondary flex items-center justify-center gap-2.5 text-slate-800 hover:text-sky-600 px-7 py-3.5 sm:py-4 rounded-full font-bold text-[10px] sm:text-[11px] tracking-[0.2em] uppercase w-full sm:w-auto border border-sky-200">
+                                <svg class="w-4 h-4 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                                <span>+62 817-0879-315</span>
+                            </a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
 
     <!-- MASTERPIECE LINE-UP SECTION -->
     <section id="lineup" class="py-24 lg:py-40 bg-gradient-to-b from-[#e0f2fe] via-[#f0f8ff] to-[#e6f4fe] text-slate-900 relative overflow-hidden">
@@ -509,19 +579,17 @@
         </div>
     </section>
 
-    <!-- PROMO & CREDIT SIMULATION SECTION (DIPERBAIKI: UKURAN LEBAR SELARAS & MARGIN TEPI PROPORSIONAL) -->
+    <!-- PROMO & CREDIT SIMULATION SECTION -->
     <section class="py-16 md:py-24 lg:py-32 bg-gradient-to-b from-[#e6f4fe] via-[#edf7fe] to-[#dbeafe] relative overflow-hidden">
         <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-sky-300/25 rounded-full blur-[170px] pointer-events-none"></div>
 
-        <!-- Ukuran max-width & padding luar diselaraskan penuh dengan section line-up & bento -->
         <div class="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 relative z-10">
             <div class="glass-panel mobile-bento-glass-light rounded-[24px] sm:rounded-[32px] md:rounded-[40px] overflow-hidden relative shadow-[0_30px_70px_-15px_rgba(2,132,199,0.18)] group reveal-up premium-card-hover border border-sky-200/90 w-full">
                 <div class="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-[460px] md:min-h-[500px] lg:min-h-[540px]">
                     
                     <!-- Kolom Kiri: Teks & Action Button -->
                     <div class="lg:col-span-6 xl:col-span-5 p-7 sm:p-10 md:p-14 lg:p-16 xl:p-20 relative z-10 flex flex-col justify-center">
-                        <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-sky-300/70 bg-sky-500/10 mb-6 md:mb-8 w-max">
-                            <span class="w-2 h-2 rounded-full bg-sky-600 shrink-0"></span>
+                        <div class="inline-flex items-center px-4 py-2 rounded-full border border-sky-300/70 bg-sky-500/10 mb-6 md:mb-8 w-max">
                             <span class="text-sky-700 text-[8px] md:text-[9px] font-bold tracking-[0.3em] uppercase">Promo & Pembiayaan Geely BSD</span>
                         </div>
                         
@@ -545,8 +613,6 @@
                     <!-- Kolom Kanan: Foto Kabin Keluarga & Soft Gradient Vignette Blend -->
                     <div class="lg:col-span-6 xl:col-span-7 relative min-h-[300px] sm:min-h-[380px] lg:min-h-full overflow-hidden block">
                         <img src="https://assets.zyrosite.com/Yle46KEPN6IkVONg/2400x0-14-mxB2lNnxMqfjr7pG.webp" alt="Simulasi Kredit dan Harga Pembiayaan Mobil Geely Tangerang Banten" class="absolute inset-0 w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-[2.5s] ease-out opacity-95">
-                        
-                        <!-- Transisi gradasi lembut yang menyatu dengan panel kaca di desktop & mobile -->
                         <div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-white/95 via-white/50 lg:via-white/25 to-transparent pointer-events-none"></div>
                     </div>
 
@@ -848,18 +914,22 @@
         </div>
     </section>
 
-    <!-- EM-I SUPER HYBRID SECTION -->
-    <div class="relative w-full pb-10 bg-gradient-to-b from-[#e2f0fd] via-[#f0f9ff] to-[#e8f4fc]">
-        <div class="sticky top-[25vh] md:top-0 w-full aspect-video md:h-[100vh] overflow-hidden z-0">
+    <!-- EM-I SUPER HYBRID SECTION DENGAN TRANSISI STICKY HALUS -->
+    <div id="emi-sticky-wrapper" class="relative w-full bg-gradient-to-b from-[#e2f0fd] via-[#f0f9ff] to-[#e8f4fc]">
+        <!-- Sticky Video Media Container dengan Transisi Skala, Opacity, dan Blur -->
+        <div id="emi-sticky-media" class="sticky top-0 w-full h-[70vh] sm:h-[85vh] md:h-[100vh] overflow-hidden z-0 transition-[transform,opacity,filter] duration-500 ease-out will-change-transform origin-center">
             <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
                 <source src="https://assets.zyrosite.com/Yle46KEPN6IkVONg/geely---coming-soon-starray-em-i---geely-epping-1080p-h264-YZ9EbbbjRws55ErL.mp4" type="video/mp4">
             </video>
             
-            <div class="absolute inset-x-0 top-0 h-16 md:h-36 bg-gradient-to-b from-[#e2f0fd] to-transparent pointer-events-none z-10"></div>
-            <div class="absolute inset-x-0 bottom-0 h-16 md:h-36 bg-gradient-to-t from-[#e8f4fc] to-transparent pointer-events-none z-10"></div>
+            <!-- Vignette & Transisi Dimming Dinamis Saat Sticky Bergerak -->
+            <div id="emi-sticky-overlay" class="absolute inset-0 bg-slate-950/40 opacity-0 transition-opacity duration-300 pointer-events-none z-10"></div>
+            <div class="absolute inset-x-0 top-0 h-20 md:h-36 bg-gradient-to-b from-[#e2f0fd] via-[#e2f0fd]/80 to-transparent pointer-events-none z-10"></div>
+            <div class="absolute inset-x-0 bottom-0 h-24 md:h-44 bg-gradient-to-t from-[#e8f4fc] via-[#e8f4fc]/80 to-transparent pointer-events-none z-10"></div>
         </div>
 
-        <section class="mt-[40vh] md:mt-[70vh] py-16 md:py-24 lg:py-32 bg-gradient-to-b from-[#e8f4fc]/95 via-white/95 to-[#e0f2fe]/95 backdrop-blur-md relative z-30 shadow-[0_-25px_60px_rgba(2,132,199,0.12)] min-h-[100vh] rounded-t-[2.5rem] md:rounded-none border-t border-sky-200">
+        <!-- Kartu Konten Overlap dengan Transisi Glassmorphism Lembut -->
+        <section id="emi-content-card" class="relative z-30 -mt-[25vh] sm:-mt-[35vh] md:-mt-[45vh] py-16 md:py-24 lg:py-32 bg-gradient-to-b from-[#e8f4fc]/95 via-white/95 to-[#e0f2fe]/95 backdrop-blur-xl shadow-[0_-30px_70px_rgba(2,132,199,0.18)] min-h-[100vh] rounded-t-[2.5rem] sm:rounded-t-[3.5rem] md:rounded-t-[4.5rem] border-t border-sky-300/80 transition-all duration-500">
             <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-sky-400/20 rounded-full blur-[160px] pointer-events-none z-0"></div>
             <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-400/20 rounded-full blur-[140px] pointer-events-none z-0"></div>
 
@@ -1085,29 +1155,6 @@
     </section>
     @endif
 
-    <!-- FIRST VISIT PROMO MODAL -->
-    <div id="first-visit-cta-modal" class="fixed inset-0 z-[9990] hidden items-center justify-center bg-slate-900/60 backdrop-blur-md opacity-0 transition-opacity duration-500 p-4 sm:p-6" onclick="closeFirstVisitCta(event)">
-        <div class="relative w-full max-w-lg md:max-w-xl bg-gradient-to-b from-white to-[#f0f9ff] border border-sky-300 rounded-3xl p-3 sm:p-4 cta-modal-pulse transform scale-95 transition-all duration-500 shadow-2xl" onclick="event.stopPropagation()">
-            <button onclick="closeFirstVisitCta(null)" aria-label="Tutup Promo" class="absolute -top-3 -right-3 md:-top-4 md:-right-4 w-10 h-10 md:w-11 md:h-11 rounded-full bg-white border border-sky-200 text-slate-700 flex items-center justify-center hover:text-sky-600 hover:border-sky-400 hover:scale-110 transition-all z-20 shadow-xl cursor-pointer">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                </svg>
-            </button>
-
-            <div class="absolute -top-10 -left-10 w-40 h-40 bg-sky-400/20 rounded-full blur-[50px] pointer-events-none"></div>
-            <div class="absolute -bottom-10 -right-10 w-40 h-40 bg-blue-500/20 rounded-full blur-[50px] pointer-events-none"></div>
-
-            <a href="/test-drive" onclick="setPromoCookie();" title="Penawaran Eksklusif Geely BSD" class="block relative w-full overflow-hidden rounded-2xl group border border-sky-100 hover:border-sky-400 transition-colors duration-300">
-                <img src="{{ asset('assets/a.png') }}" alt="Promo Spesial Pengunjung Baru Geely BSD" class="w-full h-auto max-h-[75vh] object-contain mx-auto transform group-hover:scale-[1.02] transition-transform duration-500">
-                <div class="absolute inset-0 bg-gradient-to-t from-sky-950/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center p-4">
-                    <span class="text-white text-[10px] md:text-xs font-bold tracking-[0.2em] uppercase bg-sky-600/90 backdrop-blur-md px-6 py-2.5 rounded-full border border-sky-300/50 shadow-lg">
-                        Klaim Promo Sekarang &rarr;
-                    </span>
-                </div>
-            </a>
-        </div>
-    </div>
-
     <!-- LIGHTBOX PREVIEW MODAL -->
     <div id="lightbox" class="fixed inset-0 hidden items-center justify-center bg-slate-950/85 backdrop-blur-md opacity-0 transition-opacity duration-300" style="z-index: 9999;" onclick="closeLightbox(event)">
         <button onclick="closeLightbox(event)" aria-label="Close Preview" class="absolute top-6 right-6 md:top-10 md:right-10 text-white/70 hover:text-white transition-colors bg-black/40 p-2.5 rounded-full border border-white/20 hover:bg-white/20 cursor-pointer" style="z-index: 10000;">
@@ -1129,83 +1176,7 @@
     </div>
 
     <script>
-        const PROMO_COOKIE_NAME = 'geely_bsd_promo_seen';
-        const PROMO_STORAGE_KEY = 'geely_bsd_has_seen_first_visit_cta';
-
-        function setPromoCookie(days = 30) {
-            const date = new Date();
-            date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
-            document.cookie = `${PROMO_COOKIE_NAME}=true; expires=${date.toUTCString()}; path=/; SameSite=Lax`;
-            
-            try {
-                localStorage.setItem(PROMO_STORAGE_KEY, 'true');
-            } catch (e) {}
-        }
-
-        function getPromoCookie() {
-            const match = document.cookie.match(new RegExp('(^| )' + PROMO_COOKIE_NAME + '=([^;]+)'));
-            if (match) return match[2];
-
-            try {
-                return localStorage.getItem(PROMO_STORAGE_KEY);
-            } catch (e) {
-                return null;
-            }
-        }
-
-        function showFirstVisitCta() {
-            const modal = document.getElementById('first-visit-cta-modal');
-            if (!modal) return;
-
-            const modalDialog = modal.querySelector('div');
-            modal.classList.remove('hidden');
-            modal.classList.add('flex');
-
-            requestAnimationFrame(() => {
-                modal.classList.remove('opacity-0');
-                modal.classList.add('opacity-100');
-                if (modalDialog) {
-                    modalDialog.classList.remove('scale-95');
-                    modalDialog.classList.add('scale-100');
-                }
-            });
-
-            document.body.classList.add('cta-modal-open');
-            setPromoCookie();
-        }
-
-        function closeFirstVisitCta(e) {
-            if (e && e.target !== e.currentTarget && !e.target.closest('button')) return;
-
-            const modal = document.getElementById('first-visit-cta-modal');
-            if (!modal) return;
-
-            const modalDialog = modal.querySelector('div');
-            modal.classList.remove('opacity-100');
-            modal.classList.add('opacity-0');
-
-            if (modalDialog) {
-                modalDialog.classList.remove('scale-100');
-                modalDialog.classList.add('scale-95');
-            }
-
-            setPromoCookie();
-
-            setTimeout(() => {
-                modal.classList.add('hidden');
-                modal.classList.remove('flex');
-                document.body.classList.remove('cta-modal-open');
-            }, 500);
-        }
-
         document.addEventListener('DOMContentLoaded', () => {
-            const hasSeenPromo = getPromoCookie();
-            if (!hasSeenPromo) {
-                setTimeout(() => {
-                    showFirstVisitCta();
-                }, 1200);
-            }
-
             const observerOptions = {
                 root: null,
                 rootMargin: '0px',
@@ -1223,6 +1194,91 @@
 
             const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-scale');
             revealElements.forEach(el => revealObserver.observe(el));
+
+            // Transisi Sticky: Section 2 Menimpa Section 1 Secara Halus (60fps, GPU-Accelerated)
+            const heroHeader = document.getElementById('hero-header');
+            const heroDim = document.getElementById('hero-dim-overlay');
+            const salesSection = document.getElementById('sales-profile');
+
+            if (heroHeader && salesSection) {
+                let isHeroTicking = false;
+                const updateHeroSticky = () => {
+                    const scrollY = window.pageYOffset || document.documentElement.scrollTop;
+                    const winH = window.innerHeight;
+
+                    if (scrollY > 0 && scrollY <= winH) {
+                        const progress = Math.min(1, Math.max(0, scrollY / winH));
+                        const scale = 1 - (progress * 0.06);
+                        const opacity = Math.max(0.35, 1 - (progress * 0.65));
+                        const blur = progress * 4;
+
+                        heroHeader.style.transform = `scale(${scale})`;
+                        heroHeader.style.opacity = `${opacity}`;
+                        heroHeader.style.filter = `blur(${blur}px)`;
+                        if (heroDim) {
+                            heroDim.style.opacity = `${progress * 0.7}`;
+                        }
+                    } else if (scrollY === 0) {
+                        heroHeader.style.transform = 'scale(1)';
+                        heroHeader.style.opacity = '1';
+                        heroHeader.style.filter = 'blur(0px)';
+                        if (heroDim) heroDim.style.opacity = '0';
+                    }
+                    isHeroTicking = false;
+                };
+
+                window.addEventListener('scroll', () => {
+                    if (!isHeroTicking) {
+                        window.requestAnimationFrame(updateHeroSticky);
+                        isHeroTicking = true;
+                    }
+                }, { passive: true });
+                updateHeroSticky();
+            }
+
+            // Transisi Sticky Scroll Halus & Aman (Bebas Error, 60fps Menggunakan requestAnimationFrame)
+            const emiWrapper = document.getElementById('emi-sticky-wrapper');
+            const emiMedia = document.getElementById('emi-sticky-media');
+            const emiOverlay = document.getElementById('emi-sticky-overlay');
+
+            if (emiWrapper && emiMedia) {
+                let isStickyTicking = false;
+                const updateStickyTransition = () => {
+                    const rect = emiWrapper.getBoundingClientRect();
+                    const winH = window.innerHeight;
+                    const totalDist = rect.height - winH;
+
+                    if (rect.top <= 0 && rect.bottom >= 0 && totalDist > 0) {
+                        const progress = Math.min(1, Math.max(0, -rect.top / totalDist));
+                        
+                        // Perhitungan transisi: skala mengecil lembut (1 -> 0.93), redup alami, dan blur halus
+                        const scale = 1 - (progress * 0.07);
+                        const opacity = Math.max(0.35, 1 - (progress * 0.65));
+                        const blur = progress * 6;
+
+                        emiMedia.style.transform = `scale(${scale})`;
+                        emiMedia.style.opacity = `${opacity}`;
+                        emiMedia.style.filter = `blur(${blur}px)`;
+                        if (emiOverlay) {
+                            emiOverlay.style.opacity = `${progress * 0.6}`;
+                        }
+                    } else if (rect.top > 0) {
+                        emiMedia.style.transform = 'scale(1)';
+                        emiMedia.style.opacity = '1';
+                        emiMedia.style.filter = 'blur(0px)';
+                        if (emiOverlay) emiOverlay.style.opacity = '0';
+                    }
+                    isStickyTicking = false;
+                };
+
+                window.addEventListener('scroll', () => {
+                    if (!isStickyTicking) {
+                        window.requestAnimationFrame(updateStickyTransition);
+                        isStickyTicking = true;
+                    }
+                }, { passive: true });
+                updateStickyTransition();
+            }
 
             // Slider drag & navigation logic
             document.querySelectorAll('[data-slider-wrapper]').forEach(wrapper => {
@@ -1497,10 +1553,6 @@
             if (e.key === 'Escape') {
                 if (!lightbox.classList.contains('hidden')) {
                     closeLightbox();
-                }
-                const firstVisitModal = document.getElementById('first-visit-cta-modal');
-                if (firstVisitModal && !firstVisitModal.classList.contains('hidden')) {
-                    closeFirstVisitCta(null);
                 }
             }
         });

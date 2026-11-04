@@ -104,7 +104,7 @@
         <!-- ==========================================
              MAIN FLOATING SPATIAL PANEL
         =========================================== -->
-        <div class="relative z-10 w-full max-w-[1200px] spatial-glass rounded-[2.5rem] md:rounded-[3rem] overflow-hidden flex flex-col lg:flex-row shadow-[0_0_100px_rgba(0,0,0,1)] ring-1 ring-white/10">
+        <div class="relative z-10 w-full max-w-[1260px] spatial-glass rounded-[2.5rem] md:rounded-[3rem] overflow-hidden flex flex-col lg:flex-row shadow-[0_0_100px_rgba(0,0,0,1)] ring-1 ring-white/10">
             
             <!-- LEFT: Showcase & Visuals -->
             <div class="w-full lg:w-5/12 p-8 md:p-12 relative flex flex-col justify-between overflow-hidden group">
@@ -114,16 +114,15 @@
                 <div class="absolute inset-0 bg-cyan-900/20 mix-blend-overlay"></div>
 
                 <div class="relative z-10">
-                    <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-cyan-400/30 bg-black/40 backdrop-blur-md">
-                        <span class="w-2 h-2 rounded-full bg-cyan-400 animate-pulse"></span>
-                        <span class="text-[9px] font-bold tracking-[0.3em] uppercase text-cyan-300">Geely Virtual Booking</span>
+                    <div class="inline-flex items-center mb-4 sm:mb-5 px-3.5 py-1 rounded-full border border-cyan-400/30 bg-black/40 backdrop-blur-md">
+                        <span class="text-[8px] font-bold tracking-[0.25em] uppercase text-cyan-300">Geely Virtual Booking</span>
                     </div>
-                    <h1 class="font-geely text-4xl sm:text-5xl lg:text-6xl text-white font-bold uppercase tracking-tight leading-[1.1] drop-shadow-2xl">
+                    <h1 class="font-geely text-2xl sm:text-3xl lg:text-4xl text-white font-bold uppercase tracking-tight leading-[1.15] drop-shadow-xl">
                         Unlock<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-500">The Future.</span>
                     </h1>
                 </div>
 
-                <div class="relative z-10 mt-24 lg:mt-0">
+                <div class="relative z-10 mt-14 lg:mt-0">
                     <div id="active-car-tag" class="text-cyan-400 text-[10px] font-bold tracking-[0.3em] uppercase mb-2 block">Smart SUV</div>
                     <h2 id="active-car-title" class="font-geely text-3xl text-white tracking-wide uppercase mb-3">Geely EX5</h2>
                     <p id="active-car-desc" class="text-white/60 text-sm font-light max-w-sm leading-relaxed">
@@ -141,25 +140,31 @@
                     <!-- 1. Model Selector (Pills) -->
                     <div class="space-y-3">
                         <label class="text-[10px] font-bold tracking-[0.2em] uppercase text-white/50 flex items-center gap-2">
-                            <span class="w-4 h-[1px] bg-cyan-500/50"></span> Select Interface
+                            <span class="w-4 h-[1px] bg-cyan-500/50"></span> Pilih Model Kendaraan
                         </label>
-                        <div class="flex flex-wrap gap-3">
+                        <div class="flex flex-wrap gap-2.5 sm:gap-3">
                             <label class="cursor-pointer">
                                 <input type="radio" name="car_model" value="ex5" class="peer sr-only" checked>
-                                <div class="px-6 py-3 rounded-full border border-white/10 bg-white/5 text-white/60 text-xs font-bold tracking-[0.15em] uppercase transition-all duration-300 peer-checked:bg-cyan-500/20 peer-checked:border-cyan-400 peer-checked:text-cyan-300 peer-checked:shadow-[0_0_20px_rgba(34,211,238,0.3)] hover:bg-white/10">
+                                <div class="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full border border-white/10 bg-white/5 text-white/60 text-xs font-bold tracking-[0.15em] uppercase transition-all duration-300 peer-checked:bg-cyan-500/20 peer-checked:border-cyan-400 peer-checked:text-cyan-300 peer-checked:shadow-[0_0_20px_rgba(34,211,238,0.3)] hover:bg-white/10">
                                     Geely EX5
                                 </div>
                             </label>
                             <label class="cursor-pointer">
                                 <input type="radio" name="car_model" value="ex2" class="peer sr-only">
-                                <div class="px-6 py-3 rounded-full border border-white/10 bg-white/5 text-white/60 text-xs font-bold tracking-[0.15em] uppercase transition-all duration-300 peer-checked:bg-cyan-500/20 peer-checked:border-cyan-400 peer-checked:text-cyan-300 peer-checked:shadow-[0_0_20px_rgba(34,211,238,0.3)] hover:bg-white/10">
+                                <div class="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full border border-white/10 bg-white/5 text-white/60 text-xs font-bold tracking-[0.15em] uppercase transition-all duration-300 peer-checked:bg-cyan-500/20 peer-checked:border-cyan-400 peer-checked:text-cyan-300 peer-checked:shadow-[0_0_20px_rgba(34,211,238,0.3)] hover:bg-white/10">
                                     Geely EX2
                                 </div>
                             </label>
                             <label class="cursor-pointer">
                                 <input type="radio" name="car_model" value="starray" class="peer sr-only">
-                                <div class="px-6 py-3 rounded-full border border-white/10 bg-white/5 text-white/60 text-xs font-bold tracking-[0.15em] uppercase transition-all duration-300 peer-checked:bg-cyan-500/20 peer-checked:border-cyan-400 peer-checked:text-cyan-300 peer-checked:shadow-[0_0_20px_rgba(34,211,238,0.3)] hover:bg-white/10">
+                                <div class="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full border border-white/10 bg-white/5 text-white/60 text-xs font-bold tracking-[0.15em] uppercase transition-all duration-300 peer-checked:bg-cyan-500/20 peer-checked:border-cyan-400 peer-checked:text-cyan-300 peer-checked:shadow-[0_0_20px_rgba(34,211,238,0.3)] hover:bg-white/10">
                                     Starray EM-i
+                                </div>
+                            </label>
+                            <label class="cursor-pointer">
+                                <input type="radio" name="car_model" value="coolray" class="peer sr-only">
+                                <div class="px-5 sm:px-6 py-2.5 sm:py-3 rounded-full border border-white/10 bg-white/5 text-white/60 text-xs font-bold tracking-[0.15em] uppercase transition-all duration-300 peer-checked:bg-cyan-500/20 peer-checked:border-cyan-400 peer-checked:text-cyan-300 peer-checked:shadow-[0_0_20px_rgba(34,211,238,0.3)] hover:bg-white/10">
+                                    Geely Coolray
                                 </div>
                             </label>
                         </div>
@@ -169,7 +174,7 @@
                         <!-- 2. Personal Info -->
                         <div class="space-y-4">
                             <label class="text-[10px] font-bold tracking-[0.2em] uppercase text-white/50 flex items-center gap-2">
-                                <span class="w-4 h-[1px] bg-cyan-500/50"></span> User Identity
+                                <span class="w-4 h-[1px] bg-cyan-500/50"></span> Data Diri
                             </label>
                             
                             <!-- Input with Icon -->
@@ -179,7 +184,7 @@
                             </div>
                             
                             <div class="hud-input-group">
-                                <input type="tel" name="phone" id="phoneNumber" required placeholder="No. WhatsApp (cth: 08123456789)" class="hud-input peer">
+                                <input type="tel" name="phone" id="phoneNumber" required placeholder="No. WhatsApp (cth: 08170879315)" class="hud-input peer">
                                 <svg class="hud-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"></path></svg>
                             </div>
                         </div>
@@ -187,7 +192,7 @@
                         <!-- 3. Scheduling -->
                         <div class="space-y-4">
                             <label class="text-[10px] font-bold tracking-[0.2em] uppercase text-white/50 flex items-center gap-2">
-                                <span class="w-4 h-[1px] bg-cyan-500/50"></span> Parameters
+                                <span class="w-4 h-[1px] bg-cyan-500/50"></span> Jadwal & Lokasi
                             </label>
                             
                             <div class="grid grid-cols-2 gap-4">
@@ -202,6 +207,7 @@
                             <div class="hud-input-group">
                                 <select name="dealer_location" id="dealerLocation" required class="hud-input peer !pl-11 appearance-none cursor-pointer">
                                     <option value="" disabled selected hidden>Pilih Titik Lokasi</option>
+                                    <option value="alam-sutera" selected>Geely Wonder Alam Sutera</option>
                                     <option value="bsd">Geely BSD City</option>
                                     <option value="pik">Geely Center PIK</option>
                                     <option value="pondok-indah">Geely Pondok Indah</option>
@@ -224,8 +230,8 @@
                             <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:animate-[shimmer_1.5s_infinite]"></div>
                             
                             <span class="relative z-10 flex justify-center items-center gap-3 text-cyan-300 group-hover:text-black font-bold text-xs sm:text-sm tracking-[0.2em] uppercase transition-colors">
-                                Inisialisasi Sistem
-                                <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                                Konfirmasi Booking Test Drive
+                                <svg class="w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                             </span>
                         </button>
                     </div>
@@ -238,13 +244,24 @@
                         <div class="absolute inset-2 rounded-full border border-cyan-400/60 animate-[spin_4s_linear_infinite]"></div>
                         <svg class="w-10 h-10 text-cyan-300 relative z-10 drop-shadow-[0_0_10px_rgba(34,211,238,0.8)]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                     </div>
-                    <h3 class="font-geely text-2xl sm:text-3xl text-white mb-3 tracking-wide">Akses Diberikan.</h3>
-                    <p class="text-white/60 text-sm leading-relaxed max-w-sm mx-auto mb-8">
-                        Transmisi data berhasil tercatat di sistem CRM kami. Sales Consultant Geely BSD akan mengonfirmasi jadwal Anda segera via WhatsApp.
+                    <h3 class="font-geely text-2xl sm:text-3xl text-white mb-3 tracking-wide">Jadwal Berhasil Dikirim</h3>
+                    <p class="text-white/60 text-sm leading-relaxed max-w-sm mx-auto mb-6">
+                        Terima kasih! Formulir booking Anda telah kami terima. Sales Consultant Geely Wonder Alam Sutera (<strong class="text-white font-semibold">YENNI - +62 817-0879-315</strong>) akan segera mengonfirmasi jadwal test drive Anda via WhatsApp.
                     </p>
-                    <button onclick="window.location.reload()" class="px-8 py-3 rounded-full bg-white/5 border border-white/10 text-white/80 text-[10px] tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-300">
-                        Kembali ke Main Menu
-                    </button>
+                    
+                    <div class="flex flex-col sm:flex-row items-center gap-3 mb-6">
+                        <a href="https://wa.me/628170879315?text=Halo%20Yenni,%20saya%20sudah%20mengisi%20formulir%20booking%20test%20drive%20Geely" 
+                           target="_blank" 
+                           rel="noopener noreferrer"
+                           class="px-6 py-3 rounded-full bg-[#25D366] text-white text-xs font-bold tracking-wider uppercase hover:bg-[#20bd5a] transition-all shadow-[0_4px_14px_rgba(37,211,102,0.4)] flex items-center gap-2">
+                            <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/></svg>
+                            <span>Chat Langsung Yenni</span>
+                        </a>
+
+                        <button onclick="window.location.reload()" class="px-6 py-3 rounded-full bg-white/5 border border-white/10 text-white/80 text-[10px] tracking-[0.2em] uppercase hover:bg-white hover:text-black transition-all duration-300">
+                            Kembali ke Menu
+                        </button>
+                    </div>
                 </div>
 
             </div>
@@ -255,7 +272,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             
-            // Database Visual & Data
+            // Database Visual & Data Model Mobil
             const db = {
                 'ex5': {
                     img: 'https://assets.zyrosite.com/Yle46KEPN6IkVONg/2400x0-17-YyvDPj63ErSwozLD.webp',
@@ -264,16 +281,22 @@
                     desc: 'Siap mengubah cara Anda memandang mobilitas. Konfirmasi jadwal test drive Anda dalam hitungan detik.'
                 },
                 'ex2': {
-                    img: 'https://assets.zyrosite.com/Yle46KEPN6IkVONg/ambient-lighting-1-YCHFgHZwRQjP7gVB.webp',
+                    img: "{{ asset('assets/images/spesifikasi-Geely-EX2-2026.webp') }}",
                     tag: 'Urban EV',
                     title: 'Geely EX2',
                     desc: 'Manuver lincah untuk jalanan kota. Rasakan teknologi EV masa depan langsung dari genggaman Anda.'
                 },
                 'starray': {
-                    img: 'https://assets.zyrosite.com/Yle46KEPN6IkVONg/interior_starray_01-YD0EBleD6kSoMROy.png',
+                    img: "{{ asset('assets/images/geely-starray-em-i-front-angle-low-view-414009.webp') }}",
                     tag: 'Super Hybrid',
                     title: 'Starray EM-i',
                     desc: 'Simfoni kemewahan kabin dan performa tanpa batas. Atur jadwal Anda untuk pengalaman eksklusif.'
+                },
+                'coolray': {
+                    img: "{{ asset('assets/coolray/1782976852-2artboard-2-jpg.avif') }}",
+                    tag: 'Dynamic Sport SUV',
+                    title: 'Geely Coolray',
+                    desc: 'Ditenagai mesin 1.5L Turbo 172 HP dan 7-Speed DCT. Rasakan akselerasi responsif dan kendali penuh di setiap lintasan.'
                 }
             };
 
@@ -300,6 +323,8 @@
 
             function updateVisuals(modelKey) {
                 const data = db[modelKey];
+                if (!data) return;
+
                 [activeTag, activeTitle, activeDesc, cardVisual, bgVisual].forEach(el => {
                     if (el) el.style.opacity = '0';
                 });
@@ -347,7 +372,7 @@
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                             <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                        Menyimpan ke CRM...
+                        Memproses Jadwal...
                     </span>
                 `;
                 btn.disabled = true;
