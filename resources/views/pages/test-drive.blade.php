@@ -107,25 +107,28 @@
         <div class="relative z-10 w-full max-w-[1260px] spatial-glass rounded-[2.5rem] md:rounded-[3rem] overflow-hidden flex flex-col lg:flex-row shadow-[0_0_100px_rgba(0,0,0,1)] ring-1 ring-white/10">
             
             <!-- LEFT: Showcase & Visuals -->
-            <div class="w-full lg:w-5/12 p-8 md:p-12 relative flex flex-col justify-between overflow-hidden group">
-                <!-- Background Image inside card -->
-                <img id="card-visual" src="https://assets.zyrosite.com/Yle46KEPN6IkVONg/2400x0-17-YyvDPj63ErSwozLD.webp" class="absolute inset-0 w-full h-full object-cover transition-transform duration-[2s] group-hover:scale-110 opacity-60 mix-blend-luminosity group-hover:mix-blend-normal">
-                <div class="absolute inset-0 bg-gradient-to-t from-black via-black/50 to-transparent"></div>
-                <div class="absolute inset-0 bg-cyan-900/20 mix-blend-overlay"></div>
-
+            <div class="w-full lg:w-5/12 p-6 sm:p-8 lg:p-12 relative flex flex-col justify-between overflow-hidden group bg-slate-950/40 lg:bg-transparent">
+                <!-- Top: Badge & Header -->
                 <div class="relative z-10">
-                    <div class="inline-flex items-center mb-4 sm:mb-5 px-3.5 py-1 rounded-full border border-cyan-400/30 bg-black/40 backdrop-blur-md">
+                    <div class="inline-flex items-center mb-3 sm:mb-4 px-3.5 py-1 rounded-full border border-cyan-400/30 bg-black/40 backdrop-blur-md">
                         <span class="text-[8px] font-bold tracking-[0.25em] uppercase text-cyan-300">Geely Virtual Booking</span>
                     </div>
                     <h1 class="font-geely text-2xl sm:text-3xl lg:text-4xl text-white font-bold uppercase tracking-tight leading-[1.15] drop-shadow-xl">
-                        Unlock<br><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-500">The Future.</span>
+                        Unlock<br class="hidden sm:inline"><span class="sm:hidden"> </span><span class="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 to-blue-500">The Future.</span>
                     </h1>
                 </div>
 
-                <div class="relative z-10 mt-14 lg:mt-0">
-                    <div id="active-car-tag" class="text-cyan-400 text-[10px] font-bold tracking-[0.3em] uppercase mb-2 block">Smart SUV</div>
-                    <h2 id="active-car-title" class="font-geely text-3xl text-white tracking-wide uppercase mb-3">Geely EX5</h2>
-                    <p id="active-car-desc" class="text-white/60 text-sm font-light max-w-sm leading-relaxed">
+                <!-- Middle: Dedicated Frame Foto Mobil (Tidak Tertimpa Tulisan) -->
+                <div class="relative w-full aspect-[16/10] sm:aspect-[16/9] my-4 sm:my-6 rounded-2xl overflow-hidden border border-white/15 shadow-2xl bg-slate-950/80">
+                    <img id="card-visual" src="https://assets.zyrosite.com/Yle46KEPN6IkVONg/2400x0-17-YyvDPj63ErSwozLD.webp" alt="Geely Car Showcase" class="w-full h-full object-cover object-center transition-all duration-700 group-hover:scale-105">
+                    <div class="absolute inset-0 bg-gradient-to-t from-slate-950/70 via-transparent to-transparent pointer-events-none"></div>
+                </div>
+
+                <!-- Bottom: Detail Spesifikasi Mobil -->
+                <div class="relative z-10">
+                    <div id="active-car-tag" class="text-cyan-400 text-[10px] font-bold tracking-[0.3em] uppercase mb-1.5 block transition-opacity duration-300">Smart SUV</div>
+                    <h2 id="active-car-title" class="font-geely text-2xl sm:text-3xl text-white tracking-wide uppercase mb-2 transition-opacity duration-300">Geely EX5</h2>
+                    <p id="active-car-desc" class="text-white/70 text-xs sm:text-sm font-light max-w-sm leading-relaxed transition-opacity duration-300">
                         Siap mengubah cara Anda memandang mobilitas. Konfirmasi jadwal test drive Anda dalam hitungan detik.
                     </p>
                 </div>
@@ -206,17 +209,19 @@
                             
                             <div class="hud-input-group">
                                 <select name="dealer_location" id="dealerLocation" required class="hud-input peer !pl-11 appearance-none cursor-pointer">
-                                    <option value="" disabled selected hidden>Pilih Titik Lokasi</option>
-                                    <option value="alam-sutera" selected>Geely Wonder Alam Sutera</option>
-                                    <option value="bsd">Geely BSD City</option>
-                                    <option value="pik">Geely Center PIK</option>
-                                    <option value="pondok-indah">Geely Pondok Indah</option>
-                                    <option value="home">Home Service (Jadetabek)</option>
+                                    <option value="dealer" selected>Test Drive di Dealer (Geely Wonder Alam Sutera)</option>
+                                    <option value="home">Test Drive di Rumah (Home Test Drive)</option>
                                 </select>
                                 <svg class="hud-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
                                 <div class="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none text-white/30">
                                     <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                                 </div>
+                            </div>
+
+                            <!-- Input Alamat (Otomatis tampil saat memilih Test Drive di Rumah) -->
+                            <div id="homeAddressWrapper" class="hud-input-group hidden">
+                                <input type="text" name="address" id="homeAddress" placeholder="Alamat Lengkap / Domisili Pengantaran Unit" class="hud-input peer !pl-11 text-white/90">
+                                <svg class="hud-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"></path></svg>
                             </div>
                         </div>
                     </div>
@@ -339,7 +344,7 @@
                     activeTag.style.opacity = '1';
                     activeTitle.style.opacity = '1';
                     activeDesc.style.opacity = '1';
-                    cardVisual.style.opacity = '0.6';
+                    cardVisual.style.opacity = '1';
                     bgVisual.style.opacity = '0.4';
                 }, 300);
             }
@@ -355,6 +360,19 @@
             const today = new Date().toISOString().split('T')[0];
             const dateInput = document.getElementById('prefDate');
             if(dateInput) dateInput.setAttribute('min', today);
+
+            // Toggle Input Alamat Saat Memilih Test Drive di Rumah
+            const dealerLocationSelect = document.getElementById('dealerLocation');
+            const homeAddressWrapper = document.getElementById('homeAddressWrapper');
+            if (dealerLocationSelect && homeAddressWrapper) {
+                dealerLocationSelect.addEventListener('change', (e) => {
+                    if (e.target.value === 'home') {
+                        homeAddressWrapper.classList.remove('hidden');
+                    } else {
+                        homeAddressWrapper.classList.add('hidden');
+                    }
+                });
+            }
 
             // Real AJAX Form Submission ke CRM Database
             form.addEventListener('submit', async (e) => {

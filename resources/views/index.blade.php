@@ -59,6 +59,17 @@
             box-shadow: 0 20px 45px -10px rgba(14, 165, 233, 0.1), inset 0 1px 0 rgba(255, 255, 255, 1);
         }
 
+        /* Real Automotive Translucent Glass Tokens */
+        .true-glass-pane {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.32) 0%, rgba(255, 255, 255, 0.12) 100%);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid rgba(255, 255, 255, 0.65);
+            border-top: 1.5px solid rgba(255, 255, 255, 0.95);
+            border-left: 1.5px solid rgba(255, 255, 255, 0.75);
+            box-shadow: 0 30px 60px -15px rgba(2, 132, 199, 0.18), inset 0 1px 3px rgba(255, 255, 255, 0.9), inset 0 -1px 2px rgba(2, 132, 199, 0.08);
+        }
+
         /* Floating Nav Chip */
         .glass-chip-nav {
             background: rgba(255, 255, 255, 0.85);
@@ -287,7 +298,7 @@
     </style>
 
     <!-- CINEMATIC LIGHT BLUE AUTOMOTIVE HERO HEADER (STICKY PINNED SECTION 1) -->
-    <header id="hero-header" class="sticky top-0 z-0 min-h-[100svh] w-full flex flex-col justify-between items-center overflow-hidden bg-gradient-to-b from-[#e0f2fe] via-[#f0f9ff] to-[#e0f2fe] bg-noise pt-28 pb-12 md:pt-36 md:pb-16 transition-[transform,opacity,filter] duration-300 will-change-transform origin-center">
+    <header id="hero-header" class="sticky top-0 z-0 min-h-[100svh] w-full flex flex-col justify-between items-center overflow-hidden bg-gradient-to-b from-[#e0f2fe] via-[#f0f9ff] to-[#e0f2fe] bg-noise pt-20 sm:pt-24 md:pt-36 pb-36 sm:pb-28 md:pb-16 transition-[transform,opacity,filter] duration-300 will-change-transform origin-center">
         <!-- Background Cinematic Video with Light Crystalline Overlay -->
         <div class="absolute inset-0 z-0 overflow-hidden">
             <video autoplay muted loop playsinline class="w-full h-full object-cover scale-105 filter brightness-[1.05] contrast-[1.02] opacity-75">
@@ -312,35 +323,41 @@
             </div>
         </div>
 
-        <!-- Center Stage: Open Typography & Brand Narrative -->
-        <div class="relative z-20 w-full max-w-5xl mx-auto px-6 text-center my-auto py-6">
-            <h1 class="font-geely text-5xl sm:text-7xl md:text-8xl lg:text-[108px] text-slate-900 uppercase leading-[0.88] tracking-tighter drop-shadow-sm mb-6 reveal-up delay-100">
-                <span class="sr-only">Temukan inovasi mobilitas masa depan dengan Geely EX2, Geely EX5, dan Geely Starray EM-i di BSD City Tangerang - </span>
-                DRIVE THE <br>
-                <span class="text-liquid drop-shadow-[0_0_35px_rgba(56,189,248,0.5)]">FUTURE</span>
-            </h1>
+        <!-- Center Stage: Typography & Controls dalam Frame Kaca Tembus Pandang Asli -->
+        <div class="relative z-20 w-full max-w-5xl mx-auto px-4 sm:px-6 my-auto py-2 sm:py-4">
+            <div class="true-glass-pane rounded-[1.75rem] sm:rounded-[2.75rem] md:rounded-[3.5rem] p-4 sm:p-8 md:p-12 lg:p-14 text-center relative overflow-hidden">
+                <!-- Pantulan Efek Bias Cahaya Kaca (Specular Reflection) -->
+                <div class="absolute -top-32 -left-32 w-80 h-80 bg-gradient-to-br from-white/50 via-white/10 to-transparent rounded-full blur-2xl pointer-events-none"></div>
+                <div class="absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-white to-transparent opacity-90 pointer-events-none"></div>
 
-            <p class="max-w-2xl mx-auto text-slate-700 text-xs sm:text-sm md:text-base font-normal tracking-wide leading-relaxed drop-shadow-sm mb-8 reveal-up delay-200">
-                Rasakan era baru mobilitas premium bersama line-up kendaraan listrik cerdas Geely. Jelajahi kelincahan urban <strong class="text-slate-950 font-semibold">Geely EX2</strong>, inovasi elektrik tangguh <strong class="text-slate-950 font-semibold">Geely EX5</strong>, performa super hybrid mutakhir <strong class="text-slate-950 font-semibold">Geely Starray EM-i</strong>, serta performa dinamis <strong class="text-slate-950 font-semibold">Geely Coolray</strong>.
-            </p>
+                <h1 class="relative z-10 font-geely text-3xl sm:text-5xl md:text-7xl lg:text-[88px] text-slate-900 uppercase leading-[0.9] tracking-tighter drop-shadow-[0_2px_12px_rgba(255,255,255,0.7)] mb-4 sm:mb-5 reveal-up delay-100">
+                    <span class="sr-only">Temukan inovasi mobilitas masa depan dengan Geely EX2, Geely EX5, dan Geely Starray EM-i di BSD City Tangerang - </span>
+                    DRIVE THE <br>
+                    <span class="text-liquid drop-shadow-[0_0_35px_rgba(56,189,248,0.5)]">FUTURE</span>
+                </h1>
 
-            <!-- Primary Glass Action Controls -->
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-4 reveal-up delay-300">
-                <a href="/test-drive" title="Booking Test Drive Mobil Geely di Showroom BSD" class="btn-shimmer glass-btn-primary flex items-center justify-center gap-3 text-white px-8 md:px-10 py-3.5 md:py-4 rounded-full font-bold text-[10px] md:text-[11px] tracking-[0.2em] uppercase cursor-pointer w-full sm:w-auto shadow-lg hover:shadow-cyan-400/50">
-                    <span>Book Test Drive</span>
-                    <svg class="w-4 h-4 text-sky-100 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                </a>
-                <a href="#lineup" title="Eksplorasi Model Mobil Listrik Geely Terbaru" class="glass-btn-secondary group flex items-center justify-center gap-3 text-slate-800 hover:text-sky-600 px-7 py-3 md:py-3.5 rounded-full cursor-pointer w-full sm:w-auto border border-sky-200">
-                    <div class="w-6 h-6 rounded-full bg-sky-100 flex items-center justify-center group-hover:bg-sky-200 transition-all">
-                        <svg class="w-3 h-3 text-sky-700 transform group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
-                    </div>
-                    <span class="text-[10px] font-bold tracking-[0.2em] uppercase">Explore Models</span>
-                </a>
+                <p class="relative z-10 max-w-2xl mx-auto text-slate-800 text-xs sm:text-sm md:text-base font-medium tracking-wide leading-relaxed drop-shadow-[0_1px_6px_rgba(255,255,255,0.85)] mb-6 sm:mb-7 md:mb-8 reveal-up delay-200">
+                    Rasakan era baru mobilitas premium bersama line-up kendaraan listrik cerdas Geely. Jelajahi kelincahan urban <strong class="text-slate-950 font-bold">Geely EX2</strong>, inovasi elektrik tangguh <strong class="text-slate-950 font-bold">Geely EX5</strong>, performa super hybrid mutakhir <strong class="text-slate-950 font-bold">Geely Starray EM-i</strong>, serta performa dinamis <strong class="text-slate-950 font-bold">Geely Coolray</strong>.
+                </p>
+
+                <!-- Primary Glass Action Controls -->
+                <div class="relative z-10 flex flex-col sm:flex-row items-center justify-center gap-3.5 sm:gap-4 reveal-up delay-300">
+                    <a href="/test-drive" title="Booking Test Drive Mobil Geely di Showroom BSD" class="btn-shimmer glass-btn-primary flex items-center justify-center gap-3 text-white px-8 md:px-10 py-3.5 md:py-4 rounded-full font-bold text-[10px] md:text-[11px] tracking-[0.2em] uppercase cursor-pointer w-full sm:w-auto shadow-lg hover:shadow-cyan-400/50">
+                        <span>Book Test Drive</span>
+                        <svg class="w-4 h-4 text-sky-100 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                    </a>
+                    <a href="#lineup" title="Eksplorasi Model Mobil Listrik Geely Terbaru" class="glass-btn-secondary group flex items-center justify-center gap-3 text-slate-800 hover:text-sky-600 px-7 py-3 md:py-3.5 rounded-full cursor-pointer w-full sm:w-auto border border-sky-200">
+                        <div class="w-6 h-6 rounded-full bg-sky-100 flex items-center justify-center group-hover:bg-sky-200 transition-all">
+                            <svg class="w-3 h-3 text-sky-700 transform group-hover:translate-y-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3"></path></svg>
+                        </div>
+                        <span class="text-[10px] font-bold tracking-[0.2em] uppercase">Explore Models</span>
+                    </a>
+                </div>
             </div>
         </div>
 
         <!-- Bottom Floating HUD Island -->
-        <div class="relative z-20 w-full max-w-4xl mx-auto px-4 reveal-up delay-400">
+        <div class="relative z-20 w-full max-w-4xl mx-auto px-4 mb-4 sm:mb-2 md:mb-0 reveal-up delay-400">
             <div class="glass-island-dock rounded-2xl md:rounded-full p-2 md:p-2.5">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
                     <a href="/models/ex5" class="glass-island-cell rounded-xl md:rounded-full py-2.5 px-4 flex flex-col items-center justify-center text-center group cursor-pointer shadow-sm">
