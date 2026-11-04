@@ -943,15 +943,17 @@
         </div>
     </section>
 
-    <!-- EM-I SUPER HYBRID SECTION (STRUKTUR SEMULA - TANPA VIGNET PUTIH) -->
-    <div class="relative w-full pb-10 bg-gradient-to-b from-[#e2f0fd] via-[#f0f9ff] to-[#e8f4fc]">
-        <div class="sticky top-[25vh] md:top-0 w-full aspect-video md:h-[100vh] overflow-hidden z-0 bg-slate-950">
-            <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
+    <!-- EM-I SUPER HYBRID SECTION (STICKY TERKUNCI DALAM SEKSI, TIDAK TEMBUS KE BAWAH) -->
+    <div id="starray-showcase-wrapper" class="relative w-full bg-slate-950 z-20">
+        <!-- 1. Video Banner Sticky Top-0 (Menempel Bersih Tanpa Teks Dobel) -->
+        <div class="sticky top-0 z-10 w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden bg-slate-950">
+            <video autoplay muted loop playsinline class="w-full h-full object-cover">
                 <source src="https://assets.zyrosite.com/Yle46KEPN6IkVONg/geely---coming-soon-starray-em-i---geely-epping-1080p-h264-YZ9EbbbjRws55ErL.mp4" type="video/mp4">
             </video>
         </div>
 
-        <section class="mt-[40vh] md:mt-[70vh] py-16 md:py-24 lg:py-32 bg-gradient-to-b from-[#e8f4fc]/95 via-white/95 to-[#e0f2fe]/95 backdrop-blur-md relative z-30 shadow-[0_-25px_60px_rgba(2,132,199,0.12)] min-h-[100vh] rounded-t-[2.5rem] md:rounded-none border-t border-sky-200">
+        <!-- 2. Sheet Konten Solid (Naik Menutupi Video Seperti Tirai, 100% Solid Tanpa Transparan Tembus) -->
+        <section class="relative z-20 w-full bg-[#e8f4fc] py-16 md:py-24 lg:py-32 shadow-[0_-30px_70px_rgba(0,0,0,0.5)] rounded-t-[2.5rem] md:rounded-t-[3.5rem] border-t-2 border-sky-300">
             <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-sky-400/20 rounded-full blur-[160px] pointer-events-none z-0"></div>
             <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-400/20 rounded-full blur-[140px] pointer-events-none z-0"></div>
 
@@ -1002,8 +1004,8 @@
         </section>
     </div>
 
-    <!-- GEELY APP REMOTE CONTROL SECTION -->
-    <section id="app-remote" class="py-16 md:py-24 lg:py-32 relative z-30 bg-gradient-to-b from-[#e0f2fe] via-[#f0f9ff] to-[#e8f4fc] border-t border-sky-200">
+    <!-- GEELY APP REMOTE CONTROL SECTION (SOLID BASE - TIDAK BISA DITEMBUS STICKY) -->
+    <section id="app-remote" class="py-16 md:py-24 lg:py-32 relative z-30 bg-[#e0f2fe] bg-gradient-to-b from-[#e0f2fe] via-[#f0f9ff] to-[#e8f4fc] border-t border-sky-200">
         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-sky-300/30 rounded-full blur-[150px] pointer-events-none z-0"></div>
         <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-300/20 rounded-full blur-[130px] pointer-events-none z-0"></div>
 
