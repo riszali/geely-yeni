@@ -1509,18 +1509,18 @@
     <!-- SCHEMA JSON-LD STRUCTURED DATA -->
     <script type="application/ld+json">
     {
-      "@context": "https://schema.org",
-      "@graph": [
+      "@@context": "https://schema.org",
+      "@@graph": [
         {
-          "@type": "AutoDealer",
+          "@@type": "AutoDealer",
           "name": "Dealer Resmi Geely BSD City",
           "image": "{{ asset('assets/images/ex5/dama.jpeg') }}",
-          "@id": "https://geelybsd.id",
+          "@@id": "https://geelybsd.id",
           "url": "https://geelybsd.id",
           "telephone": "+6281214112446", 
           "description": "Dealer mobil listrik resmi Geely BSD Tangerang. Melayani test drive, pembelian tunai/kredit dengan simulasi instan, promo bunga spesial, dan servis resmi Geely EX5, EX2, dan Starray EM-i.",
           "address": {
-            "@type": "PostalAddress",
+            "@@type": "PostalAddress",
             "streetAddress": "BSD City",
             "addressLocality": "Tangerang Selatan",
             "addressRegion": "Banten",
@@ -1528,12 +1528,12 @@
             "addressCountry": "ID"
           },
           "geo": {
-            "@type": "GeoCoordinates",
+            "@@type": "GeoCoordinates",
             "latitude": -6.3023, 
             "longitude": 106.6521
           },
           "openingHoursSpecification": {
-            "@type": "OpeningHoursSpecification",
+            "@@type": "OpeningHoursSpecification",
             "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
             "opens": "08:30",
             "closes": "17:30"
@@ -1541,28 +1541,28 @@
           "priceRange": "$$$"
         },
         {
-          "@type": "ItemList",
+          "@@type": "ItemList",
           "itemListElement": [
             {
-              "@type": "ListItem",
+              "@@type": "ListItem",
               "position": 1,
               "name": "Geely EX5",
               "url": "https://geelybsd.id/models/ex5"
             },
             {
-              "@type": "ListItem",
+              "@@type": "ListItem",
               "position": 2,
               "name": "Geely EX2",
               "url": "https://geelybsd.id/models/ex2"
             },
             {
-              "@type": "ListItem",
+              "@@type": "ListItem",
               "position": 3,
               "name": "Starray EM-i",
               "url": "https://geelybsd.id/models/starray-em-i"
             },
             {
-              "@type": "ListItem",
+              "@@type": "ListItem",
               "position": 4,
               "name": "Geely Coolray",
               "url": "https://geelybsd.id/models/coolray"
