@@ -590,16 +590,14 @@
     <!-- TECH SPECS & READY TO CONQUER SECTION (SESUAI FOTO KEDUA) -->
     <section class="py-16 md:py-24 lg:py-36 relative w-full overflow-hidden bg-gradient-to-b from-[#e0f2fe] via-[#ecf6fd] to-[#e0f2fe]">
         <div class="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-white/70 to-transparent pointer-events-none z-10"></div>
-        <div class="absolute -top-24 -left-24 w-96 h-96 bg-sky-300/30 rounded-full blur-[120px] pointer-events-none z-0"></div>
-        <div class="absolute -bottom-24 -right-24 w-96 h-96 bg-blue-300/25 rounded-full blur-[120px] pointer-events-none z-0"></div>
 
         <div class="relative z-20 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
                 
-                <!-- SISI KIRI: Cockpit Video/Media & 3 Kartu Spesifikasi (Sesuai Foto Kedua) -->
-                <div class="order-1 lg:col-span-7 flex flex-col justify-between gap-5 md:gap-6 reveal-left">
+                <!-- SISI KIRI (Desktop) / BAWAH (Mobile): Cockpit Video/Media & 3 Kartu Spesifikasi -->
+                <div class="order-2 lg:order-1 lg:col-span-7 flex flex-col justify-between gap-5 md:gap-6 reveal-left">
                     <!-- Kartu Atas: Cockpit Command Preview Media -->
-                    <div class="glass-panel p-2.5 sm:p-3 rounded-[24px] sm:rounded-[32px] md:rounded-[36px] border border-sky-200/90 shadow-[0_20px_45px_-10px_rgba(14,165,233,0.15)] overflow-hidden group">
+                    <div class="bg-white/90 backdrop-blur-xl p-2.5 sm:p-3 rounded-[24px] sm:rounded-[32px] md:rounded-[36px] border border-sky-200/90 shadow-[0_20px_45px_-10px_rgba(14,165,233,0.15)] overflow-hidden group">
                         <div class="relative w-full aspect-[16/9] sm:aspect-[16/9.2] rounded-[18px] sm:rounded-[26px] md:rounded-[30px] overflow-hidden bg-slate-950">
                             <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover object-center transform transition-transform duration-[4s] ease-out opacity-95 group-hover:scale-105 z-0">
                                 <source src="https://assets.zyrosite.com/Yle46KEPN6IkVONg/video_atmosphere-WPk8K2f2d7da9R4C.mp4" type="video/mp4">
@@ -623,15 +621,15 @@
                     <!-- Kartu Bawah: 3 Kolom Metrik Tanpa Garis Pemisah (Sesuai Foto Kedua) -->
                     <div class="grid grid-cols-3 gap-3 sm:gap-4 md:gap-5">
                         <!-- Stat 1: Range -->
-                        <div class="glass-panel p-4 sm:p-5 md:p-6 rounded-[20px] sm:rounded-[26px] md:rounded-[30px] border border-sky-200/80 shadow-[0_12px_30px_rgba(14,165,233,0.08)] flex flex-col justify-center items-center text-center transition-all duration-300 hover:border-sky-400 hover:-translate-y-1">
+                        <div class="bg-white/95 backdrop-blur-md p-4 sm:p-5 md:p-6 rounded-[20px] sm:rounded-[26px] md:rounded-[30px] border border-sky-100 shadow-[0_12px_30px_rgba(14,165,233,0.08)] flex flex-col justify-center items-center text-center transition-all duration-300 hover:border-sky-300 hover:-translate-y-1">
                             <span class="text-slate-400 text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.2em] font-bold uppercase mb-1.5 sm:mb-2 whitespace-nowrap">
                                 Up To
                             </span>
                             <div class="flex items-baseline justify-center mb-1.5 sm:mb-2">
-                                <span class="font-geely text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#0284c7] leading-none">
+                                <span class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-none" style="color: #0284c7 !important; -webkit-text-fill-color: #0284c7 !important;">
                                     495
                                 </span>
-                                <span class="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-500 ml-1 leading-none">
+                                <span class="text-[10px] sm:text-xs md:text-sm font-bold text-slate-500 ml-1 leading-none" style="color: #64748b !important; -webkit-text-fill-color: #64748b !important;">
                                     km*
                                 </span>
                             </div>
@@ -641,15 +639,15 @@
                         </div>
 
                         <!-- Stat 2: Charging -->
-                        <div class="glass-panel p-4 sm:p-5 md:p-6 rounded-[20px] sm:rounded-[26px] md:rounded-[30px] border border-sky-200/80 shadow-[0_12px_30px_rgba(14,165,233,0.08)] flex flex-col justify-center items-center text-center transition-all duration-300 hover:border-sky-400 hover:-translate-y-1">
+                        <div class="bg-white/95 backdrop-blur-md p-4 sm:p-5 md:p-6 rounded-[20px] sm:rounded-[26px] md:rounded-[30px] border border-sky-100 shadow-[0_12px_30px_rgba(14,165,233,0.08)] flex flex-col justify-center items-center text-center transition-all duration-300 hover:border-sky-300 hover:-translate-y-1">
                             <span class="text-slate-400 text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.2em] font-bold uppercase mb-1.5 sm:mb-2 whitespace-nowrap">
                                 Fast Charge
                             </span>
                             <div class="flex items-baseline justify-center mb-1.5 sm:mb-2">
-                                <span class="font-geely text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#0284c7] leading-none">
+                                <span class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-none" style="color: #0284c7 !important; -webkit-text-fill-color: #0284c7 !important;">
                                     20
                                 </span>
-                                <span class="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-500 ml-1 leading-none">
+                                <span class="text-[10px] sm:text-xs md:text-sm font-bold text-slate-500 ml-1 leading-none" style="color: #64748b !important; -webkit-text-fill-color: #64748b !important;">
                                     mins**
                                 </span>
                             </div>
@@ -659,15 +657,15 @@
                         </div>
 
                         <!-- Stat 3: Acceleration -->
-                        <div class="glass-panel p-4 sm:p-5 md:p-6 rounded-[20px] sm:rounded-[26px] md:rounded-[30px] border border-sky-200/80 shadow-[0_12px_30px_rgba(14,165,233,0.08)] flex flex-col justify-center items-center text-center transition-all duration-300 hover:border-sky-400 hover:-translate-y-1">
+                        <div class="bg-white/95 backdrop-blur-md p-4 sm:p-5 md:p-6 rounded-[20px] sm:rounded-[26px] md:rounded-[30px] border border-sky-100 shadow-[0_12px_30px_rgba(14,165,233,0.08)] flex flex-col justify-center items-center text-center transition-all duration-300 hover:border-sky-300 hover:-translate-y-1">
                             <span class="text-slate-400 text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.2em] font-bold uppercase mb-1.5 sm:mb-2 whitespace-nowrap">
                                 Acceleration
                             </span>
                             <div class="flex items-baseline justify-center mb-1.5 sm:mb-2">
-                                <span class="font-geely text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-[#2563eb] leading-none">
+                                <span class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-none" style="color: #4f46e5 !important; -webkit-text-fill-color: #4f46e5 !important;">
                                     6.9
                                 </span>
-                                <span class="text-[10px] sm:text-xs md:text-sm font-semibold text-slate-500 ml-1 leading-none">
+                                <span class="text-[10px] sm:text-xs md:text-sm font-bold text-slate-500 ml-1 leading-none" style="color: #64748b !important; -webkit-text-fill-color: #64748b !important;">
                                     sec
                                 </span>
                             </div>
@@ -678,19 +676,17 @@
                     </div>
                 </div>
 
-                <!-- SISI KANAN: Kartu Ready to Conquer (Sesuai Foto Kedua) -->
-                <div class="order-2 lg:col-span-5 flex flex-col justify-center reveal-right">
-                    <div class="glass-panel p-8 sm:p-10 md:p-12 lg:p-14 rounded-[24px] sm:rounded-[32px] md:rounded-[40px] border border-sky-200/90 shadow-[0_25px_55px_-12px_rgba(14,165,233,0.18)] relative overflow-hidden group hover:border-sky-400 transition-all duration-500 h-full flex flex-col justify-center">
-                        <div class="absolute top-0 right-0 w-80 h-80 bg-sky-300/25 rounded-full blur-[80px] pointer-events-none transition-colors duration-700 group-hover:bg-sky-400/30"></div>
-                        
+                <!-- SISI KANAN (Desktop) / ATAS (Mobile): Kartu Ready to Conquer -->
+                <div class="order-1 lg:order-2 lg:col-span-5 flex flex-col justify-center reveal-right">
+                    <div class="bg-white/95 backdrop-blur-xl p-8 sm:p-10 md:p-12 lg:p-14 rounded-[24px] sm:rounded-[32px] md:rounded-[40px] border border-sky-100 shadow-[0_25px_55px_-12px_rgba(14,165,233,0.15)] relative overflow-hidden group hover:border-sky-300 transition-all duration-500 h-full flex flex-col justify-center">
                         <div class="relative z-10">
-                            <span class="text-sky-600 text-[10px] sm:text-xs tracking-[0.3em] font-bold uppercase mb-4 block drop-shadow-sm">
+                            <span class="text-[#0284c7] text-[10px] sm:text-xs tracking-[0.3em] font-bold uppercase mb-4 block" style="color: #0284c7 !important; -webkit-text-fill-color: #0284c7 !important;">
                                 All-New Geely EX5
                             </span>
                             
-                            <h2 class="font-geely text-4xl sm:text-5xl lg:text-6xl uppercase tracking-tighter mb-6 md:mb-8 leading-[0.92] text-slate-900">
-                                Ready To <br> 
-                                <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-blue-700 to-indigo-700">
+                            <h2 class="font-geely text-4xl sm:text-5xl lg:text-6xl uppercase tracking-tighter mb-6 md:mb-8 leading-[0.92]">
+                                <span class="block" style="color: #0f172a !important; -webkit-text-fill-color: #0f172a !important;">Ready To</span>
+                                <span class="block font-black tracking-tight" style="color: #1e293b !important; -webkit-text-fill-color: #1e293b !important;">
                                     Conquer
                                 </span>
                             </h2>
