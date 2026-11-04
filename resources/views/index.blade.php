@@ -223,10 +223,54 @@
             user-select: none;
         }
 
+        /* Lineup Slider: Kunci mati sumbu Y, slide murni horizontal tanpa goyang vertikal */
         #lineup-slider {
-            touch-action: pan-y pinch-zoom;
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+            overscroll-behavior-x: contain;
             -webkit-overflow-scrolling: touch;
-            user-select: none;
+            cursor: grab;
+        }
+
+        #lineup-slider:active {
+            cursor: grabbing;
+        }
+
+        #lineup-slider,
+        #lineup-slider *,
+        .lineup-card,
+        .lineup-card * {
+            -webkit-user-drag: none !important;
+            -khtml-user-drag: none !important;
+            -moz-user-drag: none !important;
+            -o-user-drag: none !important;
+            user-drag: none !important;
+            -webkit-user-select: none !important;
+            user-select: none !important;
+        }
+
+        /* App Remote & Gallery Slider: Kunci mati sumbu Y & matikan ghost drag */
+        #app-remote-slider,
+        [data-slider] {
+            overflow-x: auto !important;
+            overflow-y: hidden !important;
+            overscroll-behavior-y: auto !important;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        #app-remote-slider,
+        #app-remote-slider *,
+        .app-remote-card,
+        .app-remote-card *,
+        [data-slider],
+        [data-slider] * {
+            -webkit-user-drag: none !important;
+            -khtml-user-drag: none !important;
+            -moz-user-drag: none !important;
+            -o-user-drag: none !important;
+            user-drag: none !important;
+            -webkit-user-select: none !important;
+            user-select: none !important;
         }
 
         .lineup-card {
@@ -504,7 +548,7 @@
                 </p>
             </div>
 
-            <div class="relative w-full" id="lineup-slider-wrapper">
+            <div class="relative w-full group" id="lineup-slider-wrapper">
                 @php
                     $showcase = [
                         [
@@ -542,8 +586,16 @@
                     ];
                 @endphp
 
+                <!-- Tombol Navigasi Slide (Kiri & Kanan) - Tersembunyi default di desktop, muncul saat kursor mendekati area foto -->
+                <button id="lineup-prev" type="button" aria-label="Previous Slide" class="hidden md:flex absolute -left-3 sm:-left-5 lg:-left-6 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-13 sm:h-13 md:w-14 md:h-14 rounded-full bg-white/95 backdrop-blur-md border border-sky-200 text-sky-700 items-center justify-center hover:bg-sky-500 hover:text-white hover:border-sky-400 transition-all duration-300 shadow-xl z-30 cursor-pointer opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto disabled:opacity-0 disabled:pointer-events-none">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+                <button id="lineup-next" type="button" aria-label="Next Slide" class="hidden md:flex absolute -right-3 sm:-right-5 lg:-right-6 top-1/2 -translate-y-1/2 w-11 h-11 sm:w-13 sm:h-13 md:w-14 md:h-14 rounded-full bg-white/95 backdrop-blur-md border border-sky-200 text-sky-700 items-center justify-center hover:bg-sky-500 hover:text-white hover:border-sky-400 transition-all duration-300 shadow-xl z-30 cursor-pointer opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto disabled:opacity-0 disabled:pointer-events-none">
+                    <svg class="w-5 h-5 sm:w-6 sm:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+
                 <!-- Showcase Cards Slider Track -->
-                <div id="lineup-slider" class="flex items-stretch overflow-x-auto hide-scrollbar snap-x snap-mandatory gap-5 md:gap-6 pb-6 pt-2 scroll-smooth -mx-6 px-[7.5vw] md:mx-0 md:px-0">
+                <div id="lineup-slider" class="flex items-stretch overflow-x-auto overflow-y-hidden hide-scrollbar snap-x snap-mandatory gap-5 md:gap-6 pb-6 pt-2 scroll-smooth -mx-6 px-[7.5vw] md:mx-0 md:px-0">
                     @foreach($showcase as $index => $car)
                     <div data-lineup-card="{{ $index }}" class="lineup-card flex-shrink-0 snap-center md:snap-start group relative rounded-[24px] md:rounded-[32px] overflow-hidden reveal-up {{ $car['delay'] }} border border-sky-200/80 premium-card-hover glare-effect bg-slate-900 transition-all duration-500 shadow-xl">
                         <div class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none select-none">
@@ -579,32 +631,9 @@
                     @endforeach
                 </div>
 
-                <!-- Showcase Pagination Controls -->
-                <div class="mt-8 md:mt-12 flex flex-col sm:flex-row items-center justify-between gap-6 reveal-up">
-                    <div class="flex items-center gap-3">
-                        <span class="text-sky-700 text-xs font-mono font-bold tracking-widest" id="lineup-page-indicator">01</span>
-                        <div class="w-24 md:w-32 h-[4px] bg-sky-200 rounded-full overflow-hidden relative">
-                            <div id="lineup-progress-bar" class="h-full bg-gradient-to-r from-sky-500 to-blue-600 rounded-full transition-all duration-300" style="width: 50%;"></div>
-                        </div>
-                        <span class="text-slate-400 text-xs font-mono font-bold tracking-widest" id="lineup-page-total">02</span>
-                    </div>
-
-                    <div class="flex items-center gap-2 md:gap-3">
-                        <button id="lineup-prev" type="button" aria-label="Previous Page" class="w-10 h-10 md:w-12 md:h-12 rounded-full glass-panel border border-sky-200 flex items-center justify-center text-slate-700 hover:text-sky-700 hover:border-sky-400 hover:bg-sky-50 transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none cursor-pointer shadow-sm">
-                            <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                        </button>
-
-                        <div id="lineup-pagination-dots" class="flex items-center gap-2 px-1"></div>
-
-                        <button id="lineup-next" type="button" aria-label="Next Page" class="w-10 h-10 md:w-12 md:h-12 rounded-full glass-panel border border-sky-200 flex items-center justify-center text-slate-700 hover:text-sky-700 hover:border-sky-400 hover:bg-sky-50 transition-all duration-300 disabled:opacity-30 disabled:pointer-events-none cursor-pointer shadow-sm">
-                            <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                        </button>
-                    </div>
-                </div>
-
                 <div class="text-center mt-3 flex md:hidden justify-center items-center gap-2 text-sky-600 text-[9px] font-bold uppercase tracking-widest">
                     <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                    Swipe to explore more models
+                    Geser untuk melihat model lainnya
                 </div>
             </div>            
         </div>
@@ -943,17 +972,15 @@
         </div>
     </section>
 
-    <!-- EM-I SUPER HYBRID SECTION (STICKY TERKUNCI DALAM SEKSI, TIDAK TEMBUS KE BAWAH) -->
-    <div id="starray-showcase-wrapper" class="relative w-full bg-slate-950 z-20">
-        <!-- 1. Video Banner Sticky Top-0 (Menempel Bersih Tanpa Teks Dobel) -->
-        <div class="sticky top-0 z-10 w-full h-[60vh] sm:h-[70vh] md:h-[80vh] overflow-hidden bg-slate-950">
-            <video autoplay muted loop playsinline class="w-full h-full object-cover">
+    <!-- EM-I SUPER HYBRID SECTION -->
+    <div class="relative w-full pb-10 bg-gradient-to-b from-[#e2f0fd] via-[#f0f9ff] to-[#e8f4fc]">
+        <div class="sticky top-[25vh] md:top-0 w-full aspect-video md:h-[100vh] overflow-hidden z-0 bg-slate-950">
+            <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover">
                 <source src="https://assets.zyrosite.com/Yle46KEPN6IkVONg/geely---coming-soon-starray-em-i---geely-epping-1080p-h264-YZ9EbbbjRws55ErL.mp4" type="video/mp4">
             </video>
         </div>
 
-        <!-- 2. Sheet Konten Solid (Naik Menutupi Video Seperti Tirai, 100% Solid Tanpa Transparan Tembus) -->
-        <section class="relative z-20 w-full bg-[#e8f4fc] py-16 md:py-24 lg:py-32 shadow-[0_-30px_70px_rgba(0,0,0,0.5)] rounded-t-[2.5rem] md:rounded-t-[3.5rem] border-t-2 border-sky-300">
+        <section class="mt-[40vh] md:mt-[70vh] py-16 md:py-24 lg:py-32 bg-gradient-to-b from-[#e8f4fc]/95 via-white/95 to-[#e0f2fe]/95 backdrop-blur-md relative z-30 shadow-[0_-25px_60px_rgba(2,132,199,0.12)] min-h-[100vh] rounded-t-[2.5rem] md:rounded-none border-t border-sky-200">
             <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-sky-400/20 rounded-full blur-[160px] pointer-events-none z-0"></div>
             <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-400/20 rounded-full blur-[140px] pointer-events-none z-0"></div>
 
@@ -1004,8 +1031,8 @@
         </section>
     </div>
 
-    <!-- GEELY APP REMOTE CONTROL SECTION (SOLID BASE - TIDAK BISA DITEMBUS STICKY) -->
-    <section id="app-remote" class="py-16 md:py-24 lg:py-32 relative z-30 bg-[#e0f2fe] bg-gradient-to-b from-[#e0f2fe] via-[#f0f9ff] to-[#e8f4fc] border-t border-sky-200">
+    <!-- GEELY APP REMOTE CONTROL SECTION -->
+    <section id="app-remote" class="py-16 md:py-24 lg:py-32 relative z-30 bg-gradient-to-b from-[#e0f2fe] via-[#f0f9ff] to-[#e8f4fc] border-t border-sky-200">
         <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-sky-300/30 rounded-full blur-[150px] pointer-events-none z-0"></div>
         <div class="absolute bottom-0 left-0 w-[400px] h-[400px] bg-blue-300/20 rounded-full blur-[130px] pointer-events-none z-0"></div>
 
@@ -1022,8 +1049,8 @@
                 </p>
             </div>
 
-            <div class="flex overflow-x-auto overscroll-x-contain hide-scrollbar snap-x snap-mandatory gap-6 md:grid md:grid-cols-3 lg:gap-8 pb-8 md:pb-0 px-4 md:px-0">
-                <div class="flex-shrink-0 w-[85vw] snap-center md:w-auto glass-panel rounded-[1.5rem] md:rounded-[2rem] flex flex-col reveal-up delay-100 group shadow-lg border border-sky-200 overflow-hidden">
+            <div id="app-remote-slider" draggable="false" class="flex overflow-x-auto overflow-y-hidden hide-scrollbar snap-x snap-mandatory gap-6 md:grid md:grid-cols-3 lg:gap-8 pb-8 md:pb-0 px-4 md:px-0">
+                <div draggable="false" class="app-remote-card flex-shrink-0 w-[85vw] snap-center md:w-auto glass-panel rounded-[1.5rem] md:rounded-[2rem] flex flex-col reveal-up delay-100 group shadow-lg border border-sky-200 overflow-hidden">
                     <div class="relative w-full aspect-[4/3] overflow-hidden bg-slate-100">
                         <img src="https://assets.zyrosite.com/Yle46KEPN6IkVONg/always-carghed.jpg-sPvzxctIegkiPhzC.webp" alt="Always Charged - Geely Smart Charging Management" draggable="false" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform md:group-hover:scale-105 transition-transform duration-700 select-none pointer-events-none">
                     </div>
@@ -1035,7 +1062,7 @@
                     </div>
                 </div>
 
-                <div class="flex-shrink-0 w-[85vw] snap-center md:w-auto glass-panel rounded-[1.5rem] md:rounded-[2rem] flex flex-col reveal-up delay-200 group shadow-lg border border-sky-200 overflow-hidden">
+                <div draggable="false" class="app-remote-card flex-shrink-0 w-[85vw] snap-center md:w-auto glass-panel rounded-[1.5rem] md:rounded-[2rem] flex flex-col reveal-up delay-200 group shadow-lg border border-sky-200 overflow-hidden">
                     <div class="relative w-full aspect-[4/3] overflow-hidden bg-slate-100">
                         <img src="https://assets.zyrosite.com/Yle46KEPN6IkVONg/never-lost.jpg-9JUUSHg9iMEbQsEN.webp" alt="Never Lost - Geely GPS Car Finder" draggable="false" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform md:group-hover:scale-105 transition-transform duration-700 select-none pointer-events-none">
                     </div>
@@ -1047,7 +1074,7 @@
                     </div>
                 </div>
 
-                <div class="flex-shrink-0 w-[85vw] snap-center md:w-auto glass-panel rounded-[1.5rem] md:rounded-[2rem] flex flex-col reveal-up delay-300 group shadow-lg border border-sky-200 overflow-hidden">
+                <div draggable="false" class="app-remote-card flex-shrink-0 w-[85vw] snap-center md:w-auto glass-panel rounded-[1.5rem] md:rounded-[2rem] flex flex-col reveal-up delay-300 group shadow-lg border border-sky-200 overflow-hidden">
                     <div class="relative w-full aspect-[4/3] overflow-hidden bg-slate-100">
                         <img src="https://assets.zyrosite.com/Yle46KEPN6IkVONg/full-control.jpg-ycOYdP2jZuNB3u9w.webp" alt="Full Control - Smart Climate & Cabin Access" draggable="false" loading="lazy" class="absolute inset-0 w-full h-full object-cover transform md:group-hover:scale-105 transition-transform duration-700 select-none pointer-events-none">
                     </div>
@@ -1093,7 +1120,7 @@
                     <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                 </button>
 
-                <div data-slider class="flex overflow-x-auto overscroll-x-contain hide-scrollbar snap-x snap-mandatory gap-4 md:gap-6 pt-4 pb-12 px-4 md:px-0 -mx-4 md:mx-0 scroll-smooth">
+                <div data-slider class="flex overflow-x-auto overflow-y-hidden hide-scrollbar snap-x snap-mandatory gap-4 md:gap-6 pt-4 pb-12 px-4 md:px-0 -mx-4 md:mx-0 scroll-smooth">
                     @php
                         $customers = [
                             'assets/images/customer/IMG_4242.PNG',
@@ -1219,7 +1246,17 @@
             const revealElements = document.querySelectorAll('.reveal-up, .reveal-left, .reveal-right, .reveal-scale');
             revealElements.forEach(el => revealObserver.observe(el));
 
-            // Slider drag & navigation logic
+            // App Remote Slider: Matikan total drag bawaan browser pada seluruh kartu dan foto
+            const appRemoteSlider = document.getElementById('app-remote-slider');
+            if (appRemoteSlider) {
+                appRemoteSlider.addEventListener('dragstart', (e) => e.preventDefault());
+                appRemoteSlider.querySelectorAll('*').forEach(el => {
+                    el.setAttribute('draggable', 'false');
+                    el.addEventListener('dragstart', (e) => e.preventDefault());
+                });
+            }
+
+            // Slider drag & navigation logic for customer gallery
             document.querySelectorAll('[data-slider-wrapper]').forEach(wrapper => {
                 const slider = wrapper.querySelector('[data-slider]');
                 const prevBtn = wrapper.querySelector('[data-prev]');
@@ -1277,179 +1314,88 @@
                 }
             });
 
-            // Lineup Slider Logic
+            // Lineup Slide Navigation Logic
             const lineupSlider = document.getElementById('lineup-slider');
             const lineupPrev = document.getElementById('lineup-prev');
             const lineupNext = document.getElementById('lineup-next');
-            const lineupDots = document.getElementById('lineup-pagination-dots');
-            const lineupIndicator = document.getElementById('lineup-page-indicator');
-            const lineupTotal = document.getElementById('lineup-page-total');
-            const lineupProgress = document.getElementById('lineup-progress-bar');
 
-            if (lineupSlider && lineupPrev && lineupNext) {
-                // Prevent ghost native dragging on all lineup images
-                lineupSlider.querySelectorAll('img').forEach(img => {
-                    img.setAttribute('draggable', 'false');
-                    img.addEventListener('dragstart', (e) => e.preventDefault());
+            if (lineupSlider) {
+                // Matikan total drag bawaan browser pada seluruh kartu, link, dan foto
+                lineupSlider.addEventListener('dragstart', (e) => e.preventDefault());
+                lineupSlider.querySelectorAll('*').forEach(el => {
+                    el.setAttribute('draggable', 'false');
+                    el.addEventListener('dragstart', (e) => e.preventDefault());
                 });
 
-                const cards = lineupSlider.querySelectorAll('[data-lineup-card]');
-                
-                function getPagesCount() {
-                    if (window.innerWidth < 768) {
-                        return cards.length;
+                const getSlideStep = () => {
+                    const firstCard = lineupSlider.querySelector('.lineup-card');
+                    if (firstCard) {
+                        return firstCard.offsetWidth + 24;
                     }
-                    const sliderWidth = lineupSlider.clientWidth;
-                    const scrollWidth = lineupSlider.scrollWidth;
-                    const maxScroll = scrollWidth - sliderWidth;
-                    if (maxScroll <= 10) return 1;
-                    const cardWidth = cards[0] ? cards[0].offsetWidth + 24 : sliderWidth;
-                    const visibleCards = Math.max(1, Math.round((sliderWidth + 24) / cardWidth));
-                    return Math.max(1, Math.ceil(cards.length / visibleCards));
-                }
+                    return lineupSlider.clientWidth * 0.85;
+                };
 
-                let totalPages = getPagesCount();
-
-                function renderPagination() {
-                    totalPages = getPagesCount();
-                    if (lineupTotal) lineupTotal.textContent = String(totalPages).padStart(2, '0');
-                    if (!lineupDots) return;
-
-                    lineupDots.innerHTML = '';
-                    for (let i = 0; i < totalPages; i++) {
-                        const btn = document.createElement('button');
-                        btn.type = 'button';
-                        btn.className = `lineup-page-btn w-8 h-8 md:w-9 md:h-9 rounded-full text-[11px] font-mono font-bold transition-all duration-300 flex items-center justify-center cursor-pointer ${
-                            i === 0 
-                                ? 'bg-sky-500 text-white shadow-[0_0_15px_rgba(14,165,233,0.5)] font-extrabold' 
-                                : 'text-slate-600 hover:text-slate-900 bg-white/70 border border-sky-200 hover:border-sky-400'
-                        }`;
-                        btn.textContent = String(i + 1).padStart(2, '0');
-                        btn.setAttribute('aria-label', `Halaman ${i + 1}`);
-                        btn.addEventListener('click', () => goToPage(i));
-                        lineupDots.appendChild(btn);
-                    }
-                    updateControls();
-                }
-
-                function getCurrentPage() {
-                    if (window.innerWidth < 768) {
-                        const sliderCenter = lineupSlider.scrollLeft + lineupSlider.clientWidth / 2;
-                        let closestIdx = 0;
-                        let minDiff = Infinity;
-                        cards.forEach((card, idx) => {
-                            const cardCenter = card.offsetLeft + card.offsetWidth / 2;
-                            const diff = Math.abs(sliderCenter - cardCenter);
-                            if (diff < minDiff) {
-                                minDiff = diff;
-                                closestIdx = idx;
-                            }
-                        });
-                        return closestIdx;
-                    }
-                    const maxScroll = lineupSlider.scrollWidth - lineupSlider.clientWidth;
-                    if (maxScroll <= 10) return 0;
-                    const scrollLeft = lineupSlider.scrollLeft;
-                    if (scrollLeft >= maxScroll - 20) return totalPages - 1;
-                    const cardWidth = cards[0] ? cards[0].offsetWidth + 24 : lineupSlider.clientWidth;
-                    const visibleCards = Math.max(1, Math.round((lineupSlider.clientWidth + 24) / cardWidth));
-                    const page = Math.floor((scrollLeft + 20) / (visibleCards * cardWidth));
-                    return Math.min(Math.max(0, page), totalPages - 1);
-                }
-
-                function updateControls() {
-                    const currentPage = getCurrentPage();
-                    if (lineupIndicator) lineupIndicator.textContent = String(currentPage + 1).padStart(2, '0');
-                    
-                    if (lineupProgress) {
-                        const progress = totalPages > 1 ? ((currentPage + 1) / totalPages) * 100 : 100;
-                        lineupProgress.style.width = `${progress}%`;
-                    }
-
-                    const buttons = lineupDots ? lineupDots.querySelectorAll('.lineup-page-btn') : [];
-                    buttons.forEach((btn, idx) => {
-                        if (idx === currentPage) {
-                            btn.className = 'lineup-page-btn w-8 h-8 md:w-9 md:h-9 rounded-full text-[11px] font-mono font-extrabold bg-sky-500 text-white shadow-[0_0_15px_rgba(14,165,233,0.5)] transition-all duration-300 flex items-center justify-center cursor-pointer';
-                        } else {
-                            btn.className = 'lineup-page-btn w-8 h-8 md:w-9 md:h-9 rounded-full text-[11px] font-mono font-bold text-slate-600 hover:text-slate-900 bg-white/70 border border-sky-200 hover:border-sky-400 transition-all duration-300 flex items-center justify-center cursor-pointer';
-                        }
-                    });
-
-                    lineupPrev.disabled = currentPage === 0;
-                    lineupNext.disabled = currentPage >= totalPages - 1;
-                }
-
-                function goToPage(pageIndex) {
-                    if (!cards[pageIndex]) return;
-                    if (window.innerWidth < 768) {
-                        const targetCard = cards[pageIndex];
-                        const targetLeft = targetCard.offsetLeft - (lineupSlider.clientWidth - targetCard.offsetWidth) / 2;
-                        lineupSlider.scrollTo({ left: targetLeft, behavior: 'smooth' });
-                    } else {
+                if (lineupPrev && lineupNext) {
+                    const updateSlideButtons = () => {
                         const maxScroll = lineupSlider.scrollWidth - lineupSlider.clientWidth;
-                        if (pageIndex >= totalPages - 1) {
-                            lineupSlider.scrollTo({ left: maxScroll, behavior: 'smooth' });
-                        } else {
-                            const cardWidth = cards[0] ? cards[0].offsetWidth + 24 : lineupSlider.clientWidth;
-                            const visibleCards = Math.max(1, Math.round((lineupSlider.clientWidth + 24) / cardWidth));
-                            const targetScroll = Math.min(pageIndex * visibleCards * cardWidth, maxScroll);
-                            lineupSlider.scrollTo({ left: targetScroll, behavior: 'smooth' });
+                        lineupPrev.disabled = lineupSlider.scrollLeft <= 10;
+                        lineupNext.disabled = lineupSlider.scrollLeft >= maxScroll - 10;
+                    };
+
+                    lineupPrev.addEventListener('click', () => {
+                        lineupSlider.scrollBy({ left: -getSlideStep(), behavior: 'smooth' });
+                    });
+
+                    lineupNext.addEventListener('click', () => {
+                        lineupSlider.scrollBy({ left: getSlideStep(), behavior: 'smooth' });
+                    });
+
+                    lineupSlider.addEventListener('scroll', () => {
+                        requestAnimationFrame(updateSlideButtons);
+                    }, { passive: true });
+
+                    window.addEventListener('resize', updateSlideButtons);
+                    updateSlideButtons();
+                }
+
+                // Drag mouse khusus horizontal (kiri-kanan saja), cegah pergeseran vertikal
+                let isDown = false;
+                let startX;
+                let scrollLeft;
+                let isDragging = false;
+
+                lineupSlider.addEventListener('mousedown', (e) => {
+                    isDown = true;
+                    isDragging = false;
+                    startX = e.pageX - lineupSlider.offsetLeft;
+                    scrollLeft = lineupSlider.scrollLeft;
+                });
+
+                lineupSlider.addEventListener('mouseleave', () => {
+                    isDown = false;
+                });
+
+                lineupSlider.addEventListener('mouseup', () => {
+                    isDown = false;
+                });
+
+                lineupSlider.addEventListener('mousemove', (e) => {
+                    if (!isDown) return;
+                    e.preventDefault();
+                    isDragging = true;
+                    const x = e.pageX - lineupSlider.offsetLeft;
+                    const walk = (x - startX) * 1.5;
+                    lineupSlider.scrollLeft = scrollLeft - walk;
+                });
+
+                lineupSlider.querySelectorAll('a').forEach(link => {
+                    link.addEventListener('click', (e) => {
+                        if (isDragging) {
+                            e.preventDefault();
+                            e.stopPropagation();
                         }
-                    }
-                }
-
-                lineupPrev.addEventListener('click', () => {
-                    const current = getCurrentPage();
-                    if (current > 0) goToPage(current - 1);
+                    }, true);
                 });
-
-                lineupNext.addEventListener('click', () => {
-                    const current = getCurrentPage();
-                    if (current < totalPages - 1) goToPage(current + 1);
-                });
-
-                lineupSlider.addEventListener('scroll', () => {
-                    requestAnimationFrame(updateControls);
-                });
-
-                if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
-                    let isDown = false;
-                    let startX;
-                    let scrollLeft;
-                    let isDragging = false;
-
-                    lineupSlider.addEventListener('mousedown', (e) => {
-                        isDown = true;
-                        isDragging = false;
-                        startX = e.pageX - lineupSlider.offsetLeft;
-                        scrollLeft = lineupSlider.scrollLeft;
-                    });
-
-                    lineupSlider.addEventListener('mouseleave', () => { isDown = false; });
-                    lineupSlider.addEventListener('mouseup', () => { isDown = false; });
-
-                    lineupSlider.addEventListener('mousemove', (e) => {
-                        if (!isDown) return;
-                        e.preventDefault();
-                        isDragging = true;
-                        const x = e.pageX - lineupSlider.offsetLeft;
-                        const walk = (x - startX) * 1.5;
-                        lineupSlider.scrollLeft = scrollLeft - walk;
-                    });
-
-                    const clickableLinks = lineupSlider.querySelectorAll('a');
-                    clickableLinks.forEach(item => {
-                        item.addEventListener('click', (e) => {
-                            if (isDragging) {
-                                e.preventDefault();
-                                e.stopPropagation();
-                            }
-                        }, true);
-                    });
-                }
-
-                window.addEventListener('resize', renderPagination);
-                renderPagination();
             }
         });
 
