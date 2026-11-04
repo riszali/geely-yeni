@@ -298,7 +298,7 @@
     </style>
 
     <!-- CINEMATIC LIGHT BLUE AUTOMOTIVE HERO HEADER (STICKY PINNED SECTION 1) -->
-    <header id="hero-header" class="sticky top-0 z-0 min-h-[100svh] w-full flex flex-col justify-between items-center overflow-hidden bg-gradient-to-b from-[#e0f2fe] via-[#f0f9ff] to-[#e0f2fe] bg-noise pt-20 sm:pt-24 md:pt-36 pb-36 sm:pb-28 md:pb-16 transition-[transform,opacity,filter] duration-300 will-change-transform origin-center">
+    <header id="hero-header" class="sticky top-0 z-0 min-h-[100svh] w-full flex flex-col justify-between items-center overflow-hidden bg-gradient-to-b from-[#e0f2fe] via-[#f0f9ff] to-[#e0f2fe] bg-noise pt-20 sm:pt-24 md:pt-36 pb-28 sm:pb-28 md:pb-16 transition-[transform,opacity,filter] duration-300 will-change-transform origin-center">
         <!-- Background Cinematic Video with Light Crystalline Overlay -->
         <div class="absolute inset-0 z-0 overflow-hidden">
             <video autoplay muted loop playsinline class="w-full h-full object-cover scale-105 filter brightness-[1.05] contrast-[1.02] opacity-75">
@@ -323,9 +323,9 @@
             </div>
         </div>
 
-        <!-- Center Stage: Typography & Controls dalam Frame Kaca Tembus Pandang Asli -->
-        <div class="relative z-20 w-full max-w-5xl mx-auto px-4 sm:px-6 my-auto py-2 sm:py-4">
-            <div class="true-glass-pane rounded-[1.75rem] sm:rounded-[2.75rem] md:rounded-[3.5rem] p-4 sm:p-8 md:p-12 lg:p-14 text-center relative overflow-hidden">
+        <!-- Center Stage: Typography & Controls dalam Frame Kaca Tembus Pandang Asli (Di Layer Atas / z-30) -->
+        <div class="relative z-30 w-full max-w-5xl mx-auto px-4 sm:px-6 mt-auto mb-0 md:my-auto py-2 sm:py-4">
+            <div class="true-glass-pane rounded-[1.75rem] sm:rounded-[2.75rem] md:rounded-[3.5rem] p-4 sm:p-8 md:p-12 lg:p-14 text-center relative overflow-hidden shadow-[0_25px_55px_-10px_rgba(2,132,199,0.25)]">
                 <!-- Pantulan Efek Bias Cahaya Kaca (Specular Reflection) -->
                 <div class="absolute -top-32 -left-32 w-80 h-80 bg-gradient-to-br from-white/50 via-white/10 to-transparent rounded-full blur-2xl pointer-events-none"></div>
                 <div class="absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-white to-transparent opacity-90 pointer-events-none"></div>
@@ -356,9 +356,9 @@
             </div>
         </div>
 
-        <!-- Bottom Floating HUD Island -->
-        <div class="relative z-20 w-full max-w-4xl mx-auto px-4 mb-4 sm:mb-2 md:mb-0 reveal-up delay-400">
-            <div class="glass-island-dock rounded-2xl md:rounded-full p-2 md:p-2.5">
+        <!-- Bottom Floating HUD Island (Khusus HP Di Bawah Kaca & Atap Masuk ke Belakang Kaca Bertumpuk) -->
+        <div class="relative z-20 w-full max-w-4xl mx-auto px-4 -mt-7 sm:-mt-9 md:mt-0 mb-auto md:mb-0 reveal-up delay-400">
+            <div class="glass-island-dock rounded-2xl md:rounded-full p-2 md:p-2.5 pt-7 sm:pt-9 md:pt-2.5 shadow-xl">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
                     <a href="/models/ex5" class="glass-island-cell rounded-xl md:rounded-full py-2.5 px-4 flex flex-col items-center justify-center text-center group cursor-pointer shadow-sm">
                         <span class="text-slate-900 font-mono text-[11px] font-bold tracking-wider group-hover:text-sky-600 transition-colors">GEELY EX5</span>
