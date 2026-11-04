@@ -215,13 +215,28 @@
             scrollbar-width: none;
         }
 
-        [data-slider] { cursor: grab; }
-        [data-slider]:active { cursor: grabbing; }
-        [data-slider] img { pointer-events: none; }
-
-        #lineup-slider {
+        [data-slider], #lineup-slider { 
+            cursor: grab; 
             touch-action: pan-y pinch-zoom;
             -webkit-overflow-scrolling: touch;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        [data-slider]:active, #lineup-slider:active { 
+            cursor: grabbing; 
+        }
+        [data-slider] img, #lineup-slider img, .lineup-card img { 
+            pointer-events: none !important;
+            -webkit-user-drag: none !important;
+            user-select: none !important;
+            -webkit-user-select: none !important;
+            -webkit-touch-callout: none !important;
+        }
+
+        .lineup-card {
+            user-select: none;
+            -webkit-user-select: none;
+            -webkit-user-drag: none;
         }
 
         @media (max-width: 767px) {
@@ -298,7 +313,7 @@
     </style>
 
     <!-- CINEMATIC LIGHT BLUE AUTOMOTIVE HERO HEADER (STICKY PINNED SECTION 1) -->
-    <header id="hero-header" class="sticky top-0 z-0 min-h-[100svh] w-full flex flex-col justify-between items-center overflow-hidden bg-gradient-to-b from-[#e0f2fe] via-[#f0f9ff] to-[#e0f2fe] bg-noise pt-20 sm:pt-24 md:pt-36 pb-28 sm:pb-28 md:pb-16 transition-[transform,opacity,filter] duration-300 will-change-transform origin-center">
+    <header id="hero-header" class="sticky top-0 z-0 min-h-[100svh] w-full flex flex-col justify-between items-center overflow-hidden bg-gradient-to-b from-[#e0f2fe] via-[#f0f9ff] to-[#e0f2fe] bg-noise pt-24 sm:pt-28 md:pt-36 pb-24 sm:pb-28 md:pb-16 transition-[transform,opacity,filter] duration-300 will-change-transform origin-center">
         <!-- Background Cinematic Video with Light Crystalline Overlay -->
         <div class="absolute inset-0 z-0 overflow-hidden">
             <video autoplay muted loop playsinline class="w-full h-full object-cover scale-105 filter brightness-[1.05] contrast-[1.02] opacity-75">
@@ -316,21 +331,21 @@
 
         <!-- Top Floating Status Badge -->
         <div class="relative z-20 reveal-up">
-            <div class="inline-flex items-center gap-3 px-4 py-1.5 md:px-5 md:py-2 rounded-full glass-chip-nav border border-sky-300/60 shadow-sm">
-                <span class="text-[9px] md:text-[10px] font-bold tracking-[0.35em] uppercase text-sky-800 drop-shadow-sm">Geely Wonder YENNI</span>
+            <div class="inline-flex items-center gap-2 sm:gap-3 px-3.5 sm:px-5 py-1.5 md:py-2 rounded-full glass-chip-nav border border-sky-300/60 shadow-sm">
+                <span class="text-[8px] sm:text-[9px] md:text-[10px] font-bold tracking-[0.2em] sm:tracking-[0.35em] uppercase text-sky-800 drop-shadow-sm whitespace-nowrap">Geely Wonder YENNI</span>
                 <div class="w-[1px] h-3 bg-sky-300"></div>
-                <span class="text-[8px] md:text-[9px] font-semibold tracking-[0.2em] uppercase text-slate-600 hidden sm:inline">+628170879315</span>
+                <span class="text-[8px] md:text-[9px] font-semibold tracking-[0.12em] sm:tracking-[0.2em] uppercase text-slate-600 whitespace-nowrap">+628170879315</span>
             </div>
         </div>
 
-        <!-- Center Stage: Typography & Controls dalam Frame Kaca Tembus Pandang Asli (Di Layer Atas / z-30) -->
-        <div class="relative z-30 w-full max-w-5xl mx-auto px-4 sm:px-6 mt-auto mb-0 md:my-auto py-2 sm:py-4">
-            <div class="true-glass-pane rounded-[1.75rem] sm:rounded-[2.75rem] md:rounded-[3.5rem] p-4 sm:p-8 md:p-12 lg:p-14 text-center relative overflow-hidden shadow-[0_25px_55px_-10px_rgba(2,132,199,0.25)]">
+        <!-- Center Stage: Typography & Controls dalam Frame Kaca Tembus Pandang Asli -->
+        <div class="relative z-30 w-full max-w-5xl mx-auto px-4 sm:px-6 mt-3 sm:mt-4 md:my-auto mb-0 py-2 sm:py-4">
+            <div class="true-glass-pane rounded-t-[1.75rem] sm:rounded-t-[2.75rem] rounded-b-none md:rounded-[3.5rem] pt-8 pb-6 px-5 sm:p-8 md:p-12 lg:p-14 text-center relative overflow-hidden shadow-[0_20px_50px_-10px_rgba(2,132,199,0.2)] border-b-0 md:border-b">
                 <!-- Pantulan Efek Bias Cahaya Kaca (Specular Reflection) -->
                 <div class="absolute -top-32 -left-32 w-80 h-80 bg-gradient-to-br from-white/50 via-white/10 to-transparent rounded-full blur-2xl pointer-events-none"></div>
                 <div class="absolute inset-x-0 top-0 h-[1.5px] bg-gradient-to-r from-transparent via-white to-transparent opacity-90 pointer-events-none"></div>
 
-                <h1 class="relative z-10 font-geely text-3xl sm:text-5xl md:text-7xl lg:text-[88px] text-slate-900 uppercase leading-[0.9] tracking-tighter drop-shadow-[0_2px_12px_rgba(255,255,255,0.7)] mb-4 sm:mb-5 reveal-up delay-100">
+                <h1 class="relative z-10 font-geely text-4xl sm:text-5xl md:text-7xl lg:text-[88px] text-slate-900 uppercase leading-[0.92] tracking-tighter drop-shadow-[0_2px_12px_rgba(255,255,255,0.7)] mb-4 sm:mb-5 reveal-up delay-100">
                     <span class="sr-only">Temukan inovasi mobilitas masa depan dengan Geely EX2, Geely EX5, dan Geely Starray EM-i di BSD City Tangerang - </span>
                     DRIVE THE <br>
                     <span class="text-liquid drop-shadow-[0_0_35px_rgba(56,189,248,0.5)]">FUTURE</span>
@@ -356,9 +371,9 @@
             </div>
         </div>
 
-        <!-- Bottom Floating HUD Island (Khusus HP Di Bawah Kaca & Atap Masuk ke Belakang Kaca Bertumpuk) -->
-        <div class="relative z-20 w-full max-w-4xl mx-auto px-4 -mt-7 sm:-mt-9 md:mt-0 mb-auto md:mb-0 reveal-up delay-400">
-            <div class="glass-island-dock rounded-2xl md:rounded-full p-2 md:p-2.5 pt-7 sm:pt-9 md:pt-2.5 shadow-xl">
+        <!-- Bottom Floating HUD Island (Khusus HP Menyatu Rapi di Bawah Frame Kaca) -->
+        <div class="relative z-20 w-full max-w-5xl md:max-w-4xl mx-auto px-4 sm:px-6 md:px-4 -mt-[1px] md:mt-0 mb-auto md:mb-0 reveal-up delay-400">
+            <div class="glass-island-dock rounded-t-none rounded-b-[1.75rem] sm:rounded-b-[2.5rem] md:rounded-full p-2.5 md:p-2.5 shadow-2xl border-t border-sky-200/60 md:border-t-white">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
                     <a href="/models/ex5" class="glass-island-cell rounded-xl md:rounded-full py-2.5 px-4 flex flex-col items-center justify-center text-center group cursor-pointer shadow-sm">
                         <span class="text-slate-900 font-mono text-[11px] font-bold tracking-wider group-hover:text-sky-600 transition-colors">GEELY EX5</span>
@@ -529,15 +544,15 @@
                 @endphp
 
                 <!-- Showcase Cards Slider Track -->
-                <div id="lineup-slider" class="flex items-stretch overflow-x-auto hide-scrollbar snap-x snap-mandatory gap-5 md:gap-6 pb-6 pt-2 scroll-smooth -mx-6 px-[7.5vw] md:mx-0 md:px-0">
+                <div id="lineup-slider" class="flex items-stretch overflow-x-auto hide-scrollbar snap-x snap-mandatory gap-5 md:gap-6 pb-6 pt-2 scroll-smooth -mx-6 px-[7.5vw] md:mx-0 md:px-0 select-none">
                     @foreach($showcase as $index => $car)
-                    <div data-lineup-card="{{ $index }}" class="lineup-card flex-shrink-0 snap-center md:snap-start group relative rounded-[24px] md:rounded-[32px] overflow-hidden reveal-up {{ $car['delay'] }} border border-sky-200/80 premium-card-hover glare-effect bg-slate-900 transition-all duration-500 shadow-xl">
-                        <div class="absolute inset-0 w-full h-full overflow-hidden">
-                            <img src="{{ $car['img'] }}" alt="Mobil Listrik {{ $car['name'] }} - {{ $car['type'] }} tersedia di Dealer Geely BSD" class="w-full h-full object-cover object-center transform group-hover:scale-110 transition-transform duration-[1.5s] ease-out brightness-90 group-hover:brightness-100">
-                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/45 to-transparent opacity-90 group-hover:opacity-85 transition-opacity duration-500"></div>
+                    <div data-lineup-card="{{ $index }}" class="lineup-card flex-shrink-0 snap-center md:snap-start group relative rounded-[24px] md:rounded-[32px] overflow-hidden reveal-up {{ $car['delay'] }} border border-sky-200/80 premium-card-hover glare-effect bg-slate-900 transition-all duration-500 shadow-xl select-none">
+                        <div class="absolute inset-0 w-full h-full overflow-hidden pointer-events-none select-none">
+                            <img src="{{ $car['img'] }}" alt="Mobil Listrik {{ $car['name'] }} - {{ $car['type'] }} tersedia di Dealer Geely BSD" draggable="false" loading="eager" class="w-full h-full object-cover object-center transform group-hover:scale-110 transition-transform duration-[1.5s] ease-out brightness-90 group-hover:brightness-100 pointer-events-none select-none">
+                            <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/45 to-transparent opacity-90 group-hover:opacity-85 transition-opacity duration-500 pointer-events-none"></div>
                         </div>
                         
-                        <div class="relative z-10 w-full h-full p-6 md:p-8 flex flex-col justify-end">
+                        <div class="relative z-10 w-full h-full p-6 md:p-8 flex flex-col justify-end select-none">
                             <div class="transform translate-y-0 md:translate-y-4 md:group-hover:translate-y-0 transition-transform duration-500 ease-out">
                                 <span class="text-sky-300 text-[10px] md:text-[9px] font-bold tracking-[0.3em] uppercase mb-2 block drop-shadow-md">
                                     {{ $car['type'] }}
@@ -1483,6 +1498,9 @@
                 lineupSlider.addEventListener('scroll', () => {
                     requestAnimationFrame(updateControls);
                 });
+
+                // Cegah drag bawaan browser agar gambar tidak tertarik keluar
+                lineupSlider.addEventListener('dragstart', (e) => e.preventDefault());
 
                 if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
                     let isDown = false;
