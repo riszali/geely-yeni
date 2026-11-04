@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login CRM Portal | Geely BSD</title>
+    <title>Login CRM Portal | HiGeely</title>
     
     <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}?v={{ time() }}">
 
@@ -129,7 +129,7 @@
         <!-- Headline & Subtitle -->
         <div class="text-center mb-8">
             <h1 class="font-geely text-2xl sm:text-3xl font-extrabold tracking-normal uppercase text-white leading-tight">
-                Geely BSD <span class="text-[#00b4d8]">CRM Portal</span>
+                HiGeely
             </h1>
             <p class="text-[13px] text-gray-400 mt-2 font-normal leading-relaxed">
                 Masuk untuk mengelola prospek, follow-up leads, & pipeline penjualan.
@@ -207,7 +207,7 @@
             <!-- Action Button -->
             <div class="pt-3">
                 <button type="submit" class="btn-cyan-action w-full py-4 text-xs uppercase flex items-center justify-center gap-2">
-                    <span>Akses Dashboard CRM</span>
+                    <span>Masuk</span>
                     <svg class="w-4 h-4 stroke-[3]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
                     </svg>
@@ -218,7 +218,7 @@
         <!-- Footer Back Link -->
         <div class="mt-8 text-center border-t border-white/5 pt-6">
             <a href="/" class="text-xs text-gray-500 hover:text-gray-300 transition-colors inline-flex items-center gap-2">
-                <span>&larr;</span> Kembali ke Website Geely BSD
+                <span>&larr;</span> Kembali ke Website HiGeely
             </a>
         </div>
 
