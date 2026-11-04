@@ -44,37 +44,69 @@
             border-color: #0284c7;
             box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
         }
+
+        /* Transisi Halus Buka-Tutup Sidebar Desktop */
+        #sidebar {
+            transition: margin-left 0.3s cubic-bezier(0.4, 0, 0.2, 1), transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        @media (min-width: 768px) {
+            #sidebar.desktop-collapsed {
+                margin-left: -16rem; /* Sembunyikan w-64 */
+            }
+        }
+        @media (min-width: 1024px) {
+            #sidebar.desktop-collapsed {
+                margin-left: -18rem; /* Sembunyikan lg:w-72 */
+            }
+        }
     </style>
     @stack('styles')
 </head>
 <body class="min-h-screen antialiased selection:bg-[#0284c7] selection:text-white flex flex-col md:flex-row bg-[#f8fafc]">
 
-    <!-- Mobile Header with Hamburger -->
-    <div class="md:hidden flex items-center justify-between p-4 bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
+    <!-- Mobile Header: Tombol Hamburger di KIRI (Sejajar dengan Arah Geser Sidebar) -->
+    <div class="md:hidden flex items-center justify-between p-3.5 bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
         <div class="flex items-center gap-3">
-            <img src="{{ asset('assets/footer-logos-geely.png') }}" alt="Geely Logo" class="h-7 w-auto object-contain brightness-0">
-            <span class="font-bold text-sm tracking-wider text-slate-900">GEELY <span class="text-[#0284c7]">ADMIN</span></span>
+            <button id="mobileMenuBtn" aria-label="Buka Menu Navigasi" class="p-2 rounded-xl bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200 focus:outline-none transition-colors">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                </svg>
+            </button>
+            <div class="flex items-center gap-2">
+                <img src="{{ asset('assets/footer-logos-geely.png') }}" alt="Geely Logo" class="h-6 w-auto object-contain brightness-0">
+                <span class="font-bold text-sm tracking-wider text-slate-900">GEELY <span class="text-[#0284c7]">ADMIN</span></span>
+            </div>
         </div>
-        <button id="mobileMenuBtn" aria-label="Toggle Menu" class="p-2 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/></svg>
-        </button>
+
+        <div class="flex items-center gap-1.5 text-[9px] font-bold text-emerald-700 bg-emerald-50 border border-emerald-200 px-2.5 py-1 rounded-full">
+            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> ONLINE
+        </div>
     </div>
 
-    <!-- SIDEBAR NAVIGASI TERPADU (LIGHT THEME) -->
-    <aside id="sidebar" class="fixed md:sticky top-0 inset-y-0 left-0 z-40 w-64 lg:w-72 bg-white border-r border-slate-200 flex flex-col justify-between transform -translate-x-full md:translate-x-0 transition-transform duration-300 h-screen shadow-sm">
+    <!-- SIDEBAR NAVIGASI TERPADU (Bisa Buka-Tutup di Desktop & Mobile) -->
+    <aside id="sidebar" class="fixed md:sticky top-0 inset-y-0 left-0 z-40 w-64 lg:w-72 bg-white border-r border-slate-200 flex flex-col justify-between transform -translate-x-full md:translate-x-0 h-screen shadow-sm shrink-0">
         
-        <!-- Bagian Atas: Logo Brand & Status Profil -->
+        <!-- Bagian Atas: Logo Brand & Tombol Tutup -->
         <div>
-            <div class="p-6 border-b border-slate-200 flex items-center gap-3.5">
-                <img src="{{ asset('assets/footer-logos-geely.png') }}" alt="Geely Logo" class="h-9 w-auto object-contain brightness-0">
-                <div>
-                    <h2 class="font-bold text-sm uppercase tracking-wider text-slate-900 flex items-center gap-1.5">
-                        GEELY <span class="text-[#0284c7]">PORTAL</span>
-                    </h2>
-                    <span class="text-[9px] text-emerald-600 font-mono tracking-wider flex items-center gap-1.5 mt-0.5">
-                        <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> SYSTEM ONLINE
-                    </span>
+            <div class="p-5 lg:p-6 border-b border-slate-200 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <img src="{{ asset('assets/footer-logos-geely.png') }}" alt="Geely Logo" class="h-8 lg:h-9 w-auto object-contain brightness-0">
+                    <div>
+                        <h2 class="font-bold text-sm uppercase tracking-wider text-slate-900 flex items-center gap-1.5">
+                            GEELY <span class="text-[#0284c7]">PORTAL</span>
+                        </h2>
+                        <span class="text-[9px] text-emerald-600 font-mono tracking-wider flex items-center gap-1.5 mt-0.5">
+                            <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> SYSTEM ONLINE
+                        </span>
+                    </div>
                 </div>
+
+                <!-- Tombol Tutup Sidebar Cepat -->
+                <button id="sidebarCloseBtn" aria-label="Tutup Sidebar" title="Tutup Sidebar" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
             </div>
 
             <!-- Menu Navigasi Utama -->
@@ -140,7 +172,7 @@
 
                 <form action="{{ route('admin.logout') }}" method="POST">
                     @csrf
-                    <button type="submit" title="Logout dari Sistem" class="p-2 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors">
+                    <button type="submit" title="Logout dari Sistem" class="p-2 rounded-xl text-slate-400 hover:text-rose-600 hover:bg-rose-50 transition-colors cursor-pointer">
                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
                         </svg>
@@ -151,10 +183,31 @@
     </aside>
 
     <!-- Overlay Mobile -->
-    <div id="sidebarOverlay" class="fixed inset-0 bg-slate-900/40 z-30 hidden md:hidden"></div>
+    <div id="sidebarOverlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-30 hidden md:hidden transition-opacity"></div>
 
     <!-- AREA KONTEN UTAMA -->
-    <div class="flex-1 flex flex-col min-w-0">
+    <div class="flex-1 flex flex-col min-w-0 transition-all duration-300">
+        
+        <!-- Topbar Desktop: Tombol Toggle Sidebar (Buka/Tutup) -->
+        <header class="hidden md:flex items-center justify-between px-6 lg:px-8 py-3 bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
+            <div class="flex items-center gap-3">
+                <button id="desktopToggleBtn" type="button" aria-label="Toggle Sidebar" class="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 hover:border-slate-300 text-slate-700 transition-all text-xs font-semibold cursor-pointer shadow-xs">
+                    <svg id="desktopToggleIcon" class="w-4 h-4 text-sky-600 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                    <span id="desktopToggleText">Tutup Sidebar</span>
+                </button>
+            </div>
+
+            <div class="flex items-center gap-4 text-xs font-medium text-slate-500">
+                <span class="flex items-center gap-1.5 font-mono text-[11px] text-emerald-600 bg-emerald-50 px-3 py-1 rounded-full border border-emerald-200">
+                    <span class="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span> GEELY CRM ONLINE
+                </span>
+                <span class="text-slate-300">|</span>
+                <span class="text-slate-700 font-bold">Admin Portal</span>
+            </div>
+        </header>
+
         <main class="w-full max-w-[1600px] mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
             @yield('content')
         </main>
@@ -162,19 +215,78 @@
 
     <script>
         const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const desktopToggleBtn = document.getElementById('desktopToggleBtn');
+        const sidebarCloseBtn = document.getElementById('sidebarCloseBtn');
+        const desktopToggleText = document.getElementById('desktopToggleText');
+        const desktopToggleIcon = document.getElementById('desktopToggleIcon');
         const sidebar = document.getElementById('sidebar');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
 
-        if (mobileMenuBtn && sidebar && sidebarOverlay) {
+        // 1. Logika Buka-Tutup Sidebar Mobile
+        function openMobileSidebar() {
+            sidebar.classList.remove('-translate-x-full');
+            sidebarOverlay.classList.remove('hidden');
+        }
+
+        function closeMobileSidebar() {
+            sidebar.classList.add('-translate-x-full');
+            sidebarOverlay.classList.add('hidden');
+        }
+
+        if (mobileMenuBtn) {
             mobileMenuBtn.addEventListener('click', () => {
-                sidebar.classList.toggle('-translate-x-full');
-                sidebarOverlay.classList.toggle('hidden');
-            });
-            sidebarOverlay.addEventListener('click', () => {
-                sidebar.classList.add('-translate-x-full');
-                sidebarOverlay.classList.add('hidden');
+                if (sidebar.classList.contains('-translate-x-full')) {
+                    openMobileSidebar();
+                } else {
+                    closeMobileSidebar();
+                }
             });
         }
+
+        if (sidebarOverlay) {
+            sidebarOverlay.addEventListener('click', closeMobileSidebar);
+        }
+
+        // 2. Logika Buka-Tutup Sidebar Desktop
+        function updateDesktopButtonState(isCollapsed) {
+            if (!desktopToggleText || !desktopToggleIcon) return;
+            if (isCollapsed) {
+                desktopToggleText.textContent = 'Buka Sidebar';
+                desktopToggleIcon.classList.add('rotate-180');
+            } else {
+                desktopToggleText.textContent = 'Tutup Sidebar';
+                desktopToggleIcon.classList.remove('rotate-180');
+            }
+        }
+
+        function toggleDesktopSidebar() {
+            const isCurrentlyCollapsed = sidebar.classList.toggle('desktop-collapsed');
+            localStorage.setItem('geely_admin_sidebar_collapsed', isCurrentlyCollapsed ? 'true' : 'false');
+            updateDesktopButtonState(isCurrentlyCollapsed);
+        }
+
+        if (desktopToggleBtn) {
+            desktopToggleBtn.addEventListener('click', toggleDesktopSidebar);
+        }
+
+        if (sidebarCloseBtn) {
+            sidebarCloseBtn.addEventListener('click', () => {
+                if (window.innerWidth < 768) {
+                    closeMobileSidebar();
+                } else {
+                    toggleDesktopSidebar();
+                }
+            });
+        }
+
+        // 3. Pulihkan State Sidebar Desktop dari LocalStorage
+        document.addEventListener('DOMContentLoaded', () => {
+            const isCollapsed = localStorage.getItem('geely_admin_sidebar_collapsed') === 'true';
+            if (isCollapsed && window.innerWidth >= 768) {
+                sidebar.classList.add('desktop-collapsed');
+                updateDesktopButtonState(true);
+            }
+        });
     </script>
     @stack('scripts')
 </body>
