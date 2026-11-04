@@ -52,7 +52,7 @@
     <!-- Mobile Header with Hamburger -->
     <div class="md:hidden flex items-center justify-between p-4 bg-white border-b border-slate-200 sticky top-0 z-50 shadow-sm">
         <div class="flex items-center gap-3">
-            <img src="{{ asset('assets/footer-logos-geely.png') }}" alt="Geely Logo" class="h-7 w-auto object-contain">
+            <img src="{{ asset('assets/footer-logos-geely.png') }}" alt="Geely Logo" class="h-7 w-auto object-contain brightness-0">
             <span class="font-bold text-sm tracking-wider text-slate-900">GEELY <span class="text-[#0284c7]">ADMIN</span></span>
         </div>
         <button id="mobileMenuBtn" aria-label="Toggle Menu" class="p-2 rounded-lg bg-slate-100 border border-slate-200 text-slate-700 hover:bg-slate-200">
@@ -66,7 +66,7 @@
         <!-- Bagian Atas: Logo Brand & Status Profil -->
         <div>
             <div class="p-6 border-b border-slate-200 flex items-center gap-3.5">
-                <img src="{{ asset('assets/footer-logos-geely.png') }}" alt="Geely Logo" class="h-9 w-auto object-contain">
+                <img src="{{ asset('assets/footer-logos-geely.png') }}" alt="Geely Logo" class="h-9 w-auto object-contain brightness-0">
                 <div>
                     <h2 class="font-bold text-sm uppercase tracking-wider text-slate-900 flex items-center gap-1.5">
                         GEELY <span class="text-[#0284c7]">PORTAL</span>
