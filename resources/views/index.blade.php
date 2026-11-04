@@ -594,8 +594,8 @@
         <div class="relative z-20 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
                 
-                <!-- SISI KIRI (Desktop) / BAWAH (Mobile): Cockpit Video/Media & 3 Kartu Spesifikasi -->
-                <div class="order-2 lg:order-1 lg:col-span-7 flex flex-col justify-between gap-5 md:gap-6 reveal-left">
+                <!-- SISI KIRI: Cockpit Video/Media & 3 Kartu Spesifikasi (Sesuai Foto Kedua) -->
+                <div class="order-1 lg:col-span-7 flex flex-col justify-between gap-5 md:gap-6 reveal-left">
                     <!-- Kartu Atas: Cockpit Command Preview Media -->
                     <div class="bg-white/90 backdrop-blur-xl p-2.5 sm:p-3 rounded-[24px] sm:rounded-[32px] md:rounded-[36px] border border-sky-200/90 shadow-[0_20px_45px_-10px_rgba(14,165,233,0.15)] overflow-hidden group">
                         <div class="relative w-full aspect-[16/9] sm:aspect-[16/9.2] rounded-[18px] sm:rounded-[26px] md:rounded-[30px] overflow-hidden bg-slate-950">
@@ -676,8 +676,8 @@
                     </div>
                 </div>
 
-                <!-- SISI KANAN (Desktop) / ATAS (Mobile): Kartu Ready to Conquer -->
-                <div class="order-1 lg:order-2 lg:col-span-5 flex flex-col justify-center reveal-right">
+                <!-- SISI KANAN: Kartu Ready to Conquer (Sesuai Foto Kedua) -->
+                <div class="order-2 lg:col-span-5 flex flex-col justify-center reveal-right">
                     <div class="bg-white/95 backdrop-blur-xl p-8 sm:p-10 md:p-12 lg:p-14 rounded-[24px] sm:rounded-[32px] md:rounded-[40px] border border-sky-100 shadow-[0_25px_55px_-12px_rgba(14,165,233,0.15)] relative overflow-hidden group hover:border-sky-300 transition-all duration-500 h-full flex flex-col justify-center">
                         <div class="relative z-10">
                             <span class="text-[#0284c7] text-[10px] sm:text-xs tracking-[0.3em] font-bold uppercase mb-4 block" style="color: #0284c7 !important; -webkit-text-fill-color: #0284c7 !important;">
