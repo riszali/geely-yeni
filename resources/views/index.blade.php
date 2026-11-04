@@ -304,7 +304,7 @@
             <div class="absolute inset-x-0 bottom-0 h-80 bg-gradient-to-t from-[#e0f2fe] via-[#f0f9ff]/80 to-transparent pointer-events-none"></div>
         </div>
 
-        <!-- Top Floating Status Badge (Titik berkedip dihilangkan, menjadi solid dot bersih) -->
+        <!-- Top Floating Status Badge -->
         <div class="relative z-20 reveal-up">
             <div class="inline-flex items-center gap-3 px-4 py-1.5 md:px-5 md:py-2 rounded-full glass-chip-nav border border-sky-300/60 shadow-sm">
                 <span class="inline-flex rounded-full h-2 w-2 bg-sky-600"></span>
@@ -341,7 +341,7 @@
             </div>
         </div>
 
-        <!-- Bottom Floating HUD Island (Model Quick Spec Bar) -->
+        <!-- Bottom Floating HUD Island -->
         <div class="relative z-20 w-full max-w-4xl mx-auto px-4 reveal-up delay-400">
             <div class="glass-island-dock rounded-2xl md:rounded-full p-2 md:p-2.5">
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-2">
@@ -509,36 +509,47 @@
         </div>
     </section>
 
-    <!-- PROMO & CREDIT SIMULATION SECTION -->
-    <section class="py-24 lg:py-32 bg-gradient-to-b from-[#e6f4fe] to-[#dbeafe] relative overflow-hidden">
-        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-sky-300/30 rounded-full blur-[160px] pointer-events-none"></div>
+    <!-- PROMO & CREDIT SIMULATION SECTION (DIPERBAIKI: UKURAN LEBAR SELARAS & MARGIN TEPI PROPORSIONAL) -->
+    <section class="py-16 md:py-24 lg:py-32 bg-gradient-to-b from-[#e6f4fe] via-[#edf7fe] to-[#dbeafe] relative overflow-hidden">
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[900px] h-[900px] bg-sky-300/25 rounded-full blur-[170px] pointer-events-none"></div>
 
-        <div class="max-w-[1400px] mx-auto px-6 md:px-12 relative z-10">
-            <div class="glass-panel mobile-bento-glass-light rounded-[24px] md:rounded-[40px] overflow-hidden relative shadow-[0_30px_70px_-15px_rgba(2,132,199,0.2)] group reveal-up premium-card-hover border border-sky-200">
-                <div class="grid grid-cols-1 lg:grid-cols-2 items-center">
-                    <div class="p-8 md:p-12 lg:p-24 relative z-10">
-                        <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-sky-300/60 bg-sky-500/10 mb-6 md:mb-8">
-                            <div class="w-2 h-2 rounded-full bg-sky-600"></div>
+        <!-- Ukuran max-width & padding luar diselaraskan penuh dengan section line-up & bento -->
+        <div class="max-w-[1600px] mx-auto px-4 sm:px-6 md:px-12 lg:px-16 relative z-10">
+            <div class="glass-panel mobile-bento-glass-light rounded-[24px] sm:rounded-[32px] md:rounded-[40px] overflow-hidden relative shadow-[0_30px_70px_-15px_rgba(2,132,199,0.18)] group reveal-up premium-card-hover border border-sky-200/90 w-full">
+                <div class="grid grid-cols-1 lg:grid-cols-12 items-stretch min-h-[460px] md:min-h-[500px] lg:min-h-[540px]">
+                    
+                    <!-- Kolom Kiri: Teks & Action Button -->
+                    <div class="lg:col-span-6 xl:col-span-5 p-7 sm:p-10 md:p-14 lg:p-16 xl:p-20 relative z-10 flex flex-col justify-center">
+                        <div class="inline-flex items-center gap-2.5 px-4 py-2 rounded-full border border-sky-300/70 bg-sky-500/10 mb-6 md:mb-8 w-max">
+                            <span class="w-2 h-2 rounded-full bg-sky-600 shrink-0"></span>
                             <span class="text-sky-700 text-[8px] md:text-[9px] font-bold tracking-[0.3em] uppercase">Promo & Pembiayaan Geely BSD</span>
                         </div>
                         
-                        <h2 class="font-geely text-4xl sm:text-5xl md:text-6xl text-slate-900 uppercase tracking-tighter mb-4 md:mb-6 leading-[1.1]">
-                            Miliki <br> <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-blue-600 to-cyan-600">Geely Impian</span>
+                        <h2 class="font-geely text-4xl sm:text-5xl md:text-6xl text-slate-900 uppercase tracking-tighter mb-4 md:mb-6 leading-[1.05]">
+                            Miliki <br> 
+                            <span class="text-transparent bg-clip-text bg-gradient-to-r from-sky-600 via-blue-600 to-cyan-600">Geely Impian</span>
                         </h2>
                         
-                        <p class="text-slate-600 text-sm md:text-base font-normal leading-relaxed mb-8 md:mb-12 max-w-md">
+                        <p class="text-slate-600 text-sm md:text-base font-normal leading-relaxed mb-8 md:mb-10 max-w-xl">
                             Dapatkan penawaran harga terbaik dan akses kebebasan finansial dengan program pembiayaan premium yang 100% transparan di wilayah Tangerang dan Jakarta. Gunakan kalkulator pintar bertenaga AI kami.
                         </p>
 
-                        <a href="/credit-simulation" title="Kalkulator Simulasi Kredit Mobil Geely" class="btn-shimmer inline-flex items-center justify-center gap-4 bg-gradient-to-r from-sky-600 to-blue-600 text-white px-8 md:px-10 py-4 md:py-5 rounded-full font-bold text-[10px] md:text-[11px] tracking-[0.2em] uppercase transition-all duration-500 hover:scale-105 shadow-[0_15px_35px_rgba(2,132,199,0.35)] w-full sm:w-auto">
-                            <span>Mulai Simulasi Kredit</span>
-                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                        </a>
+                        <div class="pt-1">
+                            <a href="/credit-simulation" title="Kalkulator Simulasi Kredit Mobil Geely" class="btn-shimmer inline-flex items-center justify-center gap-3.5 bg-gradient-to-r from-sky-600 to-blue-600 text-white px-8 md:px-10 py-4 md:py-4.5 rounded-full font-bold text-[10px] md:text-[11px] tracking-[0.2em] uppercase transition-all duration-500 hover:scale-[1.03] shadow-[0_15px_35px_rgba(2,132,199,0.35)] w-full sm:w-auto">
+                                <span>Mulai Simulasi Kredit</span>
+                                <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
+                            </a>
+                        </div>
                     </div>                    
-                    <div class="h-56 md:h-64 lg:h-full relative overflow-hidden block">
-                        <img src="https://assets.zyrosite.com/Yle46KEPN6IkVONg/2400x0-14-mxB2lNnxMqfjr7pG.webp" alt="Simulasi Kredit dan Harga Pembiayaan Mobil Geely Tangerang Banten" class="absolute inset-0 w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-[2s] ease-out opacity-90">
-                        <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-[#e6f4fe] via-transparent to-transparent"></div>
+                    
+                    <!-- Kolom Kanan: Foto Kabin Keluarga & Soft Gradient Vignette Blend -->
+                    <div class="lg:col-span-6 xl:col-span-7 relative min-h-[300px] sm:min-h-[380px] lg:min-h-full overflow-hidden block">
+                        <img src="https://assets.zyrosite.com/Yle46KEPN6IkVONg/2400x0-14-mxB2lNnxMqfjr7pG.webp" alt="Simulasi Kredit dan Harga Pembiayaan Mobil Geely Tangerang Banten" class="absolute inset-0 w-full h-full object-cover object-center transform group-hover:scale-105 transition-transform duration-[2.5s] ease-out opacity-95">
+                        
+                        <!-- Transisi gradasi lembut yang menyatu dengan panel kaca di desktop & mobile -->
+                        <div class="absolute inset-0 bg-gradient-to-t lg:bg-gradient-to-r from-white/95 via-white/50 lg:via-white/25 to-transparent pointer-events-none"></div>
                     </div>
+
                 </div>
             </div>
         </div>
@@ -587,26 +598,23 @@
         </div>
     </section>
 
-    <!-- TECH SPECS & READY TO CONQUER SECTION (SESUAI FOTO KEDUA) -->
+    <!-- TECH SPECS & READY TO CONQUER SECTION -->
     <section class="py-16 md:py-24 lg:py-36 relative w-full overflow-hidden bg-gradient-to-b from-[#e0f2fe] via-[#ecf6fd] to-[#e0f2fe]">
         <div class="absolute top-0 inset-x-0 h-40 bg-gradient-to-b from-white/70 to-transparent pointer-events-none z-10"></div>
 
         <div class="relative z-20 w-full max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-8">
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-stretch">
                 
-                <!-- SISI KIRI (Desktop) / BAWAH (Mobile): Cockpit Video/Media & 3 Kartu Spesifikasi -->
+                <!-- SISI KIRI: Cockpit Video/Media & 3 Kartu Spesifikasi -->
                 <div class="order-2 lg:order-1 lg:col-span-7 flex flex-col justify-between gap-5 md:gap-6 reveal-left">
-                    <!-- Kartu Atas: Cockpit Command Preview Media -->
                     <div class="bg-white/90 backdrop-blur-xl p-2.5 sm:p-3 rounded-[24px] sm:rounded-[32px] md:rounded-[36px] border border-sky-200/90 shadow-[0_20px_45px_-10px_rgba(14,165,233,0.15)] overflow-hidden group">
                         <div class="relative w-full aspect-[16/9] sm:aspect-[16/9.2] rounded-[18px] sm:rounded-[26px] md:rounded-[30px] overflow-hidden bg-slate-950">
                             <video autoplay muted loop playsinline class="absolute inset-0 w-full h-full object-cover object-center transform transition-transform duration-[4s] ease-out opacity-95 group-hover:scale-105 z-0">
                                 <source src="https://assets.zyrosite.com/Yle46KEPN6IkVONg/video_atmosphere-WPk8K2f2d7da9R4C.mp4" type="video/mp4">
                             </video>
                             
-                            <!-- Soft Gradient Vignette -->
                             <div class="absolute inset-0 bg-gradient-to-t from-slate-950/85 via-slate-950/25 to-transparent pointer-events-none z-10"></div>
                             
-                            <!-- Caption Cockpit Command -->
                             <div class="absolute bottom-5 sm:bottom-7 md:bottom-8 left-5 sm:left-7 md:left-9 z-20 pointer-events-none">
                                 <h3 class="font-geely text-2xl sm:text-3xl md:text-4xl text-white uppercase tracking-tight font-bold drop-shadow-md mb-1 leading-tight">
                                     Cockpit Command
@@ -618,9 +626,8 @@
                         </div>
                     </div>
 
-                    <!-- Kartu Bawah: 3 Kolom Metrik Tanpa Garis Pemisah (Sesuai Foto Kedua) -->
+                    <!-- 3 Kolom Metrik -->
                     <div class="grid grid-cols-3 gap-3 sm:gap-4 md:gap-5">
-                        <!-- Stat 1: Range -->
                         <div class="bg-white/95 backdrop-blur-md p-4 sm:p-5 md:p-6 rounded-[20px] sm:rounded-[26px] md:rounded-[30px] border border-sky-100 shadow-[0_12px_30px_rgba(14,165,233,0.08)] flex flex-col justify-center items-center text-center transition-all duration-300 hover:border-sky-300 hover:-translate-y-1">
                             <span class="text-slate-400 text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.2em] font-bold uppercase mb-1.5 sm:mb-2 whitespace-nowrap">
                                 Up To
@@ -638,7 +645,6 @@
                             </span>
                         </div>
 
-                        <!-- Stat 2: Charging -->
                         <div class="bg-white/95 backdrop-blur-md p-4 sm:p-5 md:p-6 rounded-[20px] sm:rounded-[26px] md:rounded-[30px] border border-sky-100 shadow-[0_12px_30px_rgba(14,165,233,0.08)] flex flex-col justify-center items-center text-center transition-all duration-300 hover:border-sky-300 hover:-translate-y-1">
                             <span class="text-slate-400 text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.2em] font-bold uppercase mb-1.5 sm:mb-2 whitespace-nowrap">
                                 Fast Charge
@@ -656,7 +662,6 @@
                             </span>
                         </div>
 
-                        <!-- Stat 3: Acceleration -->
                         <div class="bg-white/95 backdrop-blur-md p-4 sm:p-5 md:p-6 rounded-[20px] sm:rounded-[26px] md:rounded-[30px] border border-sky-100 shadow-[0_12px_30px_rgba(14,165,233,0.08)] flex flex-col justify-center items-center text-center transition-all duration-300 hover:border-sky-300 hover:-translate-y-1">
                             <span class="text-slate-400 text-[8px] sm:text-[9px] md:text-[10px] tracking-[0.2em] font-bold uppercase mb-1.5 sm:mb-2 whitespace-nowrap">
                                 Acceleration
@@ -676,7 +681,7 @@
                     </div>
                 </div>
 
-                <!-- SISI KANAN (Desktop) / ATAS (Mobile): Kartu Ready to Conquer -->
+                <!-- SISI KANAN: Kartu Ready to Conquer -->
                 <div class="order-1 lg:order-2 lg:col-span-5 flex flex-col justify-center reveal-right">
                     <div class="bg-white/95 backdrop-blur-xl p-8 sm:p-10 md:p-12 lg:p-14 rounded-[24px] sm:rounded-[32px] md:rounded-[40px] border border-sky-100 shadow-[0_25px_55px_-12px_rgba(14,165,233,0.15)] relative overflow-hidden group hover:border-sky-300 transition-all duration-500 h-full flex flex-col justify-center">
                         <div class="relative z-10">
@@ -1504,18 +1509,18 @@
     <!-- SCHEMA JSON-LD STRUCTURED DATA -->
     <script type="application/ld+json">
     {
-      "@@context": "https://schema.org",
-      "@@graph": [
+      "@context": "https://schema.org",
+      "@graph": [
         {
-          "@@type": "AutoDealer",
+          "@type": "AutoDealer",
           "name": "Dealer Resmi Geely BSD City",
           "image": "{{ asset('assets/images/ex5/dama.jpeg') }}",
-          "@@id": "https://geelybsd.id",
+          "@id": "https://geelybsd.id",
           "url": "https://geelybsd.id",
           "telephone": "+6281214112446", 
           "description": "Dealer mobil listrik resmi Geely BSD Tangerang. Melayani test drive, pembelian tunai/kredit dengan simulasi instan, promo bunga spesial, dan servis resmi Geely EX5, EX2, dan Starray EM-i.",
           "address": {
-            "@@type": "PostalAddress",
+            "@type": "PostalAddress",
             "streetAddress": "BSD City",
             "addressLocality": "Tangerang Selatan",
             "addressRegion": "Banten",
@@ -1523,12 +1528,12 @@
             "addressCountry": "ID"
           },
           "geo": {
-            "@@type": "GeoCoordinates",
+            "@type": "GeoCoordinates",
             "latitude": -6.3023, 
             "longitude": 106.6521
           },
           "openingHoursSpecification": {
-            "@@type": "OpeningHoursSpecification",
+            "@type": "OpeningHoursSpecification",
             "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
             "opens": "08:30",
             "closes": "17:30"
@@ -1536,28 +1541,28 @@
           "priceRange": "$$$"
         },
         {
-          "@@type": "ItemList",
+          "@type": "ItemList",
           "itemListElement": [
             {
-              "@@type": "ListItem",
+              "@type": "ListItem",
               "position": 1,
               "name": "Geely EX5",
               "url": "https://geelybsd.id/models/ex5"
             },
             {
-              "@@type": "ListItem",
+              "@type": "ListItem",
               "position": 2,
               "name": "Geely EX2",
               "url": "https://geelybsd.id/models/ex2"
             },
             {
-              "@@type": "ListItem",
+              "@type": "ListItem",
               "position": 3,
               "name": "Starray EM-i",
               "url": "https://geelybsd.id/models/starray-em-i"
             },
             {
-              "@@type": "ListItem",
+              "@type": "ListItem",
               "position": 4,
               "name": "Geely Coolray",
               "url": "https://geelybsd.id/models/coolray"
