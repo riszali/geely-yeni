@@ -3,393 +3,230 @@
 namespace App\Http\Controllers;
 
 use App\Models\Lead;
-use App\Models\PageVisit;
-use Carbon\Carbon;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
-use Illuminate\View\View;
-use Symfony\Component\HttpFoundation\StreamedResponse;
+use Illuminate\Support\Facades\Validator;
 
-class AdminLeadController extends Controller
+class LeadController extends Controller
 {
     /**
-     * Menampilkan Dashboard CRM Leads & Live Traffic Web Analytics.
-     * Semua metrik, grafik 7 hari, jam sibuk, dan persentase dihitung murni 100% real dari database.
-     *
-     * @param Request $request
-     * @return View
+     * Simpan data leads Reservasi Test Drive dari Form Publik
      */
-    public function index(Request $request): View
+    public function storeTestDrive(Request $request): JsonResponse
     {
-        $query = Lead::query()->latest();
+        $validator = Validator::make($request->all(), [
+            'name'  => 'required|string|max:255',
+            'phone' => 'required|string|max:50',
+        ]);
 
-        // 1. Filter Pencarian Teks
-        if ($request->filled('search')) {
-            $search = trim($request->input('search'));
-            $query->where(function ($q) use ($search) {
-                $q->where('name', 'like', "%{$search}%")
-                  ->orWhere('phone', 'like', "%{$search}%")
-                  ->orWhere('source', 'like', "%{$search}%");
-
-                if (Schema::hasColumn('leads', 'email')) {
-                    $q->orWhere('email', 'like', "%{$search}%");
-                }
-                if (Schema::hasColumn('leads', 'car_model')) {
-                    $q->orWhere('car_model', 'like', "%{$search}%");
-                }
-                if (Schema::hasColumn('leads', 'model_interest')) {
-                    $q->orWhere('model_interest', 'like', "%{$search}%");
-                }
-                if (Schema::hasColumn('leads', 'sales_notes')) {
-                    $q->orWhere('sales_notes', 'like', "%{$search}%");
-                }
-            });
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors'  => $validator->errors()
+            ], 422);
         }
 
-        // 2. Filter Status Pipeline CRM
-        if ($request->filled('status')) {
-            $status = $request->input('status');
-            if ($status === 'scheduled') {
-                $query->whereIn('status', ['test_drive_scheduled', 'scheduled', 'qualified']);
-            } elseif ($status === 'deal') {
-                $query->whereIn('status', ['spk_deal', 'converted', 'deal']);
-            } elseif ($status === 'lost') {
-                $query->whereIn('status', ['lost', 'cancelled']);
-            } else {
-                $query->where('status', $status);
-            }
-        }
-
-        // 3. Filter Tipe Sumber / Channel Leads
-        if ($request->filled('type')) {
-            $query->where('type', $request->input('type'));
-        }
-
-        // 4. Filter Model Kendaraan
-        if ($request->filled('model')) {
-            $model = strtolower(trim($request->input('model')));
-            if (Schema::hasColumn('leads', 'car_model')) {
-                $query->where('car_model', $model);
-            } elseif (Schema::hasColumn('leads', 'model_interest')) {
-                $query->where('model_interest', $model);
-            }
-        }
-
-        // 5. Filter Lokasi Dealer
-        if ($request->filled('dealer') && Schema::hasColumn('leads', 'dealer_location')) {
-            $query->where('dealer_location', $request->input('dealer'));
-        }
-
-        // 6. Filter Rentang Tanggal
-        if ($request->filled('start_date')) {
-            $query->whereDate('created_at', '>=', $request->input('start_date'));
-        }
-        if ($request->filled('end_date')) {
-            $query->whereDate('created_at', '<=', $request->input('end_date'));
-        }
-
-        $leads = $query->paginate(15)->withQueryString();
-
-        $hasTypeColumn = Schema::hasColumn('leads', 'type');
-
-        // Menghitung Metrik Pipeline 100% Real dari Database
-        $stats = [
-            'total'       => Lead::count(),
-            'new'         => Lead::where('status', 'new')->count(),
-            'contacted'   => Lead::where('status', 'contacted')->count(),
-            'scheduled'   => Lead::whereIn('status', ['test_drive_scheduled', 'scheduled', 'qualified'])->count(),
-            'deal'        => Lead::whereIn('status', ['spk_deal', 'converted', 'deal'])->count(),
-            'lost'        => Lead::whereIn('status', ['lost', 'cancelled'])->count(),
-
-            'whatsapp'    => $hasTypeColumn ? Lead::where('type', 'whatsapp_inquiry')->count() : 0,
-            'test_drive'  => $hasTypeColumn ? Lead::where('type', 'test_drive')->count() : 0,
-            'credit'      => $hasTypeColumn ? Lead::where('type', 'credit_simulation')->count() : 0,
-
-            'today_total' => Lead::whereDate('created_at', Carbon::today())->count(),
-            'today_wa'    => $hasTypeColumn ? Lead::where('type', 'whatsapp_inquiry')->whereDate('created_at', Carbon::today())->count() : 0,
-            'today_td'    => $hasTypeColumn ? Lead::where('type', 'test_drive')->whereDate('created_at', Carbon::today())->count() : 0,
-            'today_cr'    => $hasTypeColumn ? Lead::where('type', 'credit_simulation')->whereDate('created_at', Carbon::today())->count() : 0,
-
-            'month_total' => Lead::whereMonth('created_at', Carbon::now()->month)
-                                 ->whereYear('created_at', Carbon::now()->year)
-                                 ->count(),
-        ];
-        $metrics = $stats;
-
-        $today = Carbon::today()->toDateString();
-        $sevenDaysAgo = Carbon::today()->subDays(6)->toDateString();
-
-        $totalPageViews = 0;
-        $todayPageViews = 0;
-        $totalUniqueVisitors = 0;
-        $todayUniqueVisitors = 0;
-        $mobileCount = 0;
-        $desktopCount = 0;
-        $tabletCount = 0;
-        $topPages = collect();
-        $chartData = [];
-        $peakHourFormatted = '-';
-        $total7DaysViews = 0;
-        $total7DaysLeads = 0;
-
-        if (Schema::hasTable('page_visits')) {
-            $totalPageViews = PageVisit::count();
-            $todayPageViews = PageVisit::whereDate('visit_date', $today)->count();
-            $totalUniqueVisitors = PageVisit::distinct('ip_address')->count('ip_address');
-            $todayUniqueVisitors = PageVisit::whereDate('visit_date', $today)->distinct('ip_address')->count('ip_address');
-
-            // Statistik Perangkat Real
-            $deviceStats = PageVisit::select('device_type', DB::raw('count(*) as count'))
-                ->groupBy('device_type')
-                ->pluck('count', 'device_type')
-                ->toArray();
-
-            $mobileCount  = (int) ($deviceStats['mobile'] ?? 0);
-            $desktopCount = (int) ($deviceStats['desktop'] ?? 0);
-            $tabletCount  = (int) ($deviceStats['tablet'] ?? 0);
-
-            // Halaman Terpopuler Real
-            $topPages = PageVisit::select('path', DB::raw('count(*) as views'))
-                ->groupBy('path')
-                ->orderByDesc('views')
-                ->limit(5)
-                ->get();
-
-            // Agregasi Kunjungan Harian Real (7 Hari Terakhir)
-            $dailyVisitsRaw = PageVisit::select('visit_date', DB::raw('count(*) as views'), DB::raw('count(distinct ip_address) as uniques'))
-                ->whereDate('visit_date', '>=', $sevenDaysAgo)
-                ->groupBy('visit_date')
-                ->orderBy('visit_date', 'asc')
-                ->get()
-                ->keyBy(function ($item) {
-                    return Carbon::parse($item->visit_date)->format('Y-m-d');
-                });
-
-            // Agregasi Prospek Harian Real (7 Hari Terakhir)
-            $dailyLeadsRaw = Lead::select(DB::raw('DATE(created_at) as lead_date'), DB::raw('count(*) as total_leads'))
-                ->whereDate('created_at', '>=', $sevenDaysAgo)
-                ->groupBy('lead_date')
-                ->get()
-                ->keyBy('lead_date');
-
-            // Jam Kunjungan Puncak Real dari Database (Tanpa Fallback Jam Palsu)
-            $peakHourData = PageVisit::select(DB::raw('HOUR(created_at) as hour'), DB::raw('count(*) as total'))
-                ->whereDate('visit_date', '>=', $sevenDaysAgo)
-                ->groupBy('hour')
-                ->orderByDesc('total')
-                ->first();
-
-            if ($peakHourData && isset($peakHourData->hour) && $peakHourData->total > 0) {
-                $startH = (int) $peakHourData->hour;
-                $endH = ($startH + 1) % 24;
-                $peakHourFormatted = sprintf('%02d:00 - %02d:00 WIB', $startH, $endH);
-            } else {
-                $peakHourFormatted = '-';
-            }
-
-            for ($i = 6; $i >= 0; $i--) {
-                $currentDate = Carbon::today()->subDays($i);
-                $dateString = $currentDate->format('Y-m-d');
-                $dayLabel = $currentDate->locale('id')->isoFormat('DD MMM');
-
-                $views = isset($dailyVisitsRaw[$dateString]) ? (int) $dailyVisitsRaw[$dateString]->views : 0;
-                $uniques = isset($dailyVisitsRaw[$dateString]) ? (int) $dailyVisitsRaw[$dateString]->uniques : 0;
-                $leadsCount = isset($dailyLeadsRaw[$dateString]) ? (int) $dailyLeadsRaw[$dateString]->total_leads : 0;
-
-                $total7DaysViews += $views;
-                $total7DaysLeads += $leadsCount;
-
-                $chartData[] = [
-                    'date'    => $dateString,
-                    'label'   => $dayLabel,
-                    'views'   => $views,
-                    'uniques' => $uniques,
-                    'leads'   => $leadsCount,
-                ];
-            }
-        }
-
-        $totalDevices = $mobileCount + $desktopCount + $tabletCount;
-        $mobilePercent = $totalDevices > 0 ? round(($mobileCount / $totalDevices) * 100) : 0;
-        $desktopPercent = $totalDevices > 0 ? round(($desktopCount / $totalDevices) * 100) : 0;
-        $tabletPercent = $totalDevices > 0 ? round(($tabletCount / $totalDevices) * 100) : 0;
-
-        // Rata-rata pengunjung per hari murni dari total 7 hari dibagi 7
-        $avgVisitorsPerDay = $total7DaysViews > 0 ? round($total7DaysViews / 7) : 0;
-
-        // Rasio pengunjung ke leads murni dari data asli
-        $ratioVisitorToLead = $total7DaysViews > 0 
-            ? round(($total7DaysLeads / $total7DaysViews) * 100, 1) 
-            : 0.0;
-
-        $analytics = [
-            'total_views'          => $totalPageViews,
-            'today_views'          => $todayPageViews,
-            'total_uniques'        => $totalUniqueVisitors,
-            'today_uniques'        => $todayUniqueVisitors,
-            'mobile_percent'       => $mobilePercent,
-            'desktop_percent'      => $desktopPercent,
-            'tablet_percent'       => $tabletPercent,
-            'top_pages'            => $topPages,
-            'chart_data'           => $chartData,
-            'avg_visitors_per_day' => $avgVisitorsPerDay,
-            'peak_visiting_hour'   => $peakHourFormatted,
-            'ratio_visitor_to_lead'=> $ratioVisitorToLead,
+        $leadData = [
+            'name'       => $request->name,
+            'phone'      => $request->phone,
+            'type'       => 'test_drive',
+            'status'     => 'new',
+            'source'     => $request->source ?? 'Form Test Drive',
+            'ip_address' => $request->ip(),
         ];
 
-        return view('admin.leads.index', compact('leads', 'stats', 'metrics', 'analytics'));
-    }
+        if (Schema::hasColumn('leads', 'car_model')) {
+            $leadData['car_model'] = $request->car_model ?? $request->model ?? 'Geely EX5';
+        } elseif (Schema::hasColumn('leads', 'model_interest')) {
+            $leadData['model_interest'] = $request->car_model ?? $request->model ?? 'Geely EX5';
+        }
 
-    /**
-     * Mengambil detail satu data prospek (Lead) dalam format JSON.
-     *
-     * @param Lead $lead
-     * @return JsonResponse
-     */
-    public function show(Lead $lead): JsonResponse
-    {
+        if (Schema::hasColumn('leads', 'city') && $request->filled('city')) {
+            $leadData['city'] = $request->city;
+        }
+
+        if (Schema::hasColumn('leads', 'sales_notes') && $request->filled('notes')) {
+            $leadData['sales_notes'] = $request->notes;
+        }
+
+        if (Schema::hasColumn('leads', 'notes') && $request->filled('notes')) {
+            $leadData['notes'] = $request->notes;
+        }
+
+        if (Schema::hasColumn('leads', 'preferred_date') && $request->filled('preferred_date')) {
+            $leadData['preferred_date'] = $request->preferred_date;
+        }
+
+        if (Schema::hasColumn('leads', 'preferred_time') && $request->filled('preferred_time')) {
+            $leadData['preferred_time'] = $request->preferred_time;
+        }
+
+        $lead = Lead::create($leadData);
+
         return response()->json([
             'success' => true,
-            'lead'    => $lead,
-            'badge'   => $lead->status_badge ?? null,
-            'wa_url'  => $lead->whatsapp_follow_up_url ?? null,
+            'message' => 'Reservasi test drive berhasil dicatat',
+            'lead'    => $lead
         ]);
     }
 
     /**
-     * Memperbarui Status Pipeline Lead dan Catatan Sales.
-     *
-     * @param Request $request
-     * @param Lead $lead
-     * @return JsonResponse|RedirectResponse
+     * Simpan data leads Simulasi Kredit dari Kalkulator Pembiayaan
      */
-    public function updateStatus(Request $request, Lead $lead): JsonResponse|RedirectResponse
+    public function storeCreditLead(Request $request): JsonResponse
     {
-        $validated = $request->validate([
-            'status'      => 'required|string|max:50',
-            'sales_notes' => 'nullable|string|max:1000',
+        $validator = Validator::make($request->all(), [
+            'name'  => 'required|string|max:255',
+            'phone' => 'required|string|max:50',
         ]);
 
-        $lead->status = $validated['status'];
-
-        if (array_key_exists('sales_notes', $validated) && Schema::hasColumn('leads', 'sales_notes')) {
-            $lead->sales_notes = $validated['sales_notes'];
-        }
-
-        $lead->save();
-
-        if ($request->expectsJson() || $request->ajax()) {
+        if ($validator->fails()) {
             return response()->json([
-                'success' => true,
-                'message' => "Status prospek {$lead->name} berhasil diperbarui menjadi {$lead->status}.",
-                'lead'    => $lead,
-            ]);
+                'success' => false,
+                'errors'  => $validator->errors()
+            ], 422);
         }
 
-        return redirect()->back()->with('success', "Status prospek {$lead->name} berhasil diperbarui.");
+        $leadData = [
+            'name'       => $request->name,
+            'phone'      => $request->phone,
+            'type'       => 'credit_simulation',
+            'status'     => 'new',
+            'source'     => 'Kalkulator Simulasi Kredit',
+            'ip_address' => $request->ip(),
+        ];
+
+        if (Schema::hasColumn('leads', 'car_model')) {
+            $leadData['car_model'] = $request->car_model ?? $request->model ?? null;
+        } elseif (Schema::hasColumn('leads', 'model_interest')) {
+            $leadData['model_interest'] = $request->car_model ?? $request->model ?? null;
+        }
+
+        if (Schema::hasColumn('leads', 'estimated_otr') && $request->filled('otr_price')) {
+            $leadData['estimated_otr'] = (float) $request->otr_price;
+        }
+
+        if (Schema::hasColumn('leads', 'dp_percent') && $request->filled('dp_percent')) {
+            $leadData['dp_percent'] = (int) $request->dp_percent;
+        }
+
+        if (Schema::hasColumn('leads', 'tenor_years') && $request->filled('tenor')) {
+            $leadData['tenor_years'] = (int) $request->tenor;
+        }
+
+        if (Schema::hasColumn('leads', 'estimated_installment') && $request->filled('installment')) {
+            $leadData['estimated_installment'] = (float) $request->installment;
+        }
+
+        if (Schema::hasColumn('leads', 'sales_notes') && $request->filled('notes')) {
+            $leadData['sales_notes'] = $request->notes;
+        }
+
+        if (Schema::hasColumn('leads', 'notes') && $request->filled('notes')) {
+            $leadData['notes'] = $request->notes;
+        }
+
+        $lead = Lead::create($leadData);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Pengajuan simulasi kredit berhasil dicatat',
+            'lead'    => $lead
+        ]);
     }
 
     /**
-     * Menghapus (Soft Delete) Data Prospek dari Sistem.
-     *
-     * @param Request $request
-     * @param Lead $lead
-     * @return JsonResponse|RedirectResponse
+     * Catat klik WhatsApp Sales Consultant
      */
-    public function destroy(Request $request, Lead $lead): JsonResponse|RedirectResponse
+    public function storeWhatsappClick(Request $request): JsonResponse
     {
-        $customerName = $lead->name;
-        $lead->delete();
+        $leadData = [
+            'name'       => $request->name ?? 'Pengunjung Web (WhatsApp Click)',
+            'phone'      => $request->phone ?? '-',
+            'type'       => 'whatsapp_inquiry',
+            'status'     => 'new',
+            'source'     => $request->source ?? 'Tombol WhatsApp Sales',
+            'ip_address' => $request->ip(),
+        ];
 
-        if ($request->expectsJson() || $request->ajax()) {
-            return response()->json([
-                'success' => true,
-                'message' => "Prospek {$customerName} berhasil dihapus.",
-            ]);
+        $notes = $request->notes ?? 'Pengunjung mengklik tombol direct WhatsApp Sales Yenni.';
+
+        if (Schema::hasColumn('leads', 'sales_notes')) {
+            $leadData['sales_notes'] = $notes;
         }
 
-        return redirect()->back()->with('success', "Prospek {$customerName} berhasil dihapus.");
+        if (Schema::hasColumn('leads', 'notes')) {
+            $leadData['notes'] = $notes;
+        }
+
+        $lead = Lead::create($leadData);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Klik WhatsApp berhasil dicatat',
+            'lead'    => $lead
+        ]);
     }
 
     /**
-     * Export Seluruh Data Leads ke Format CSV Lengkap.
-     *
-     * @return StreamedResponse
+     * Simpan Permohonan Trade-In ke Tabel Leads CRM
      */
-    public function exportCsv(): StreamedResponse
+    public function storeTradeInLead(Request $request): JsonResponse
     {
-        $fileName = 'geely_bsd_leads_' . date('Y_m_d_His') . '.csv';
+        $validator = Validator::make($request->all(), [
+            'name'         => 'required|string|max:255',
+            'phone'        => 'required|string|max:50',
+            'old_brand'    => 'required|string|max:100',
+            'old_model'    => 'required|string|max:150',
+            'target_geely' => 'required|string|max:150',
+        ]);
 
-        return response()->streamDownload(function () {
-            $file = fopen('php://output', 'w');
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors'  => $validator->errors()
+            ], 422);
+        }
 
-            // UTF-8 BOM untuk Microsoft Excel
-            fprintf($file, chr(0xEF).chr(0xBB).chr(0xBF));
+        $details = "TRADE-IN: {$request->old_brand} {$request->old_model} ({$request->old_year}, {$request->old_transmission}) | Odo: {$request->old_mileage} | Kondisi: {$request->old_condition}"
+            . ($request->old_expected_price ? " | Ekspektasi Harga: Rp {$request->old_expected_price}" : "")
+            . " | Rencana Bayar: {$request->payment_plan} | Lokasi Inspeksi: {$request->inspection_place}"
+            . ($request->notes ? " | Catatan: {$request->notes}" : "");
 
-            fputcsv($file, [
-                'ID Prospek',
-                'Tipe Channel',
-                'Nama Pelanggan',
-                'No WhatsApp / Telepon',
-                'Model Mobil',
-                'Varian Mobil',
-                'Lokasi Dealer',
-                'Tanggal Test Drive',
-                'Waktu Test Drive',
-                'Estimasi OTR',
-                'Uang Muka (DP)',
-                'Tenor (Tahun)',
-                'Angsuran Per Bulan',
-                'Status Pipeline',
-                'Catatan Sales',
-                'Sumber Halaman / Tombol',
-                'IP Address Pengunjung',
-                'Waktu Masuk',
-            ]);
+        $leadData = [
+            'name'       => $request->name,
+            'phone'      => $request->phone,
+            'type'       => 'trade_in',
+            'status'     => 'new',
+            'source'     => 'Form Trade-In Web',
+            'ip_address' => $request->ip(),
+        ];
 
-            Lead::latest()->chunk(200, function ($leads) use ($file) {
-                foreach ($leads as $lead) {
-                    $model = $lead->car_model_label ?? $lead->car_model ?? $lead->model_interest ?? '-';
-                    $location = $lead->dealer_location_label ?? $lead->dealer_location ?? 'Dealer BSD City';
-                    $preferredDate = $lead->preferred_date ? Carbon::parse($lead->preferred_date)->format('Y-m-d') : '-';
-                    $dpText = $lead->dp_percent ? $lead->dp_percent . '%' : '-';
-                    $tenorText = $lead->tenor_years ? $lead->tenor_years . ' Tahun' : '-';
-                    $otrText = $lead->estimated_otr ? 'Rp ' . number_format($lead->estimated_otr, 0, ',', '.') : '-';
-                    $installmentText = $lead->estimated_installment ? 'Rp ' . number_format($lead->estimated_installment, 0, ',', '.') : '-';
+        if (Schema::hasColumn('leads', 'car_model')) {
+            $leadData['car_model'] = $request->target_geely;
+        } elseif (Schema::hasColumn('leads', 'model_interest')) {
+            $leadData['model_interest'] = $request->target_geely;
+        }
 
-                    fputcsv($file, [
-                        $lead->id,
-                        $lead->type ?? 'test_drive',
-                        $lead->name,
-                        $lead->phone,
-                        $model,
-                        $lead->car_variant ?? '-',
-                        $location,
-                        $preferredDate,
-                        $lead->preferred_time ?? '-',
-                        $otrText,
-                        $dpText,
-                        $tenorText,
-                        $installmentText,
-                        $lead->status,
-                        $lead->sales_notes ?? '-',
-                        $lead->source ?? 'Website',
-                        $lead->ip_address ?? '-',
-                        $lead->created_at ? $lead->created_at->format('Y-m-d H:i:s') : '-',
-                    ]);
-                }
-            });
+        if (Schema::hasColumn('leads', 'sales_notes')) {
+            $leadData['sales_notes'] = $details;
+        }
 
-            fclose($file);
-        }, $fileName, [
-            'Content-Type'        => 'text/csv; charset=UTF-8',
-            'Content-Disposition' => "attachment; filename=\"{$fileName}\"",
-            'Pragma'              => 'no-cache',
-            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0',
-            'Expires'             => '0',
+        if (Schema::hasColumn('leads', 'notes')) {
+            $leadData['notes'] = $details;
+        }
+
+        if (Schema::hasColumn('leads', 'city') && $request->filled('city')) {
+            $leadData['city'] = $request->city;
+        }
+
+        $lead = Lead::create($leadData);
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Permohonan trade-in berhasil dicatat di CRM.',
+            'lead'    => $lead
         ]);
     }
 }

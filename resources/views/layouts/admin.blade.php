@@ -45,7 +45,6 @@
             box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
         }
 
-        /* Animasi Ikon Hamburger Menjadi X */
         .hamburger-line {
             transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.2s ease;
         }
@@ -60,7 +59,6 @@
             transform: translateY(-7px) rotate(-45deg);
         }
 
-        /* Transisi Buka-Tutup Sidebar Desktop yang Rapat dan Sempurna */
         @media (min-width: 768px) {
             #sidebar {
                 transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1), 
@@ -85,14 +83,13 @@
 </head>
 <body class="min-h-screen antialiased selection:bg-[#0284c7] selection:text-white flex flex-col md:flex-row bg-[#f8fafc]">
 
-    <!-- Mobile Header: Logo di KIRI, Tombol Hamburger Animasi di KANAN -->
+    <!-- Mobile Header -->
     <div class="md:hidden flex items-center justify-between px-4 py-3 bg-white border-b border-slate-200 sticky top-0 z-50 shadow-xs">
         <div class="flex items-center gap-2.5">
             <img src="{{ asset('assets/footer-logos-geely.png') }}" alt="Geely Logo" class="h-6 w-auto object-contain brightness-0">
             <span class="font-bold text-sm tracking-wider text-slate-900">GEELY <span class="text-[#0284c7]">ADMIN</span></span>
         </div>
 
-        <!-- Tombol Hamburger dengan Animasi 3 Garis -->
         <button id="mobileMenuBtn" aria-label="Buka Menu Navigasi" class="w-10 h-10 rounded-xl bg-slate-50 hover:bg-slate-100 border border-slate-200 flex flex-col items-center justify-center gap-[5px] transition-all focus:outline-none cursor-pointer">
             <span class="hamburger-line line-1 block w-5 h-0.5 bg-slate-700 rounded-full origin-center"></span>
             <span class="hamburger-line line-2 block w-5 h-0.5 bg-slate-700 rounded-full"></span>
@@ -100,11 +97,10 @@
         </button>
     </div>
 
-    <!-- SIDEBAR NAVIGASI TERPADU (Bisa Buka-Tutup di Desktop & Mobile) -->
+    <!-- SIDEBAR NAVIGASI TERPADU -->
     <aside id="sidebar" class="fixed md:sticky top-0 inset-y-0 left-0 z-40 w-64 lg:w-72 bg-white border-r border-slate-200 flex flex-col justify-between transform -translate-x-full md:translate-x-0 h-screen shadow-sm shrink-0">
         
         <div class="w-64 lg:w-72 h-full flex flex-col justify-between">
-            <!-- Bagian Atas: Logo Brand & Tombol Tutup -->
             <div>
                 <div class="p-5 lg:p-6 border-b border-slate-200 flex items-center justify-between">
                     <div class="flex items-center gap-3">
@@ -116,7 +112,6 @@
                         </div>
                     </div>
 
-                    <!-- Tombol Tutup Sidebar Cepat -->
                     <button id="sidebarCloseBtn" aria-label="Tutup Sidebar" title="Tutup Sidebar" class="p-1.5 rounded-lg text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition-colors cursor-pointer">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -139,17 +134,26 @@
                         <span>CRM Leads & Traffic</span>
                     </a>
 
-                    <!-- 2. Customer Delivery Moments -->
+                    <!-- 2. Permohonan Trade-In Mobil (BARU) -->
+                    <a href="{{ route('admin.trade-in.index') }}" 
+                       class="flex items-center gap-3 px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.trade-in.*') ? 'bg-sky-50 border border-sky-200 text-[#0284c7] font-bold shadow-sm' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50' }}">
+                        <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7h12m0 0l-4-4m4 4l-4 4m0 6H4m0 0l4 4m-4-4l4-4"/>
+                        </svg>
+                        <span>Permohonan Trade-In</span>
+                        <span class="ml-auto px-2 py-0.5 rounded-full text-[9px] font-bold bg-amber-100 text-amber-700">Baru</span>
+                    </a>
+
+                    <!-- 3. Customer Delivery Moments -->
                     <a href="{{ route('admin.deliveries.index') }}" 
                        class="flex items-center gap-3 px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.deliveries.*') ? 'bg-sky-50 border border-sky-200 text-[#0284c7] font-bold shadow-sm' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50' }}">
                         <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
                         </svg>
                         <span>Foto Delivery Order</span>
-                        <span class="ml-auto px-2 py-0.5 rounded-full text-[9px] font-bold bg-sky-100 text-sky-700">Baru</span>
                     </a>
 
-                    <!-- 3. Artikel & Berita SEO -->
+                    <!-- 4. Artikel & Berita SEO -->
                     <a href="{{ route('admin.articles.index') }}" 
                        class="flex items-center gap-3 px-3.5 py-3 rounded-xl transition-all {{ request()->routeIs('admin.articles.*') ? 'bg-sky-50 border border-sky-200 text-[#0284c7] font-bold shadow-sm' : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50' }}">
                         <svg class="w-4 h-4 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -162,7 +166,7 @@
                         Akses Cepat
                     </div>
 
-                    <!-- 4. Lihat Website Publik -->
+                    <!-- Lihat Website Publik -->
                     <a href="/" target="_blank" class="flex items-center gap-3 px-3.5 py-2.5 rounded-xl text-slate-600 hover:text-slate-900 hover:bg-slate-100 transition-all">
                         <svg class="w-4 h-4 shrink-0 text-sky-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
@@ -198,13 +202,11 @@
         </div>
     </aside>
 
-    <!-- Overlay Mobile -->
     <div id="sidebarOverlay" class="fixed inset-0 bg-slate-900/40 backdrop-blur-xs z-30 hidden md:hidden transition-opacity"></div>
 
     <!-- AREA KONTEN UTAMA -->
     <div class="flex-1 flex flex-col min-w-0 transition-all duration-300">
         
-        <!-- Topbar Desktop: Tombol Toggle Sidebar (Buka/Tutup) -->
         <header class="hidden md:flex items-center justify-between px-6 lg:px-8 py-3.5 bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs">
             <div class="flex items-center gap-3">
                 <button id="desktopToggleBtn" type="button" aria-label="Toggle Sidebar" class="inline-flex items-center gap-2.5 px-3.5 py-2 rounded-xl border border-slate-200 bg-slate-50 hover:bg-slate-100 hover:border-slate-300 text-slate-700 transition-all text-xs font-semibold cursor-pointer shadow-xs">
@@ -216,7 +218,7 @@
             </div>
 
             <div class="flex items-center gap-4 text-xs font-medium text-slate-500">
-                <span class="text-slate-700 font-bold">Admin Portal</span>
+                <span class="text-slate-700 font-bold">Admin Portal • Geely Alam Sutera</span>
             </div>
         </header>
 
@@ -234,7 +236,6 @@
         const sidebar = document.getElementById('sidebar');
         const sidebarOverlay = document.getElementById('sidebarOverlay');
 
-        // 1. Logika Buka-Tutup Sidebar Mobile dengan Animasi Hamburger
         function openMobileSidebar() {
             sidebar.classList.remove('-translate-x-full');
             sidebarOverlay.classList.remove('hidden');
@@ -262,7 +263,6 @@
             sidebarOverlay.addEventListener('click', closeMobileSidebar);
         }
 
-        // 2. Logika Buka-Tutup Sidebar Desktop
         function updateDesktopButtonState(isCollapsed) {
             if (!desktopToggleText || !desktopToggleIcon) return;
             if (isCollapsed) {
@@ -297,7 +297,6 @@
             });
         }
 
-        // 3. Pulihkan State Sidebar Desktop dari LocalStorage
         document.addEventListener('DOMContentLoaded', () => {
             const isCollapsed = localStorage.getItem('geely_admin_sidebar_collapsed') === 'true';
             if (isCollapsed && window.innerWidth >= 768) {

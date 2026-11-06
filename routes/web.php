@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminArticleController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminCustomerDeliveryController;
 use App\Http\Controllers\AdminLeadController;
+use App\Http\Controllers\AdminTradeInController;
 use App\Http\Controllers\ArticleController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\PageController;
@@ -14,8 +15,6 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 | Geely Indonesia - Web Routes (Full Version)
 |--------------------------------------------------------------------------
-| Seluruh rute publik, eksplorasi detail kendaraan (EX2, EX5, Starray, Coolray),
-| API leads, autentikasi admin CRM, galeri delivery order, artikel SEO, dan sitemap XML.
 */
 
 // =============================================================
@@ -31,7 +30,6 @@ Route::get('/discover', [PageController::class, 'discover'])->name('discover');
 // =============================================================
 
 Route::prefix('models')->name('models.')->group(function () {
-    
     // --- GEELY EX2 ---
     Route::get('/ex2', [PageController::class, 'ex2'])->name('ex2');
     Route::get('/ex2-exterior/detail', [PageController::class, 'ex2Exterior'])->name('ex2.exterior');
@@ -67,7 +65,7 @@ Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::get('/credit-simulation', [PageController::class, 'creditSimulation'])->name('credit-simulation');
 Route::get('/trade-in', [PageController::class, 'tradeIn'])->name('trade-in');
 
-// Berita & Artikel Publik (SEO Boost)
+// Berita & Artikel Publik
 Route::get('/news', [ArticleController::class, 'index'])->name('news.index');
 Route::get('/news/{slug}', [ArticleController::class, 'show'])->name('news.show');
 
@@ -78,8 +76,8 @@ Route::get('/news/{slug}', [ArticleController::class, 'show'])->name('news.show'
 
 Route::post('/api/leads/test-drive', [LeadController::class, 'storeTestDrive'])->name('leads.store-test-drive');
 Route::post('/api/leads/credit', [LeadController::class, 'storeCreditLead'])->name('leads.store-credit');
-Route::post('/api/leads/trade-in', [LeadController::class, 'storeTradeInLead'])->name('leads.store-trade-in');
 Route::post('/api/leads/whatsapp', [LeadController::class, 'storeWhatsappClick'])->name('leads.store-whatsapp');
+Route::post('/api/leads/trade-in', [LeadController::class, 'storeTradeInLead'])->name('leads.store-trade-in');
 Route::post('/api/leads', [LeadController::class, 'storeTestDrive'])->name('leads.store');
 
 
@@ -87,36 +85,35 @@ Route::post('/api/leads', [LeadController::class, 'storeTestDrive'])->name('lead
 // 5. ADMIN AUTENTIKASI & PORTAL CRM
 // =============================================================
 
-// Rute 'login' standar yang dipanggil oleh middleware auth bawaan Laravel saat sesi habis
 Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
 
 Route::prefix('admin')->name('admin.')->group(function () {
     
-    // Auth Routes (Guest Only)
     Route::middleware('guest')->group(function () {
         Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('login');
         Route::post('/login', [AdminAuthController::class, 'login'])->name('login.post');
     });
 
-    // CRM Dashboard Routes (Protected by Auth)
     Route::middleware('auth')->group(function () {
         Route::post('/logout', [AdminAuthController::class, 'logout'])->name('logout');
         
         // Dashboard Leads & Live Analytics
         Route::get('/leads', [AdminLeadController::class, 'index'])->name('leads.index');
-        
-        // Update Pipeline Status (Mendukung kedua alias nama rute)
         Route::patch('/leads/{lead}/status', [AdminLeadController::class, 'updateStatus'])->name('leads.updateStatus');
         Route::patch('/leads/{lead}/update-status', [AdminLeadController::class, 'updateStatus'])->name('leads.update-status');
-        
-        // Export CSV (Mendukung kedua format rute)
         Route::get('/leads/export', [AdminLeadController::class, 'exportCsv'])->name('leads.export');
         Route::get('/leads/export/csv', [AdminLeadController::class, 'exportCsv'])->name('leads.export.csv');
+
+        // Dashboard Permohonan Trade-In Mobil
+        Route::get('/trade-in', [AdminTradeInController::class, 'index'])->name('trade-in.index');
+        Route::patch('/trade-in/{id}/status', [AdminTradeInController::class, 'updateStatus'])->name('trade-in.updateStatus');
+        Route::delete('/trade-in/{id}', [AdminTradeInController::class, 'destroy'])->name('trade-in.destroy');
+        Route::get('/trade-in/export/csv', [AdminTradeInController::class, 'exportCsv'])->name('trade-in.export');
 
         // Manajemen Artikel & SEO CMS
         Route::resource('articles', AdminArticleController::class);
 
-        // Manajemen Foto Delivery Order (Customer Delivery Moments)
+        // Manajemen Foto Delivery Order
         Route::resource('deliveries', AdminCustomerDeliveryController::class);
     });
 });
