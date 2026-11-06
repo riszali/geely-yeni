@@ -115,14 +115,19 @@
                 <button type="button" class="model-select-btn glass-panel px-6 py-3 rounded-full text-xs md:text-sm font-bold tracking-[0.2em] uppercase transition-all duration-300 border-white/10 text-gray-400 hover:text-white hover:border-white/30" data-model="starray">
                     Starray EM-i
                 </button>
+                <button type="button" class="model-select-btn glass-panel px-6 py-3 rounded-full text-xs md:text-sm font-bold tracking-[0.2em] uppercase transition-all duration-300 border-white/10 text-gray-400 hover:text-white hover:border-white/30" data-model="coolray">
+                    Geely Coolray
+                </button>
             </div>
 
-            <!-- 360 Viewer Area -->
+            <!-- 360 Viewer / Visual Preview Area -->
             <div class="glass-panel p-2 md:p-4 rounded-[2rem] md:rounded-[2.5rem] w-full max-w-5xl mx-auto h-[40vh] md:h-[50vh] min-h-[300px] relative overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.8)] mb-16">
                 <div class="absolute inset-0 rounded-[2rem] bg-gradient-to-b from-white/5 to-transparent pointer-events-none z-20"></div>
                 <div class="relative w-full h-full rounded-[1.5rem] md:rounded-[2rem] overflow-hidden flex items-center justify-center">
-                    <!-- CSS Hack: Ukuran ditingkatkan menjadi 120% agar watermark di ujung benar-benar terpotong oleh overflow-hidden -->
+                    <!-- 360 Spin Iframe -->
                     <iframe id="car-spin-iframe" src="https://riszali.sirv.com/Spins/ex5/white.spin" class="absolute top-1/2 left-1/2 w-[120%] h-[120%] -translate-x-1/2 -translate-y-1/2 border-0" allowfullscreen></iframe>
+                    <!-- Fallback / Static High-Res Preview for Coolray -->
+                    <img id="car-preview-img" src="{{ asset('assets/coolray/hero.webp') }}" class="hidden max-h-[85%] max-w-[85%] object-contain z-10 drop-shadow-[0_20px_35px_rgba(0,0,0,0.8)] transition-all duration-500" alt="Geely Coolray Preview">
                 </div>
             </div>
         </section>
@@ -285,7 +290,7 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             
-            // Data Terpadu: Model, Varian, Harga OTR & URL Sirv Spin untuk 360 Viewer
+            // Data Terpadu: Model, Varian, Harga OTR & URL Sirv Spin / Gambar Preview
             const carData = {
                 'ex5': {
                     spin: 'https://riszali.sirv.com/Spins/ex5/white.spin',
@@ -306,6 +311,13 @@
                     variants: [
                         { name: 'EM-i Hybrid', price: 499000000 }
                     ]
+                },
+                'coolray': {
+                    image: '{{ asset('assets/coolray/hero.webp') }}',
+                    variants: [
+                        { name: 'Coolray Standard', price: 333000000 },
+                        { name: 'Coolray Flagship', price: 377000000 }
+                    ]
                 }
             };
 
@@ -325,6 +337,7 @@
             // DOM Elements
             const modelBtns = document.querySelectorAll('.model-select-btn');
             const spinIframe = document.getElementById('car-spin-iframe');
+            const previewImg = document.getElementById('car-preview-img');
             const variantSelect = document.getElementById('carVariant');
             const otrDisplay = document.getElementById('otrPriceDisplay');
             const otrValue = document.getElementById('otrPriceValue');
@@ -424,13 +437,31 @@
                     const modelKey = target.getAttribute('data-model');
                     const selectedCar = carData[modelKey];
 
-                    // Update Iframe 360 Spin dengan efek fade
-                    spinIframe.style.opacity = '0';
-                    setTimeout(() => {
-                        spinIframe.src = selectedCar.spin;
-                        spinIframe.style.transition = 'opacity 0.5s ease';
-                        spinIframe.style.opacity = '1';
-                    }, 300);
+                    // Update Media Tampilan (360 Spin atau Hero Preview Image)
+                    if (selectedCar.image) {
+                        spinIframe.style.opacity = '0';
+                        setTimeout(() => {
+                            spinIframe.classList.add('hidden');
+                            previewImg.src = selectedCar.image;
+                            previewImg.classList.remove('hidden');
+                            previewImg.style.opacity = '0';
+                            previewImg.style.transform = 'scale(0.95)';
+                            setTimeout(() => {
+                                previewImg.style.transition = 'all 0.5s ease';
+                                previewImg.style.opacity = '1';
+                                previewImg.style.transform = 'scale(1)';
+                            }, 50);
+                        }, 200);
+                    } else {
+                        previewImg.classList.add('hidden');
+                        spinIframe.classList.remove('hidden');
+                        spinIframe.style.opacity = '0';
+                        setTimeout(() => {
+                            spinIframe.src = selectedCar.spin;
+                            spinIframe.style.transition = 'opacity 0.5s ease';
+                            spinIframe.style.opacity = '1';
+                        }, 300);
+                    }
 
                     // Memuat varian yang sesuai
                     populateVariants(modelKey);
