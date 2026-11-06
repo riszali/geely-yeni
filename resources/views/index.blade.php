@@ -526,6 +526,72 @@
         </div>
     </section>
 
+    <!-- CUSTOMER DELIVERY MOMENTS SECTION (DIPINDAHKAN KE BAWAH PROFIL SALES) -->
+    <section id="customer-gallery" class="py-16 md:py-24 lg:py-32 relative z-30 bg-gradient-to-b from-[#e8f4fc] via-[#f0f8ff] to-[#e0f2fe] border-t border-sky-200 overflow-hidden">
+        <div class="absolute top-0 left-0 w-[600px] h-[600px] bg-sky-400/15 rounded-full blur-[150px] pointer-events-none z-0"></div>
+        <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-400/15 rounded-full blur-[150px] pointer-events-none z-0"></div>
+
+        <div class="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 relative z-10">
+            <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16 reveal-up">
+                <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-sky-300 bg-sky-100/60 mb-4 shadow-sm">
+                    <span class="text-sky-700 text-[9px] md:text-[10px] font-bold tracking-[0.4em] uppercase">Happy Customers</span>
+                </div>
+                <h2 class="font-geely text-4xl sm:text-5xl md:text-7xl uppercase tracking-tighter text-slate-900 leading-none">
+                    Delivery <span class="text-gradient-cyan">Moments</span>
+                </h2>
+                <p class="mt-4 text-slate-600 text-sm md:text-base font-normal leading-relaxed">
+                    Bergabunglah dengan keluarga besar Geely Wonder Alam Sutera. Berikut adalah momen bahagia para pelanggan setia kami saat menerima kendaraan impian mereka.
+                </p>
+            </div>
+
+            <div class="relative w-full group" data-slider-wrapper>
+                <button data-prev aria-label="Previous Slide" class="absolute left-2 md:-left-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 backdrop-blur-md border border-sky-200 text-sky-600 flex items-center justify-center hover:bg-sky-500 hover:text-white transition-all shadow-xl z-20 opacity-0 group-hover:opacity-100 hidden md:flex cursor-pointer disabled:opacity-0">
+                    <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
+                </button>
+                <button data-next aria-label="Next Slide" class="absolute right-2 md:-right-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 backdrop-blur-md border border-sky-200 text-sky-600 flex items-center justify-center hover:bg-sky-500 hover:text-white transition-all shadow-xl z-20 opacity-0 group-hover:opacity-100 hidden md:flex cursor-pointer disabled:opacity-0">
+                    <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
+                </button>
+
+                <div data-slider class="flex overflow-x-auto overflow-y-hidden hide-scrollbar snap-x snap-mandatory gap-4 md:gap-6 pt-4 pb-12 px-4 md:px-0 -mx-4 md:mx-0 scroll-smooth">
+                    @php
+                        // Ambil foto delivery dari database yang diunggah Admin, fallback ke foto default jika kosong
+                        $dbDeliveries = \App\Models\CustomerDelivery::where('is_active', true)->orderBy('sort_order', 'asc')->latest()->get();
+                        
+                        $customers = [];
+                        if ($dbDeliveries->isNotEmpty()) {
+                            foreach($dbDeliveries as $item) {
+                                $customers[] = [
+                                    'url' => $item->image_url,
+                                    'title' => $item->title ?: 'Delivery Moment Pelanggan Geely',
+                                ];
+                            }
+                        } else {
+                            $customers = [
+                                ['url' => asset('assets/images/customer/IMG_4242.PNG'), 'title' => 'Delivery Moment 1'],
+                                ['url' => asset('assets/images/customer/IMG_4243.PNG'), 'title' => 'Delivery Moment 2'],
+                            ];
+                        }
+                    @endphp
+
+                    @foreach($customers as $index => $item)
+                    @php $delayClass = $index % 3 == 0 ? 'delay-100' : ($index % 3 == 1 ? 'delay-200' : 'delay-300'); @endphp
+                    <div class="flex-shrink-0 w-[75vw] sm:w-[45vw] md:w-[30vw] lg:w-[22vw] snap-center glass-panel rounded-[1.5rem] p-2.5 group cursor-pointer reveal-up {{ $delayClass }} transition-all duration-500 shadow-md hover:shadow-2xl hover:border-sky-400 border border-sky-200" onclick="openLightbox('{{ $item['url'] }}', '{{ addslashes($item['title']) }}')">
+                        <div class="relative w-full aspect-[4/5] rounded-[1rem] overflow-hidden bg-slate-100">
+                            <img src="{{ $item['url'] }}" alt="{{ $item['title'] }}" draggable="false" loading="lazy" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105 pointer-events-none select-none">
+                            <div class="absolute inset-0 bg-sky-500/15 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+            </div>
+
+            <div class="text-center mt-2 flex justify-center items-center gap-2 text-sky-600 text-[9px] font-bold uppercase tracking-widest">
+                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
+                Swipe or drag to view
+            </div>
+        </div>
+    </section>
+
     <!-- MASTERPIECE LINE-UP SECTION -->
     <section id="lineup" class="py-24 lg:py-40 bg-gradient-to-b from-[#e0f2fe] via-[#f0f8ff] to-[#e6f4fe] text-slate-900 relative overflow-hidden">
         <div class="absolute top-0 left-0 w-full h-full overflow-hidden pointer-events-none z-0 opacity-50">
@@ -1090,72 +1156,6 @@
             <div class="text-center mt-3 flex md:hidden justify-center items-center gap-2 text-sky-600 text-[9px] font-bold uppercase tracking-widest">
                 <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                 Swipe to explore
-            </div>
-        </div>
-    </section>
-
-    <!-- CUSTOMER DELIVERY MOMENTS SECTION -->
-    <section id="customer-gallery" class="py-16 md:py-24 lg:py-32 relative z-30 bg-gradient-to-b from-[#e8f4fc] via-[#f0f8ff] to-[#e0f2fe] border-t border-sky-200 overflow-hidden">
-        <div class="absolute top-0 left-0 w-[600px] h-[600px] bg-sky-400/15 rounded-full blur-[150px] pointer-events-none z-0"></div>
-        <div class="absolute bottom-0 right-0 w-[500px] h-[500px] bg-blue-400/15 rounded-full blur-[150px] pointer-events-none z-0"></div>
-
-        <div class="max-w-[1600px] mx-auto px-6 md:px-12 lg:px-16 relative z-10">
-            <div class="text-center max-w-3xl mx-auto mb-12 md:mb-16 reveal-up">
-                <div class="inline-flex items-center gap-3 px-4 py-2 rounded-full border border-sky-300 bg-sky-100/60 mb-4 shadow-sm">
-                    <span class="text-sky-700 text-[9px] md:text-[10px] font-bold tracking-[0.4em] uppercase">Happy Customers</span>
-                </div>
-                <h2 class="font-geely text-4xl sm:text-5xl md:text-7xl uppercase tracking-tighter text-slate-900 leading-none">
-                    Delivery <span class="text-gradient-cyan">Moments</span>
-                </h2>
-                <p class="mt-4 text-slate-600 text-sm md:text-base font-normal leading-relaxed">
-                    Bergabunglah dengan keluarga besar Geely Wonder Alam Sutera. Berikut adalah momen bahagia para pelanggan setia kami saat menerima kendaraan impian mereka.
-                </p>
-            </div>
-
-            <div class="relative w-full group" data-slider-wrapper>
-                <button data-prev aria-label="Previous Slide" class="absolute left-2 md:-left-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 backdrop-blur-md border border-sky-200 text-sky-600 flex items-center justify-center hover:bg-sky-500 hover:text-white transition-all shadow-xl z-20 opacity-0 group-hover:opacity-100 hidden md:flex cursor-pointer disabled:opacity-0">
-                    <svg class="w-5 h-5 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path></svg>
-                </button>
-                <button data-next aria-label="Next Slide" class="absolute right-2 md:-right-4 top-1/2 -translate-y-1/2 w-10 h-10 md:w-12 md:h-12 rounded-full bg-white/90 backdrop-blur-md border border-sky-200 text-sky-600 flex items-center justify-center hover:bg-sky-500 hover:text-white transition-all shadow-xl z-20 opacity-0 group-hover:opacity-100 hidden md:flex cursor-pointer disabled:opacity-0">
-                    <svg class="w-4 h-4 md:w-6 md:h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
-                </button>
-
-                <div data-slider class="flex overflow-x-auto overflow-y-hidden hide-scrollbar snap-x snap-mandatory gap-4 md:gap-6 pt-4 pb-12 px-4 md:px-0 -mx-4 md:mx-0 scroll-smooth">
-                    @php
-                        // Ambil foto delivery dari database yang diunggah Admin, fallback ke foto default jika kosong
-                        $dbDeliveries = \App\Models\CustomerDelivery::where('is_active', true)->orderBy('sort_order', 'asc')->latest()->get();
-                        
-                        $customers = [];
-                        if ($dbDeliveries->isNotEmpty()) {
-                            foreach($dbDeliveries as $item) {
-                                $customers[] = [
-                                    'url' => $item->image_url,
-                                    'title' => $item->title ?: 'Delivery Moment Pelanggan Geely',
-                                ];
-                            }
-                        } else {
-                            $customers = [
-                                ['url' => asset('assets/images/customer/IMG_4242.PNG'), 'title' => 'Delivery Moment 1'],
-                                ['url' => asset('assets/images/customer/IMG_4243.PNG'), 'title' => 'Delivery Moment 2'],
-                            ];
-                        }
-                    @endphp
-
-                    @foreach($customers as $index => $item)
-                    @php $delayClass = $index % 3 == 0 ? 'delay-100' : ($index % 3 == 1 ? 'delay-200' : 'delay-300'); @endphp
-                    <div class="flex-shrink-0 w-[75vw] sm:w-[45vw] md:w-[30vw] lg:w-[22vw] snap-center glass-panel rounded-[1.5rem] p-2.5 group cursor-pointer reveal-up {{ $delayClass }} transition-all duration-500 shadow-md hover:shadow-2xl hover:border-sky-400 border border-sky-200" onclick="openLightbox('{{ $item['url'] }}', '{{ addslashes($item['title']) }}')">
-                        <div class="relative w-full aspect-[4/5] rounded-[1rem] overflow-hidden bg-slate-100">
-                            <img src="{{ $item['url'] }}" alt="{{ $item['title'] }}" draggable="false" loading="lazy" class="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105 pointer-events-none select-none">
-                            <div class="absolute inset-0 bg-sky-500/15 mix-blend-overlay opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"></div>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-
-            <div class="text-center mt-2 flex justify-center items-center gap-2 text-sky-600 text-[9px] font-bold uppercase tracking-widest">
-                <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
-                Swipe or drag to view
             </div>
         </div>
     </section>
