@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Validator;
 class LeadController extends Controller
 {
     /**
-     * Simpan data leads Reservasi Test Drive dari Form Publik
+     * Simpan leads Test Drive
      */
     public function storeTestDrive(Request $request): JsonResponse
     {
@@ -28,38 +28,24 @@ class LeadController extends Controller
         }
 
         $leadData = [
-            'name'       => $request->name,
-            'phone'      => $request->phone,
-            'type'       => 'test_drive',
-            'status'     => 'new',
-            'source'     => $request->source ?? 'Form Test Drive',
-            'ip_address' => $request->ip(),
+            'type'            => 'test_drive',
+            'name'            => $request->name,
+            'phone'           => $request->phone,
+            'email'           => $request->email,
+            'car_model'       => $request->car_model ?? $request->model ?? 'Geely EX5',
+            'car_variant'     => $request->car_variant ?? $request->variant ?? null,
+            'preferred_date'  => $request->preferred_date,
+            'preferred_time'  => $request->preferred_time,
+            'dealer_location' => $request->dealer_location ?? 'alam-sutera',
+            'status'          => 'new',
+            'sales_notes'     => $request->notes ?? $request->sales_notes ?? null,
+            'source'          => $request->source ?? 'Form Test Drive',
+            'ip_address'      => $request->ip(),
+            'user_agent'      => $request->userAgent(),
         ];
-
-        if (Schema::hasColumn('leads', 'car_model')) {
-            $leadData['car_model'] = $request->car_model ?? $request->model ?? 'Geely EX5';
-        } elseif (Schema::hasColumn('leads', 'model_interest')) {
-            $leadData['model_interest'] = $request->car_model ?? $request->model ?? 'Geely EX5';
-        }
 
         if (Schema::hasColumn('leads', 'city') && $request->filled('city')) {
             $leadData['city'] = $request->city;
-        }
-
-        if (Schema::hasColumn('leads', 'sales_notes') && $request->filled('notes')) {
-            $leadData['sales_notes'] = $request->notes;
-        }
-
-        if (Schema::hasColumn('leads', 'notes') && $request->filled('notes')) {
-            $leadData['notes'] = $request->notes;
-        }
-
-        if (Schema::hasColumn('leads', 'preferred_date') && $request->filled('preferred_date')) {
-            $leadData['preferred_date'] = $request->preferred_date;
-        }
-
-        if (Schema::hasColumn('leads', 'preferred_time') && $request->filled('preferred_time')) {
-            $leadData['preferred_time'] = $request->preferred_time;
         }
 
         $lead = Lead::create($leadData);
@@ -72,7 +58,7 @@ class LeadController extends Controller
     }
 
     /**
-     * Simpan data leads Simulasi Kredit dari Kalkulator Pembiayaan
+     * Simpan leads Simulasi Kredit
      */
     public function storeCreditLead(Request $request): JsonResponse
     {
@@ -89,43 +75,24 @@ class LeadController extends Controller
         }
 
         $leadData = [
-            'name'       => $request->name,
-            'phone'      => $request->phone,
-            'type'       => 'credit_simulation',
-            'status'     => 'new',
-            'source'     => 'Kalkulator Simulasi Kredit',
-            'ip_address' => $request->ip(),
+            'type'                  => 'credit_simulation',
+            'name'                  => $request->name,
+            'phone'                 => $request->phone,
+            'email'                 => $request->email,
+            'car_model'             => $request->car_model ?? $request->model ?? 'Geely EX5',
+            'car_variant'           => $request->car_variant ?? $request->variant ?? null,
+            'estimated_otr'         => $request->filled('otr_price') ? (int) $request->otr_price : null,
+            'dp_percent'            => $request->filled('dp_percent') ? (int) $request->dp_percent : null,
+            'tenor_years'           => $request->filled('tenor') ? (int) $request->tenor : null,
+            'leasing_partner'       => $request->leasing ?? $request->leasing_partner ?? null,
+            'estimated_installment' => $request->filled('installment') ? (int) $request->installment : null,
+            'estimated_tdp'         => $request->filled('tdp') ? (int) $request->tdp : null,
+            'status'                => 'new',
+            'sales_notes'           => $request->notes ?? 'Simulasi Kredit via Website',
+            'source'                => 'Kalkulator Simulasi Kredit',
+            'ip_address'            => $request->ip(),
+            'user_agent'            => $request->userAgent(),
         ];
-
-        if (Schema::hasColumn('leads', 'car_model')) {
-            $leadData['car_model'] = $request->car_model ?? $request->model ?? null;
-        } elseif (Schema::hasColumn('leads', 'model_interest')) {
-            $leadData['model_interest'] = $request->car_model ?? $request->model ?? null;
-        }
-
-        if (Schema::hasColumn('leads', 'estimated_otr') && $request->filled('otr_price')) {
-            $leadData['estimated_otr'] = (float) $request->otr_price;
-        }
-
-        if (Schema::hasColumn('leads', 'dp_percent') && $request->filled('dp_percent')) {
-            $leadData['dp_percent'] = (int) $request->dp_percent;
-        }
-
-        if (Schema::hasColumn('leads', 'tenor_years') && $request->filled('tenor')) {
-            $leadData['tenor_years'] = (int) $request->tenor;
-        }
-
-        if (Schema::hasColumn('leads', 'estimated_installment') && $request->filled('installment')) {
-            $leadData['estimated_installment'] = (float) $request->installment;
-        }
-
-        if (Schema::hasColumn('leads', 'sales_notes') && $request->filled('notes')) {
-            $leadData['sales_notes'] = $request->notes;
-        }
-
-        if (Schema::hasColumn('leads', 'notes') && $request->filled('notes')) {
-            $leadData['notes'] = $request->notes;
-        }
 
         $lead = Lead::create($leadData);
 
@@ -137,30 +104,21 @@ class LeadController extends Controller
     }
 
     /**
-     * Catat klik WhatsApp Sales Consultant
+     * Catat leads WhatsApp
      */
     public function storeWhatsappClick(Request $request): JsonResponse
     {
-        $leadData = [
-            'name'       => $request->name ?? 'Pengunjung Web (WhatsApp Click)',
-            'phone'      => $request->phone ?? '-',
-            'type'       => 'whatsapp_inquiry',
-            'status'     => 'new',
-            'source'     => $request->source ?? 'Tombol WhatsApp Sales',
-            'ip_address' => $request->ip(),
-        ];
-
-        $notes = $request->notes ?? 'Pengunjung mengklik tombol direct WhatsApp Sales Yenni.';
-
-        if (Schema::hasColumn('leads', 'sales_notes')) {
-            $leadData['sales_notes'] = $notes;
-        }
-
-        if (Schema::hasColumn('leads', 'notes')) {
-            $leadData['notes'] = $notes;
-        }
-
-        $lead = Lead::create($leadData);
+        $lead = Lead::create([
+            'type'        => 'whatsapp_inquiry',
+            'name'        => $request->name ?? 'Pengunjung Web (WhatsApp Click)',
+            'phone'       => $request->phone ?? '-',
+            'car_model'   => $request->car_model ?? 'Umum',
+            'status'      => 'new',
+            'sales_notes' => $request->notes ?? 'Pengunjung mengklik tombol direct WhatsApp Sales Yenni.',
+            'source'      => $request->source ?? 'Tombol WhatsApp Sales',
+            'ip_address'  => $request->ip(),
+            'user_agent'  => $request->userAgent(),
+        ]);
 
         return response()->json([
             'success' => true,
@@ -170,7 +128,7 @@ class LeadController extends Controller
     }
 
     /**
-     * Simpan Permohonan Trade-In ke Tabel Leads CRM
+     * Simpan Permohonan Trade-In ke Tabel Leads
      */
     public function storeTradeInLead(Request $request): JsonResponse
     {
@@ -189,43 +147,51 @@ class LeadController extends Controller
             ], 422);
         }
 
-        $details = "TRADE-IN: {$request->old_brand} {$request->old_model} ({$request->old_year}, {$request->old_transmission}) | Odo: {$request->old_mileage} | Kondisi: {$request->old_condition}"
-            . ($request->old_expected_price ? " | Ekspektasi Harga: Rp {$request->old_expected_price}" : "")
-            . " | Rencana Bayar: {$request->payment_plan} | Lokasi Inspeksi: {$request->inspection_place}"
-            . ($request->notes ? " | Catatan: {$request->notes}" : "");
+        // Teks rincian taksasi lengkap agar tersimpan ke sales_notes
+        $summary = "=== RINCIAN TAKSASI TRADE-IN ===\n"
+            . "• Mobil Lama: {$request->old_brand} {$request->old_model} ({$request->old_year}, {$request->old_transmission})\n"
+            . "• Jarak Tempuh: {$request->old_mileage}\n"
+            . "• Kondisi Fisik: {$request->old_condition}\n"
+            . ($request->filled('old_expected_price') ? "• Ekspektasi Harga: Rp {$request->old_expected_price}\n" : "")
+            . "• Unit Geely Baru: {$request->target_geely}\n"
+            . "• Rencana Pembayaran: {$request->payment_plan}\n"
+            . "• Domisili: {$request->city}\n"
+            . "• Lokasi Inspeksi: {$request->inspection_place}\n"
+            . ($request->filled('notes') ? "• Catatan Tambahan: {$request->notes}" : "");
 
         $leadData = [
-            'name'       => $request->name,
-            'phone'      => $request->phone,
-            'type'       => 'trade_in',
-            'status'     => 'new',
-            'source'     => 'Form Trade-In Web',
-            'ip_address' => $request->ip(),
+            'type'            => 'trade_in',
+            'name'            => $request->name,
+            'phone'           => $request->phone,
+            'email'           => $request->email,
+            'car_model'       => $request->target_geely,
+            'dealer_location' => 'alam-sutera',
+            'status'          => 'new',
+            'sales_notes'     => $summary,
+            'source'          => 'Form Trade-In Web',
+            'ip_address'      => $request->ip(),
+            'user_agent'      => $request->userAgent(),
         ];
 
-        if (Schema::hasColumn('leads', 'car_model')) {
-            $leadData['car_model'] = $request->target_geely;
-        } elseif (Schema::hasColumn('leads', 'model_interest')) {
-            $leadData['model_interest'] = $request->target_geely;
-        }
-
-        if (Schema::hasColumn('leads', 'sales_notes')) {
-            $leadData['sales_notes'] = $details;
-        }
-
-        if (Schema::hasColumn('leads', 'notes')) {
-            $leadData['notes'] = $details;
-        }
-
-        if (Schema::hasColumn('leads', 'city') && $request->filled('city')) {
-            $leadData['city'] = $request->city;
+        // Simpan kolom spesifik jika migration kolom sudah dijalankan
+        if (Schema::hasColumn('leads', 'city')) {
+            $leadData['city']               = $request->city;
+            $leadData['old_brand']          = $request->old_brand;
+            $leadData['old_model']          = $request->old_model;
+            $leadData['old_year']           = $request->old_year;
+            $leadData['old_transmission']   = $request->old_transmission;
+            $leadData['old_mileage']        = $request->old_mileage;
+            $leadData['old_condition']      = $request->old_condition;
+            $leadData['old_expected_price'] = $request->old_expected_price;
+            $leadData['payment_plan']       = $request->payment_plan;
+            $leadData['inspection_place']   = $request->inspection_place;
         }
 
         $lead = Lead::create($leadData);
 
         return response()->json([
             'success' => true,
-            'message' => 'Permohonan trade-in berhasil dicatat di CRM.',
+            'message' => 'Permohonan trade-in berhasil dicatat di sistem.',
             'lead'    => $lead
         ]);
     }

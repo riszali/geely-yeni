@@ -31,6 +31,17 @@ class Lead extends Model
         'source',
         'ip_address',
         'user_agent',
+        // Kolom spesifik permohonan trade-in
+        'city',
+        'old_brand',
+        'old_model',
+        'old_year',
+        'old_transmission',
+        'old_mileage',
+        'old_condition',
+        'old_expected_price',
+        'payment_plan',
+        'inspection_place',
     ];
 
     protected $casts = [
@@ -45,7 +56,7 @@ class Lead extends Model
      */
     public function getCarModelLabelAttribute(): string
     {
-        return match (strtolower($this->car_model)) {
+        return match (strtolower($this->car_model ?? '')) {
             'ex5' => 'Geely EX5',
             'ex2' => 'Geely EX2',
             'starray' => 'Starray EM-i',
@@ -61,6 +72,7 @@ class Lead extends Model
     {
         return match (strtolower($this->dealer_location ?? '')) {
             'bsd' => 'Geely BSD City',
+            'alam-sutera', 'alamsutera' => 'Geely Wonder Alam Sutera',
             'pik' => 'Geely Center PIK',
             'pondok-indah' => 'Geely Pondok Indah',
             'home' => 'Home Service (Jadetabek)',
@@ -87,7 +99,7 @@ class Lead extends Model
     }
 
     /**
-     * Link WhatsApp Langsung untuk Sales
+     * Link WhatsApp Langsung untuk Sales Follow-up
      */
     public function getWhatsappFollowUpUrlAttribute(): string
     {
@@ -97,13 +109,17 @@ class Lead extends Model
         $date = $this->preferred_date ? $this->preferred_date->format('d M Y') : 'sesuai kesepakatan';
         $time = $this->preferred_time ? urlencode($this->preferred_time) : 'fleksibel';
 
-        $text = "Halo Kak {$customerName}, terima kasih telah mengajukan test drive {$model} melalui website resmi Geely BSD. Kami ingin mengonfirmasi jadwal test drive Anda pada tanggal {$date} pukul {$time}. Apakah ada waktu luang untuk berbicara sejenak?";
+        if (in_array($this->type, ['trade_in', 'trade-in'])) {
+            $text = "Halo Kak {$customerName}, terima kasih telah mengajukan Trade-In mobil ke unit {$model} melalui website resmi Geely Wonder Alam Sutera. Kami ingin mengonfirmasi jadwal appraisal dan inspeksi unit Anda. Apakah ada waktu luang untuk berbicara sejenak?";
+        } else {
+            $text = "Halo Kak {$customerName}, terima kasih telah mengajukan test drive {$model} melalui website resmi Geely BSD. Kami ingin mengonfirmasi jadwal test drive Anda pada tanggal {$date} pukul {$time}. Apakah ada waktu luang untuk berbicara sejenak?";
+        }
 
         return "https://wa.me/{$phone}?text={$text}";
     }
 
     /**
-     * Badge Warna Status
+     * Badge Warna Status Pipeline CRM
      */
     public function getStatusBadgeAttribute(): array
     {
@@ -116,11 +132,11 @@ class Lead extends Model
                 'label' => 'Contacted',
                 'bg' => 'bg-amber-500/20 text-amber-300 border-amber-400/40',
             ],
-            'test_drive_scheduled' => [
+            'inspection_scheduled', 'test_drive_scheduled', 'scheduled' => [
                 'label' => 'Scheduled',
                 'bg' => 'bg-blue-500/20 text-blue-300 border-blue-400/40',
             ],
-            'spk_deal' => [
+            'deal', 'spk_deal' => [
                 'label' => 'SPK / Deal',
                 'bg' => 'bg-emerald-500/20 text-emerald-300 border-emerald-400/40',
             ],
@@ -129,9 +145,32 @@ class Lead extends Model
                 'bg' => 'bg-rose-500/20 text-rose-300 border-rose-400/40',
             ],
             default => [
-                'label' => ucfirst($this->status),
+                'label' => ucfirst($this->status ?? 'New'),
                 'bg' => 'bg-gray-500/20 text-gray-300 border-gray-400/40',
             ],
         };
+    }
+
+    /**
+     * Accessor Rincian Taksasi Mobil Lama
+     */
+    public function getFormattedTradeInDetailsAttribute(): string
+    {
+        if (!empty($this->old_brand) || !empty($this->old_model)) {
+            $lines = [];
+            $lines[] = "• Mobil Lama: " . trim("{$this->old_brand} {$this->old_model}");
+            if (!empty($this->old_year)) $lines[] = "• Tahun: {$this->old_year}";
+            if (!empty($this->old_transmission)) $lines[] = "• Transmisi: {$this->old_transmission}";
+            if (!empty($this->old_mileage)) $lines[] = "• Odometer: {$this->old_mileage}";
+            if (!empty($this->old_condition)) $lines[] = "• Kondisi Fisik: {$this->old_condition}";
+            if (!empty($this->old_expected_price)) $lines[] = "• Ekspektasi Harga: Rp {$this->old_expected_price}";
+            if (!empty($this->payment_plan)) $lines[] = "• Rencana Pembayaran: {$this->payment_plan}";
+            if (!empty($this->city)) $lines[] = "• Domisili: {$this->city}";
+            if (!empty($this->inspection_place)) $lines[] = "• Lokasi Inspeksi: {$this->inspection_place}";
+
+            return implode("\n", $lines);
+        }
+
+        return $this->sales_notes ?? 'Data taksasi belum diisi lengkap.';
     }
 }
