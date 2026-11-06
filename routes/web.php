@@ -65,6 +65,7 @@ Route::prefix('models')->name('models.')->group(function () {
 Route::get('/test-drive', [PageController::class, 'testDrive'])->name('test-drive');
 Route::get('/contact', [PageController::class, 'contact'])->name('contact');
 Route::get('/credit-simulation', [PageController::class, 'creditSimulation'])->name('credit-simulation');
+Route::get('/trade-in', [PageController::class, 'tradeIn'])->name('trade-in');
 
 // Berita & Artikel Publik (SEO Boost)
 Route::get('/news', [ArticleController::class, 'index'])->name('news.index');
@@ -77,6 +78,7 @@ Route::get('/news/{slug}', [ArticleController::class, 'show'])->name('news.show'
 
 Route::post('/api/leads/test-drive', [LeadController::class, 'storeTestDrive'])->name('leads.store-test-drive');
 Route::post('/api/leads/credit', [LeadController::class, 'storeCreditLead'])->name('leads.store-credit');
+Route::post('/api/leads/trade-in', [LeadController::class, 'storeTradeInLead'])->name('leads.store-trade-in');
 Route::post('/api/leads/whatsapp', [LeadController::class, 'storeWhatsappClick'])->name('leads.store-whatsapp');
 Route::post('/api/leads', [LeadController::class, 'storeTestDrive'])->name('leads.store');
 

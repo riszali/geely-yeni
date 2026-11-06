@@ -186,4 +186,12 @@ class PageController extends Controller
     {
         return view('pages.credit-simulation');
     }
+
+    /**
+     * Halaman Program Trade-In / Tukar Tambah Mobil
+     */
+    public function tradeIn(): View
+    {
+        return view('pages.trade-in');
+    }
 }
