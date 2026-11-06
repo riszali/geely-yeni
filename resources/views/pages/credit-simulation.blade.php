@@ -1,40 +1,40 @@
 <x-layouts.app>
     <!-- ==========================================
-         ULTRA-PREMIUM GLOBAL STYLES
+         ULTRA-PREMIUM LIGHT GLASSMORPHISM STYLES
     =========================================== -->
     <style>
         /* Base Resets & Smooth Scrolling */
         html, body { 
             scroll-behavior: smooth; 
-            background-color: #050505; 
-            color: #ffffff;
+            background: #f0f9ff; 
+            color: #0f172a;
             overflow-x: hidden; 
         }
         
-        /* Advanced Cinematic Noise */
+        /* Subtle Crystalline Noise */
         .bg-noise::before {
             content: "";
             position: absolute;
             inset: 0;
-            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.03'/%3E%3C/svg%3E");
             pointer-events: none;
             z-index: 1;
-            mix-blend-mode: overlay;
+            mix-blend-mode: multiply;
         }
 
-        /* Next-Gen Spatial Glassmorphism */
+        /* Light Blue Automotive Glassmorphism */
         .glass-panel {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.01) 100%);
-            backdrop-filter: blur(40px) saturate(150%);
-            -webkit-backdrop-filter: blur(40px) saturate(150%);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-top: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(28px);
+            -webkit-backdrop-filter: blur(28px);
+            border: 1px solid rgba(186, 230, 253, 0.7);
+            border-top: 1px solid rgba(255, 255, 255, 0.95);
+            box-shadow: 0 25px 50px -12px rgba(14, 165, 233, 0.12), 0 4px 12px rgba(186, 230, 253, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.9);
         }
 
         /* Liquid Text Gradient */
         .text-liquid {
-            background: linear-gradient(270deg, #ffffff, #818cf8, #22d3ee, #ffffff);
+            background: linear-gradient(270deg, #0284c7, #2563eb, #0ea5e9, #0369a1);
             background-size: 300% 300%;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -49,85 +49,106 @@
         /* Custom Range Slider */
         input[type=range] {
             -webkit-appearance: none;
-            background: rgba(255,255,255,0.1);
+            background: rgba(186, 230, 253, 0.7);
             border-radius: 8px;
             height: 6px;
         }
         input[type=range]::-webkit-slider-thumb {
             -webkit-appearance: none;
-            height: 20px;
-            width: 20px;
+            height: 22px;
+            width: 22px;
             border-radius: 50%;
-            background: #22d3ee;
+            background: #0284c7;
             cursor: pointer;
-            box-shadow: 0 0 15px rgba(34, 211, 238, 0.6);
+            box-shadow: 0 0 14px rgba(2, 132, 199, 0.5);
+            border: 2px solid #ffffff;
             transition: transform 0.2s;
         }
         input[type=range]::-webkit-slider-thumb:hover {
-            transform: scale(1.2);
+            transform: scale(1.15);
         }
 
-        /* Form Inputs Customization for Dark Theme */
-        .dark-input {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            color: #fff;
+        /* Form Inputs Customization for Light Theme */
+        .light-input {
+            background: rgba(255, 255, 255, 0.95);
+            border: 1px solid rgba(186, 230, 253, 0.9);
+            color: #0f172a;
         }
-        .dark-input:focus {
-            border-color: #22d3ee;
-            box-shadow: 0 0 0 2px rgba(34, 211, 238, 0.2);
+        .light-input:focus {
+            border-color: #0284c7;
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.18);
             outline: none;
         }
-        .dark-input option {
-            background-color: #111;
-            color: #fff;
+        .light-input option {
+            background-color: #ffffff;
+            color: #0f172a;
+        }
+
+        /* Shimmer Button Effect */
+        .btn-shimmer {
+            position: relative;
+            overflow: hidden;
+        }
+        .btn-shimmer::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(to right, transparent, rgba(255,255,255,0.4), transparent);
+            transform: rotate(45deg) translateX(-100%);
+            animation: shimmer 3s infinite cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        @keyframes shimmer {
+            100% { transform: rotate(45deg) translateX(100%); }
         }
     </style>
 
-    <div class="relative min-h-screen bg-[#050505] overflow-hidden pb-24">
+    <div class="relative min-h-screen bg-gradient-to-b from-[#e0f2fe] via-[#f0f9ff] to-[#e0f2fe] overflow-hidden pb-24">
         <!-- Ambient Background Orbs -->
-        <div class="absolute top-0 left-1/4 w-[600px] h-[600px] bg-cyan-600/15 rounded-full blur-[150px] pointer-events-none z-0"></div>
-        <div class="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-indigo-600/10 rounded-full blur-[150px] pointer-events-none z-0"></div>
+        <div class="absolute top-0 left-1/4 w-[600px] h-[600px] bg-sky-300/30 rounded-full blur-[150px] pointer-events-none z-0"></div>
+        <div class="absolute bottom-0 right-1/4 w-[500px] h-[500px] bg-cyan-200/35 rounded-full blur-[150px] pointer-events-none z-0"></div>
         <div class="absolute inset-0 z-0 bg-noise"></div>
 
         <!-- ==========================================
              HERO & CAR SELECTOR SECTION
         =========================================== -->
         <section class="relative z-10 pt-24 md:pt-32 pb-12 max-w-[1400px] mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <div class="inline-flex items-center gap-2 mb-6 px-4 py-2 rounded-full border border-cyan-500/20 bg-cyan-500/5 text-cyan-400 backdrop-blur-md">
-                <span class="text-[10px] font-bold tracking-[0.3em] uppercase">Financial Services</span>
+            <div class="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full border border-sky-300/70 bg-sky-500/10 text-sky-700 shadow-sm backdrop-blur-md">
+                <span class="text-[10px] font-bold tracking-[0.3em] uppercase">Financial Services • Geely Wonder Alam Sutera</span>
             </div>
-            <h1 class="font-geely text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tighter mb-6 drop-shadow-xl">
+            <h1 class="font-geely text-4xl md:text-6xl lg:text-7xl font-bold uppercase tracking-tighter mb-4 text-slate-900 drop-shadow-sm">
                 Simulasi <span class="text-liquid">Kredit</span>
             </h1>
-            <p class="text-gray-400 text-sm md:text-base font-light max-w-2xl mx-auto leading-relaxed mb-12">
-                Rencanakan kepemilikan kendaraan Geely Anda dengan kalkulator pintar kami. Pilih model favorit Anda, putar 360°, dan dapatkan estimasi cicilan terbaik.
+            <p class="text-slate-600 text-sm md:text-base font-normal max-w-2xl mx-auto leading-relaxed mb-10">
+                Rencanakan kepemilikan kendaraan Geely Anda dengan kalkulator pintar kami. Pilih model favorit Anda, putar 360°, dan dapatkan estimasi cicilan serta penawaran terbaik.
             </p>
 
             <!-- Model Selection Pills -->
-            <div class="flex flex-wrap justify-center gap-4 mb-8">
-                <button type="button" class="model-select-btn active glass-panel px-6 py-3 rounded-full text-xs md:text-sm font-bold tracking-[0.2em] uppercase transition-all duration-300 border-cyan-400 text-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.2)]" data-model="ex5">
+            <div class="flex flex-wrap justify-center gap-3 sm:gap-4 mb-8">
+                <button type="button" class="model-select-btn active px-6 py-3 rounded-full text-xs md:text-sm font-bold tracking-[0.2em] uppercase transition-all duration-300 border-2 border-sky-500 bg-sky-500/15 text-sky-700 shadow-[0_4px_15px_rgba(14,165,233,0.25)]" data-model="ex5">
                     Geely EX5
                 </button>
-                <button type="button" class="model-select-btn glass-panel px-6 py-3 rounded-full text-xs md:text-sm font-bold tracking-[0.2em] uppercase transition-all duration-300 border-white/10 text-gray-400 hover:text-white hover:border-white/30" data-model="ex2">
+                <button type="button" class="model-select-btn px-6 py-3 rounded-full text-xs md:text-sm font-bold tracking-[0.2em] uppercase transition-all duration-300 border border-sky-200/80 bg-white/80 text-slate-600 hover:text-sky-700 hover:border-sky-300 shadow-sm" data-model="ex2">
                     Geely EX2
                 </button>
-                <button type="button" class="model-select-btn glass-panel px-6 py-3 rounded-full text-xs md:text-sm font-bold tracking-[0.2em] uppercase transition-all duration-300 border-white/10 text-gray-400 hover:text-white hover:border-white/30" data-model="starray">
+                <button type="button" class="model-select-btn px-6 py-3 rounded-full text-xs md:text-sm font-bold tracking-[0.2em] uppercase transition-all duration-300 border border-sky-200/80 bg-white/80 text-slate-600 hover:text-sky-700 hover:border-sky-300 shadow-sm" data-model="starray">
                     Starray EM-i
                 </button>
-                <button type="button" class="model-select-btn glass-panel px-6 py-3 rounded-full text-xs md:text-sm font-bold tracking-[0.2em] uppercase transition-all duration-300 border-white/10 text-gray-400 hover:text-white hover:border-white/30" data-model="coolray">
+                <button type="button" class="model-select-btn px-6 py-3 rounded-full text-xs md:text-sm font-bold tracking-[0.2em] uppercase transition-all duration-300 border border-sky-200/80 bg-white/80 text-slate-600 hover:text-sky-700 hover:border-sky-300 shadow-sm" data-model="coolray">
                     Geely Coolray
                 </button>
             </div>
 
             <!-- 360 Viewer / Visual Preview Area -->
-            <div class="glass-panel p-2 md:p-4 rounded-[2rem] md:rounded-[2.5rem] w-full max-w-5xl mx-auto h-[40vh] md:h-[50vh] min-h-[300px] relative overflow-hidden shadow-[0_30px_60px_rgba(0,0,0,0.8)] mb-16">
-                <div class="absolute inset-0 rounded-[2rem] bg-gradient-to-b from-white/5 to-transparent pointer-events-none z-20"></div>
-                <div class="relative w-full h-full rounded-[1.5rem] md:rounded-[2rem] overflow-hidden flex items-center justify-center">
+            <div class="glass-panel p-2 md:p-4 rounded-[2rem] md:rounded-[2.5rem] w-full max-w-5xl mx-auto h-[40vh] md:h-[50vh] min-h-[300px] relative overflow-hidden shadow-[0_25px_60px_-15px_rgba(2,132,199,0.2)] mb-16 border border-sky-200 bg-white/70">
+                <div class="absolute inset-0 rounded-[2rem] bg-gradient-to-b from-sky-100/30 via-transparent to-transparent pointer-events-none z-20"></div>
+                <div class="relative w-full h-full rounded-[1.5rem] md:rounded-[2rem] overflow-hidden flex items-center justify-center bg-gradient-to-b from-sky-50/50 to-white/90">
                     <!-- 360 Spin Iframe -->
                     <iframe id="car-spin-iframe" src="https://riszali.sirv.com/Spins/ex5/white.spin" class="absolute top-1/2 left-1/2 w-[120%] h-[120%] -translate-x-1/2 -translate-y-1/2 border-0" allowfullscreen></iframe>
-                    <!-- Fallback / Static High-Res Preview for Coolray -->
-                    <img id="car-preview-img" src="{{ asset('assets/coolray/hero.webp') }}" class="hidden max-h-[85%] max-w-[85%] object-contain z-10 drop-shadow-[0_20px_35px_rgba(0,0,0,0.8)] transition-all duration-500" alt="Geely Coolray Preview">
+                    <!-- High-Res Preview for Coolray -->
+                    <img id="car-preview-img" src="{{ asset('assets/coolray/hero.webp') }}" class="hidden max-h-[85%] max-w-[85%] object-contain z-10 drop-shadow-[0_20px_35px_rgba(2,132,199,0.25)] transition-all duration-500" alt="Geely Coolray Preview">
                 </div>
             </div>
         </section>
@@ -139,19 +160,19 @@
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
                 
                 <!-- Left Column: Form Inputs -->
-                <div class="lg:col-span-7 glass-panel rounded-[2rem] p-6 sm:p-8 md:p-10">
-                    <h2 class="font-geely text-2xl md:text-3xl font-bold mb-8 border-b border-white/10 pb-4 text-white tracking-tight">Parameter Pembiayaan</h2>
+                <div class="lg:col-span-7 glass-panel rounded-[2rem] p-6 sm:p-8 md:p-10 border border-sky-200 shadow-[0_20px_50px_rgba(14,165,233,0.1)]">
+                    <h2 class="font-geely text-2xl md:text-3xl font-bold mb-8 border-b border-sky-200/70 pb-4 text-slate-900 tracking-tight">Parameter Pembiayaan</h2>
                     
                     <form id="creditForm" class="space-y-8">
                         
                         <!-- Pilih Varian Kendaraan -->
                         <div>
-                            <label for="carVariant" class="block text-[11px] font-bold tracking-[0.2em] uppercase text-gray-400 mb-3">Varian Kendaraan</label>
+                            <label for="carVariant" class="block text-[11px] font-bold tracking-[0.2em] uppercase text-slate-500 mb-3">Varian Kendaraan</label>
                             <div class="relative">
-                                <select id="carVariant" class="w-full rounded-xl py-4 px-4 dark-input transition-colors cursor-pointer appearance-none">
+                                <select id="carVariant" class="w-full rounded-xl py-4 px-4 light-input font-medium transition-colors cursor-pointer appearance-none shadow-sm">
                                     <!-- Options populated by JS -->
                                 </select>
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400">
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                                 </div>
                             </div>
@@ -159,21 +180,21 @@
 
                         <!-- Harga OTR (Readonly/Auto updated) -->
                         <div>
-                            <label for="otrPrice" class="block text-[11px] font-bold tracking-[0.2em] uppercase text-gray-400 mb-3">Harga OTR (Jakarta)</label>
+                            <label for="otrPrice" class="block text-[11px] font-bold tracking-[0.2em] uppercase text-slate-500 mb-3">Harga OTR (Jakarta / Tangerang)</label>
                             <div class="relative">
-                                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-cyan-400 font-bold">Rp</span>
-                                <input type="text" id="otrPriceDisplay" readonly class="w-full pl-12 pr-4 py-4 rounded-xl dark-input font-geely text-xl cursor-not-allowed opacity-80" value="0">
+                                <span class="absolute left-4 top-1/2 -translate-y-1/2 text-sky-600 font-bold">Rp</span>
+                                <input type="text" id="otrPriceDisplay" readonly class="w-full pl-12 pr-4 py-4 rounded-xl light-input font-geely text-xl font-bold text-slate-800 bg-slate-50/80 cursor-not-allowed shadow-sm" value="0">
                                 <input type="hidden" id="otrPriceValue" value="0">
                             </div>
-                            <p class="text-[9px] text-gray-500 mt-2 tracking-widest uppercase">*Harga estimasi khusus, dapat berubah sewaktu-waktu.</p>
+                            <p class="text-[9px] text-slate-500 mt-2 tracking-widest uppercase">*Harga estimasi resmi, dapat berubah sewaktu-waktu sesuai program berjalan.</p>
                         </div>
 
                         <!-- Pilih Leasing -->
                         <div>
-                            <label for="leasing" class="block text-[11px] font-bold tracking-[0.2em] uppercase text-gray-400 mb-3">Mitra Leasing</label>
+                            <label for="leasing" class="block text-[11px] font-bold tracking-[0.2em] uppercase text-slate-500 mb-3">Mitra Pembiayaan / Leasing</label>
                             <div class="relative">
-                                <select id="leasing" class="w-full rounded-xl py-4 px-4 dark-input transition-colors cursor-pointer appearance-none">
-                                    <option value="bca">BCA Finance (Rate Kompetitif)</option>
+                                <select id="leasing" class="w-full rounded-xl py-4 px-4 light-input font-medium transition-colors cursor-pointer appearance-none shadow-sm">
+                                    <option value="bca">BCA Finance (Rate Bunga Kompetitif)</option>
                                     <option value="mtf">Mandiri Tunas Finance (MTF)</option>
                                     <option value="adira">Adira Finance</option>
                                     <option value="maybank">Maybank Finance</option>
@@ -183,7 +204,7 @@
                                     <option value="bfi">BFI Finance</option>
                                     <option value="oto">Oto Multiartha</option>
                                 </select>
-                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-400">
+                                <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-slate-400">
                                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                                 </div>
                             </div>
@@ -192,11 +213,11 @@
                         <!-- Uang Muka (DP) -->
                         <div>
                             <div class="flex justify-between items-center mb-4">
-                                <label for="dpPercent" class="block text-[11px] font-bold tracking-[0.2em] uppercase text-gray-400">Uang Muka (DP)</label>
-                                <span id="dpPercentLabel" class="text-cyan-400 font-geely text-2xl drop-shadow-[0_0_8px_rgba(34,211,238,0.5)]">20%</span>
+                                <label for="dpPercent" class="block text-[11px] font-bold tracking-[0.2em] uppercase text-slate-500">Uang Muka (DP)</label>
+                                <span id="dpPercentLabel" class="text-sky-600 font-geely text-2xl font-bold">20%</span>
                             </div>
                             <input type="range" id="dpPercent" min="15" max="50" step="5" value="20" class="w-full cursor-pointer">
-                            <div class="flex justify-between text-[10px] font-bold tracking-widest text-gray-500 mt-3 uppercase">
+                            <div class="flex justify-between text-[10px] font-bold tracking-widest text-slate-400 mt-3 uppercase">
                                 <span>15% (Min)</span>
                                 <span>50% (Max)</span>
                             </div>
@@ -204,27 +225,27 @@
 
                         <!-- Tenor -->
                         <div>
-                            <label class="block text-[11px] font-bold tracking-[0.2em] uppercase text-gray-400 mb-4">Tenor (Jangka Waktu)</label>
+                            <label class="block text-[11px] font-bold tracking-[0.2em] uppercase text-slate-500 mb-4">Tenor (Jangka Waktu)</label>
                             <div class="grid grid-cols-5 gap-2 sm:gap-4">
                                 <label class="cursor-pointer">
                                     <input type="radio" name="tenor" value="1" class="peer sr-only">
-                                    <div class="text-center py-3 border border-white/10 rounded-xl peer-checked:bg-cyan-500/20 peer-checked:border-cyan-400 peer-checked:text-cyan-400 text-gray-400 hover:bg-white/5 transition-all font-bold text-sm">1 Thn</div>
+                                    <div class="text-center py-3 border border-sky-200/90 rounded-xl bg-white/70 peer-checked:bg-sky-500/15 peer-checked:border-sky-500 peer-checked:text-sky-700 text-slate-600 hover:bg-sky-50 transition-all font-bold text-sm shadow-sm">1 Thn</div>
                                 </label>
                                 <label class="cursor-pointer">
                                     <input type="radio" name="tenor" value="2" class="peer sr-only">
-                                    <div class="text-center py-3 border border-white/10 rounded-xl peer-checked:bg-cyan-500/20 peer-checked:border-cyan-400 peer-checked:text-cyan-400 text-gray-400 hover:bg-white/5 transition-all font-bold text-sm">2 Thn</div>
+                                    <div class="text-center py-3 border border-sky-200/90 rounded-xl bg-white/70 peer-checked:bg-sky-500/15 peer-checked:border-sky-500 peer-checked:text-sky-700 text-slate-600 hover:bg-sky-50 transition-all font-bold text-sm shadow-sm">2 Thn</div>
                                 </label>
                                 <label class="cursor-pointer">
                                     <input type="radio" name="tenor" value="3" class="peer sr-only">
-                                    <div class="text-center py-3 border border-white/10 rounded-xl peer-checked:bg-cyan-500/20 peer-checked:border-cyan-400 peer-checked:text-cyan-400 text-gray-400 hover:bg-white/5 transition-all font-bold text-sm">3 Thn</div>
+                                    <div class="text-center py-3 border border-sky-200/90 rounded-xl bg-white/70 peer-checked:bg-sky-500/15 peer-checked:border-sky-500 peer-checked:text-sky-700 text-slate-600 hover:bg-sky-50 transition-all font-bold text-sm shadow-sm">3 Thn</div>
                                 </label>
                                 <label class="cursor-pointer">
                                     <input type="radio" name="tenor" value="4" class="peer sr-only">
-                                    <div class="text-center py-3 border border-white/10 rounded-xl peer-checked:bg-cyan-500/20 peer-checked:border-cyan-400 peer-checked:text-cyan-400 text-gray-400 hover:bg-white/5 transition-all font-bold text-sm">4 Thn</div>
+                                    <div class="text-center py-3 border border-sky-200/90 rounded-xl bg-white/70 peer-checked:bg-sky-500/15 peer-checked:border-sky-500 peer-checked:text-sky-700 text-slate-600 hover:bg-sky-50 transition-all font-bold text-sm shadow-sm">4 Thn</div>
                                 </label>
                                 <label class="cursor-pointer">
                                     <input type="radio" name="tenor" value="5" class="peer sr-only" checked>
-                                    <div class="text-center py-3 border border-white/10 rounded-xl peer-checked:bg-cyan-500/20 peer-checked:border-cyan-400 peer-checked:text-cyan-400 text-gray-400 hover:bg-white/5 transition-all font-bold text-sm">5 Thn</div>
+                                    <div class="text-center py-3 border border-sky-200/90 rounded-xl bg-white/70 peer-checked:bg-sky-500/15 peer-checked:border-sky-500 peer-checked:text-sky-700 text-slate-600 hover:bg-sky-50 transition-all font-bold text-sm shadow-sm">5 Thn</div>
                                 </label>
                             </div>
                         </div>
@@ -234,49 +255,49 @@
                 <!-- Right Column: Result Card (Sticky) -->
                 <div class="lg:col-span-5 relative">
                     <!-- Glow behind result card -->
-                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-cyan-600/20 rounded-[3rem] blur-[80px] pointer-events-none z-0"></div>
+                    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-sky-300/30 rounded-[3rem] blur-[90px] pointer-events-none z-0"></div>
                     
-                    <div class="glass-panel rounded-[2rem] p-6 sm:p-8 md:p-10 sticky top-24 z-10 shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-t border-l border-cyan-500/30">
-                        <h3 class="text-cyan-400 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase mb-6 block">Estimasi Pembiayaan</h3>
+                    <div class="glass-panel rounded-[2rem] p-6 sm:p-8 md:p-10 sticky top-24 z-10 shadow-[0_25px_60px_-15px_rgba(2,132,199,0.22)] border border-sky-300/70 bg-white/90">
+                        <h3 class="text-sky-600 text-[10px] md:text-xs font-bold tracking-[0.3em] uppercase mb-6 block">Estimasi Pembiayaan</h3>
                         
                         <div class="space-y-8">
                             <!-- Cicilan Per Bulan -->
                             <div>
-                                <p class="text-xs text-gray-400 mb-2 uppercase tracking-widest font-bold">Angsuran per Bulan</p>
+                                <p class="text-xs text-slate-500 mb-2 uppercase tracking-widest font-bold">Angsuran per Bulan</p>
                                 <div class="flex items-baseline gap-2">
-                                    <span class="text-2xl font-bold text-gray-300">Rp</span>
-                                    <span id="resultInstallment" class="text-4xl sm:text-5xl lg:text-6xl font-geely text-white drop-shadow-[0_0_15px_rgba(255,255,255,0.3)]">0</span>
+                                    <span class="text-2xl font-bold text-slate-500">Rp</span>
+                                    <span id="resultInstallment" class="text-4xl sm:text-5xl lg:text-6xl font-geely text-slate-900 font-bold drop-shadow-sm">0</span>
                                 </div>
                             </div>
 
                             <!-- Total DP -->
-                            <div class="bg-black/40 rounded-[1.5rem] p-5 border border-white/5 shadow-inner">
-                                <p class="text-[10px] text-gray-400 mb-2 uppercase tracking-widest font-bold">Total Uang Muka (TDP)</p>
+                            <div class="bg-sky-50/90 rounded-[1.5rem] p-5 border border-sky-200/80 shadow-sm">
+                                <p class="text-[10px] text-slate-500 mb-2 uppercase tracking-widest font-bold">Total Uang Muka (TDP)</p>
                                 <div class="flex items-baseline gap-2">
-                                    <span class="text-lg text-cyan-500">Rp</span>
-                                    <span id="resultTdp" class="text-2xl sm:text-3xl font-geely text-cyan-400">0</span>
+                                    <span class="text-lg font-bold text-sky-600">Rp</span>
+                                    <span id="resultTdp" class="text-2xl sm:text-3xl font-geely text-sky-600 font-bold">0</span>
                                 </div>
-                                <p class="text-[9px] text-gray-500 mt-3 tracking-wider leading-relaxed">*TDP sudah termasuk DP Murni, Asuransi (Estimasi), Biaya Admin, dan Angsuran Bulan Pertama (ADDM).</p>
+                                <p class="text-[9px] text-slate-500 mt-3 tracking-wider leading-relaxed">*TDP sudah termasuk DP Murni, Estimasi Asuransi, Biaya Admin, dan Angsuran Bulan Pertama (ADDM).</p>
                             </div>
 
                             <!-- Rincian -->
-                            <div class="space-y-4 pt-4 border-t border-white/10">
+                            <div class="space-y-4 pt-4 border-t border-sky-200/70">
                                 <div class="flex justify-between items-center text-sm">
-                                    <span class="text-gray-400 font-light">Harga Kendaraan</span>
-                                    <span id="detailOtr" class="font-bold text-white tracking-wide">Rp 0</span>
+                                    <span class="text-slate-500 font-medium">Harga Kendaraan</span>
+                                    <span id="detailOtr" class="font-bold text-slate-800 tracking-wide">Rp 0</span>
                                 </div>
                                 <div class="flex justify-between items-center text-sm">
-                                    <span class="text-gray-400 font-light">Pokok Hutang</span>
-                                    <span id="detailPrincipal" class="font-bold text-white tracking-wide">Rp 0</span>
+                                    <span class="text-slate-500 font-medium">Pokok Hutang</span>
+                                    <span id="detailPrincipal" class="font-bold text-slate-800 tracking-wide">Rp 0</span>
                                 </div>
                                 <div class="flex justify-between items-center text-sm">
-                                    <span class="text-gray-400 font-light">Suku Bunga (Flat)</span>
-                                    <span id="detailRate" class="font-bold text-cyan-400 tracking-wide bg-cyan-500/10 px-2 py-1 rounded-md">0% p.a</span>
+                                    <span class="text-slate-500 font-medium">Suku Bunga (Flat)</span>
+                                    <span id="detailRate" class="font-bold text-sky-700 tracking-wide bg-sky-500/10 border border-sky-200 px-2.5 py-1 rounded-md">0% p.a</span>
                                 </div>
                             </div>
 
-                            <button onclick="window.location.href='/test-drive'" class="w-full mt-8 bg-cyan-600 hover:bg-cyan-500 text-white font-bold py-4 px-6 rounded-full transition-all duration-300 text-xs tracking-[0.2em] uppercase shadow-[0_10px_20px_rgba(34,211,238,0.3)] hover:shadow-[0_15px_30px_rgba(34,211,238,0.5)] transform hover:-translate-y-1">
-                                Ajukan Test Drive
+                            <button onclick="window.location.href='/test-drive'" class="btn-shimmer w-full mt-8 bg-gradient-to-r from-sky-500 to-blue-600 hover:from-sky-600 hover:to-blue-700 text-white font-bold py-4 px-6 rounded-full transition-all duration-300 text-xs tracking-[0.2em] uppercase shadow-[0_10px_25px_rgba(14,165,233,0.35)] hover:shadow-[0_15px_35px_rgba(14,165,233,0.5)] transform hover:-translate-y-0.5">
+                                Ajukan Test Drive Sekarang
                             </button>
                         </div>
                     </div>
@@ -397,7 +418,7 @@
                 const insurance = price * 0.025 * tenor; 
                 const totalDp = dpPure + adminFee + insurance + installment; 
 
-                // Update UI dengan animasi ringan (fade)
+                // Update UI dengan animasi halus
                 const resultElements = ['resultInstallment', 'resultTdp', 'detailOtr', 'detailPrincipal', 'detailRate'];
                 resultElements.forEach(id => {
                     const el = document.getElementById(id);
@@ -422,16 +443,16 @@
             // Event Listeners untuk Tombol Pemilihan Model
             modelBtns.forEach(btn => {
                 btn.addEventListener('click', (e) => {
-                    // Reset styling semua tombol
+                    // Reset styling semua tombol ke light inactive
                     modelBtns.forEach(b => {
-                        b.classList.remove('active', 'border-cyan-400', 'text-cyan-400', 'shadow-[0_0_20px_rgba(34,211,238,0.2)]');
-                        b.classList.add('border-white/10', 'text-gray-400');
+                        b.classList.remove('active', 'border-2', 'border-sky-500', 'bg-sky-500/15', 'text-sky-700', 'shadow-[0_4px_15px_rgba(14,165,233,0.25)]');
+                        b.classList.add('border', 'border-sky-200/80', 'bg-white/80', 'text-slate-600');
                     });
                     
-                    // Set styling tombol yang diklik
+                    // Set styling tombol yang aktif ke light active
                     const target = e.currentTarget;
-                    target.classList.add('active', 'border-cyan-400', 'text-cyan-400', 'shadow-[0_0_20px_rgba(34,211,238,0.2)]');
-                    target.classList.remove('border-white/10', 'text-gray-400');
+                    target.classList.add('active', 'border-2', 'border-sky-500', 'bg-sky-500/15', 'text-sky-700', 'shadow-[0_4px_15px_rgba(14,165,233,0.25)]');
+                    target.classList.remove('border-sky-200/80', 'bg-white/80', 'text-slate-600');
 
                     // Ambil data kendaraan
                     const modelKey = target.getAttribute('data-model');
